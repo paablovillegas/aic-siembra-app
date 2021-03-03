@@ -9,11 +9,9 @@ import com.google.gson.annotations.SerializedName
 data class Actividad(
     @PrimaryKey
     var id_interno: Long = 0,
-    @SerializedName("_id")
     @ColumnInfo(name = "id_actividad")
     var idActividad: String? = null,
     var actividad: String,
-    @SerializedName("id_area")
     @ColumnInfo(name = "id_area")
     var idArea: String? = null,
 )

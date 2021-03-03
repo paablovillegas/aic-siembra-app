@@ -31,6 +31,12 @@ data class RanchoItem(
         tablas.map { tabla ->
             tabla.toEntity(id)
         }
+
+    fun getRanchoWithTablas(): RanchoWithTablas =
+        RanchoWithTablas(
+            rancho = toEntity(),
+            tablas = getTablasEntities()
+        )
 }
 
 data class TablaItem(
