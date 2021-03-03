@@ -28,9 +28,7 @@ data class RanchoItem(
         )
 
     fun getTablasEntities(): List<Tabla> =
-        tablas.map { tabla ->
-            tabla.toEntity(id)
-        }
+        tablas.map { it.toEntity(id) }
 
     fun getRanchoWithTablas(): RanchoWithTablas =
         RanchoWithTablas(

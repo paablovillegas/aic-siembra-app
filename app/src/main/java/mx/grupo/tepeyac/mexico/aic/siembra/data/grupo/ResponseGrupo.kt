@@ -19,40 +19,41 @@ data class ResponseGrupoItem(
 data class GrupoItem(
     @SerializedName("_id")
     val id: String,
-    @SerializedName("lugar")
+    @SerializedName("lugar", alternate = ["grupo"])
     val grupo: String,
-    @SerializedName("tipo_lugar")
+    @SerializedName("tipo_lugar", alternate = ["tipo_grupo"])
     val tipoGrupo: String,
     val fletes: ResponseFlete?,
-    val trabajadores: List<Any>,
+    val trabajadores: List<ResponseTrabajador>,
 ) {
     fun toEntity(): Grupo =
-        if (fletes != null) {
-            Grupo(
-                idGrupo = id,
-                grupo = grupo,
-                tipoGrupo = tipoGrupo,
-                fleteRegular = fletes.regular,
-                fletePersona = fletes.persona,
-                fleteCabraliego = fletes.cabraliego,
-                fleteEscondida = fletes.cabraliego,
-                fleteIncompleto = fletes.incompleto,
-            )
-        } else {
-            Grupo(
-                idGrupo = id,
-                grupo = grupo,
-                tipoGrupo = tipoGrupo
-            )
-        }
+        Grupo(
+            idGrupo = id,
+            grupo = grupo,
+            tipoGrupo = tipoGrupo,
+            fleteRegular = fletes?.regular,
+            fletePersona = fletes?.persona,
+            fleteCabraliego = fletes?.cabraliego,
+            fleteEscondida = fletes?.cabraliego,
+            fleteIncompleto = fletes?.incompleto,
+        )
+
+    fun toTrabajadoresEntities(): List<Trabajador> =
+        trabajadores.map { it.toEntity(id) }
+
+    fun getGrupoWithTrabajadores(): GrupoWithTrabajadores =
+        GrupoWithTrabajadores(
+            grupo = toEntity(),
+            trabajadores = toTrabajadoresEntities()
+        )
 }
 
 data class ResponseFlete(
-    val regular: Double?,
-    val persona: Double?,
-    val cabraliego: Double?,
-    val incompleto: Double?,
-    val escondida: Double?,
+    val regular: Double? = null,
+    val persona: Double? = null,
+    val cabraliego: Double? = null,
+    val incompleto: Double? = null,
+    val escondida: Double? = null,
 )
 
 data class ResponseTrabajador(
@@ -62,23 +63,23 @@ data class ResponseTrabajador(
     @SerializedName("apellido_paterno")
     val apellidoPaterno: String,
     @SerializedName("apellido_materno")
-    val apellidoMaterno: String?,
-    val nss: String?,
-    val curp: String?,
-    val rfc: String?,
-    val ine: String?,
-    val genero: String?,
-    val domicilio: String?,
+    val apellidoMaterno: String? = null,
+    val nss: String? = null,
+    val curp: String? = null,
+    val rfc: String? = null,
+    val ine: String? = null,
+    val genero: String? = null,
+    val domicilio: String? = null,
     @SerializedName("fecha_alta")
     val fechaAlta: Date,
     @SerializedName("fecha_naciemiento")
-    val fechaNacimiento: Date?,
-    val activo: Boolean,
-    val tarjeta: Boolean,
+    val fechaNacimiento: Date? = null,
+    val activo: Boolean = true,
+    val tarjeta: Boolean = false,
     val salario: ResponseSalario,
-    val evidencias: ResponseEvidencias?,
+    val evidencias: ResponseEvidencias? = null,
 ) {
-    fun toEntity(): Trabajador =
+    fun toEntity(idGrupo: String): Trabajador =
         Trabajador(
             idTrabajador = id,
             nombres = nombres,
@@ -97,13 +98,14 @@ data class ResponseTrabajador(
             sueldo = salario.sueldo,
             extra = salario.extra,
             bono = salario.bono,
+            idGrupo = idGrupo
         )
 }
 
 data class ResponseSalario(
     val sueldo: Double,
-    val extra: Double?,
-    val bono: Double?,
+    val extra: Double? = null,
+    val bono: Double? = null,
 )
 
 data class ResponseEvidencias(
