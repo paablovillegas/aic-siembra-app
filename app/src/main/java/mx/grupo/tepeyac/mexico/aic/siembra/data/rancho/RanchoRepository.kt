@@ -24,8 +24,9 @@ class RanchoRepository {
             } == null
         }
         val updates: List<RanchoWithTablas> = externos.mapNotNull { externo ->
-            val interno: RanchoWithTablas? = internos
-                .find { i -> i.rancho.idRancho == externo.rancho.idRancho }
+            val interno: RanchoWithTablas? = internos.find { i ->
+                i.rancho.idRancho == externo.rancho.idRancho
+            }
             if (interno != null)
                 return@mapNotNull RanchoWithTablas(
                     rancho = externo.rancho.copy(id = interno.rancho.id),
@@ -33,11 +34,17 @@ class RanchoRepository {
                 )
             return@mapNotNull null
         }
-        val deletes = internos.filter { interno ->
-            externos.find { externo ->
-                externo.rancho.idRancho == interno.rancho.idRancho
-            } == null
-        }
+        val deletes = internos
+            .filter { interno ->
+                externos.find { externo ->
+                    externo.rancho.idRancho == interno.rancho.idRancho
+                } == null
+            }
+            .map { tabla ->
+                tabla.copy(
+                    tablas = tabla.tablas.map { table -> table.copy(delete = true) }
+                )
+            }
         return listOf(inserts, updates, deletes)
     }
 

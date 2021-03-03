@@ -7,7 +7,8 @@ import androidx.room.PrimaryKey
 @Entity
 data class Area(
     @PrimaryKey
-    var id_interno: Long = 0,
+    @ColumnInfo(name = "id_interno")
+    var id: Long = 0,
     @ColumnInfo(name = "id_area")
     var idArea: String? = null,
     var area: String,

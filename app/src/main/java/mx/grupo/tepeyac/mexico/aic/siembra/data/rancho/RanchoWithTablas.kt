@@ -5,7 +5,8 @@ import androidx.room.Relation
 import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.tabla.Tabla
 
 data class RanchoWithTablas(
-    @Embedded val rancho: Rancho,
+    @Embedded
+    val rancho: Rancho,
     @Relation(
         parentColumn = "id_rancho",
         entityColumn = "id_rancho"

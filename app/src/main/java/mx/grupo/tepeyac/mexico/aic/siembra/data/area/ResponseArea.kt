@@ -29,6 +29,12 @@ data class AreaItem(
         actividades.map{
                 act -> act.toEntity(id)
         }
+
+    fun getAreaWithActividades(): AreaWithActividades =
+        AreaWithActividades(
+            area = toEntity(),
+            actividades = toActividadesEntities()
+        )
 }
 
 data class ActividadItem(
