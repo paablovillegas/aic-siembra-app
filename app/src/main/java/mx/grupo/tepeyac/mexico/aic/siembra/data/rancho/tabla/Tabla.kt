@@ -9,13 +9,10 @@ import com.google.gson.annotations.SerializedName
 data class Tabla(
     @PrimaryKey
     var id_interno: Long = 0,
-    @SerializedName("_id")
     @ColumnInfo(name = "id_tabla")
     var idTabla: String? = null,
     var tabla: String,
     var editado: Boolean = false,
-
-    @SerializedName("id_rancho")
     @ColumnInfo(name = "id_rancho")
     var idRancho: String,
 )

@@ -11,20 +11,19 @@ import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.trabajador.Trabajador
 data class Grupo(
     @PrimaryKey
     var id_interno: Long = 0,
-    @SerializedName("_id")
     @ColumnInfo(name = "id_grupo")
     var idGrupo: String? = null,
-    @SerializedName("lugar")
     var grupo: String,
-    @SerializedName("tipo_lugar")
     @ColumnInfo(name = "tipo_grupo")
     var tipoGrupo: String,
     @ColumnInfo(name = "flete_regular")
     var fleteRegular: Double? = null,
     @ColumnInfo(name = "flete_persona")
     var fletePersona: Double? = null,
-    @Ignore
-    val fletes: List<HashMap<String, Double>> = emptyList(),
-    @Ignore
-    val trabajadores: List<Trabajador> = emptyList(),
+    @ColumnInfo(name = "flete_cabraliego")
+    var fleteCabraliego: Double? = null,
+    @ColumnInfo(name = "flete_incompleto")
+    var fleteIncompleto: Double? = null,
+    @ColumnInfo(name = "flete_escondida")
+    var fleteEscondida: Double? = null,
 )

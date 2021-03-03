@@ -13,8 +13,6 @@ data class Rancho(
     @ColumnInfo(name = "id_rancho")
     var idRancho: String?,
     var rancho: String,
-    var alias: String,
+    var alias: String?,
     var editado: Boolean = false,
-    @Ignore
-    val tablas: List<Tabla> = emptyList(),
 )
