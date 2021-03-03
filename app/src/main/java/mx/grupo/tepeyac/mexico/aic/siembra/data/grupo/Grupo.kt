@@ -9,7 +9,7 @@ import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.trabajador.Trabajador
 
 @Entity
 data class Grupo(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_interno")
     var id: Long = 0,
     @ColumnInfo(name = "id_grupo")

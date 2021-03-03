@@ -2,30 +2,31 @@ package mx.grupo.tepeyac.mexico.aic.siembra.data.ciclo
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 import java.util.*
 
 @Entity
-data class Ciclo (
-    @PrimaryKey
-    private var id_interno: Long = 0,
-    @SerializedName("_id")
+data class Ciclo(
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id_interno")
+    val id: Long = 0,
     @ColumnInfo(name = "id_ciclo")
     val idCiclo: String? = null,
-    val id_tabla: Long = 0,
     val ciclo: String,
-    @SerializedName("fecha_inicio")
+    @ColumnInfo(name = "id_tabla")
+    val idTabla: String,
+    @ColumnInfo(name = "id_producto")
+    val idProducto: String,
     @ColumnInfo(name = "fecha_inicio")
     val fechaInicio: Date,
-    @SerializedName("fecha_siembra")
     @ColumnInfo(name = "fecha_siembra")
     val fechaSiembra: Date? = null,
-    @SerializedName("fecha_fin_siembra")
-    @ColumnInfo(name = "fecha_fin_siembra")
-    val fechaFin_siembra: Date? = null,
-    @SerializedName("fecha_fin")
+    @ColumnInfo(name = "fecha_cosecha")
+    val fechaCosecha: Date? = null,
     @ColumnInfo(name = "fecha_fin")
     val fechaFin: Date? = null,
-    val editado: Boolean = false
+    val editado: Boolean = false,
+    @Ignore
+    val delete: Boolean = false,
 )

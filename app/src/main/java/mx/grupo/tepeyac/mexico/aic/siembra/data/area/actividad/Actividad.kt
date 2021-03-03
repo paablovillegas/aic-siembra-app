@@ -8,7 +8,7 @@ import com.google.gson.annotations.SerializedName
 
 @Entity
 data class Actividad(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_interno")
     var id: Long = 0,
     @ColumnInfo(name = "id_actividad")

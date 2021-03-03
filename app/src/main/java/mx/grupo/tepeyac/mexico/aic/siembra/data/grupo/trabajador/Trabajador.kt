@@ -8,7 +8,7 @@ import java.util.*
 
 @Entity
 data class Trabajador(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_interno")
     var id: Long = 0,
     @ColumnInfo(name = "id_trabajador")
