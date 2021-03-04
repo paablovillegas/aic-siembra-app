@@ -6,5 +6,5 @@ import androidx.room.PrimaryKey
 data class Granel(
     @PrimaryKey
     @ColumnInfo(name = "id_interno")
-    var idInterno: Long = 0,
+    val idInterno: Long = 0,
 )

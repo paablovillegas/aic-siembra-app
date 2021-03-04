@@ -1,22 +1,22 @@
-package mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.extra
+package mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.descuento
 
 import androidx.room.ColumnInfo
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import java.util.*
 
-data class Extra(
+data class Descuento(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_interno")
     val id: Long = 0,
-    @ColumnInfo(name = "id_extra")
-    val idExtra: String? = null,
-    var horas: Int,
+    @ColumnInfo(name = "id_descuento")
+    val idDescuento: String? = null,
     var total: Double,
+    var motivo: String,
+    val fecha: Date,
     @ColumnInfo(name = "id_trabajador")
     val idTrabajador: String,
-    val fecha: Date,
     val editado: Boolean = false,
     @Ignore
-    val eliminar: Boolean = false,
+    val delete: Boolean = false,
 )

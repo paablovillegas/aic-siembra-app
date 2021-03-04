@@ -1,8 +1,8 @@
 package mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.asistenciaTrabajador
 
-import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.asistenciaTrabajador.asistencia.Asistencia
-import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.asistenciaTrabajador.bono.Bono
-import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.asistenciaTrabajador.descuento.Descuento
+import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.asistencia.Asistencia
+import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.bono.Bono
+import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.descuento.Descuento
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.extra.Extra
 import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.trabajador.Trabajador
 

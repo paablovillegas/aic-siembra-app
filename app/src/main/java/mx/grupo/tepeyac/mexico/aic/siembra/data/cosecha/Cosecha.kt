@@ -8,27 +8,28 @@ import java.util.*
 
 @Entity
 data class Cosecha(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_interno")
-    var idInterno: Long = 0,
-    var folio: String,
-    //TODO: Cambiar
-    var destino: String,
-    //TODO: Cambiar
-    var presentacion: String,
-    @SerializedName("hora_salida")
-    @ColumnInfo(name = "hora_salida")
-    var horaSalida: Date = Date(),
-    //TODO: Cambiar
-    var transporte: String,
-    //TODO: Cambiar
-    var inocuidad: String,
-    var tipo: String,
-    //TODO: Cambiar
-    var empaques: String,
-    //TODO: Cambiar
-    var cortes: String,
-    //TODO: Cambiar
-    var granel: String,
-    var estatus: Int = 0,
+    val id: Long = 0,
+    @ColumnInfo(name = "id_cosecha")
+    val idCosecha: String? = null,
+    val folio: Long,
+    val fecha: Date = Date(),
+    val tipo: String,
+    val estatus: Int = 0,
 )
+/*
+    //TODO: Cambiar
+    val destino: String,
+    //TODO: Cambiar
+    val presentacion: String,
+    //TODO: Cambiar
+    val transporte: String,
+    //TODO: Cambiar
+    val inocuidad: String,
+    val empaques: String,
+    //TODO: Cambiar
+    val cortes: String,
+    //TODO: Cambiar
+    val granel: String,
+ */
