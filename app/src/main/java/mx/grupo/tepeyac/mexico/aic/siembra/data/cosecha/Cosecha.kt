@@ -2,8 +2,8 @@ package mx.grupo.tepeyac.mexico.aic.siembra.data.cosecha
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 import java.util.*
 
 @Entity
@@ -17,7 +17,18 @@ data class Cosecha(
     val fecha: Date = Date(),
     val tipo: String,
     val estatus: Int = 0,
-)
+    @Ignore
+    val delete: Boolean = false,
+) {
+    constructor(
+        id: Long = 0,
+        idCosecha: String? = null,
+        folio: Long,
+        fecha: Date = Date(),
+        tipo: String,
+        estatus: Int = 0,
+    ) : this(id, idCosecha, folio, fecha, tipo, estatus, false)
+}
 /*
     //TODO: Cambiar
     val destino: String,

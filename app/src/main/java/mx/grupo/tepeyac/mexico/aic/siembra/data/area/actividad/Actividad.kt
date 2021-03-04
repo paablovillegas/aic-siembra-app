@@ -4,7 +4,6 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
 
 @Entity
 data class Actividad(
@@ -19,4 +18,12 @@ data class Actividad(
     var idArea: String? = null,
     @Ignore
     val delete: Boolean = false,
-)
+) {
+    constructor(
+        id: Long = 0,
+        idActividad: String? = null,
+        actividad: String,
+        idArea: String?,
+        editado: Boolean
+    ) : this(id, idActividad, actividad, editado, idArea, false)
+}

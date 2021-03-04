@@ -2,6 +2,7 @@ package mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.asistencia
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Ignore
 import androidx.room.PrimaryKey
 import java.util.*
 
@@ -15,8 +16,17 @@ data class Asistencia(
     val entrada: Date,
     val salida: Date? = null,
     @ColumnInfo(name = "id_trabajador")
-    val idTrabajador: String,
+    val idTrabajador: String? = null,
     val editado: Boolean = false,
-    @ColumnInfo(name = "id_trabajador")
-    val trabajador: String? = null,
-)
+    @Ignore
+    val delete: Boolean = false,
+) {
+    constructor(
+        id: Long = 0,
+        idAsistencia: String? = null,
+        entrada: Date,
+        salida: Date?,
+        idTrabajador: String? = null,
+        editado: Boolean = false
+    ) : this(id, idAsistencia, entrada, salida, idTrabajador, editado, false)
+}

@@ -24,7 +24,27 @@ data class ActividadTrabajador(
     @Ignore
     val delete: Boolean = false,
     @Ignore
-    val type: TipoActividadTrabajador,
-)
+    val type: TipoActividadTrabajador?,
+) {
+    constructor(
+        id: Long = 0,
+        idActividadTrabajador: String? = null,
+        idActividad: String,
+        idTrabajador: String,
+        idTabla: String,
+        fecha: Date,
+        editado: Boolean = false,
+    ) : this(
+        id,
+        idActividadTrabajador,
+        idActividad,
+        idTrabajador,
+        idTabla,
+        fecha,
+        editado,
+        false,
+        null
+    )
+}
 
 enum class TipoActividadTrabajador { REGULAR, EXTRA, BONO }

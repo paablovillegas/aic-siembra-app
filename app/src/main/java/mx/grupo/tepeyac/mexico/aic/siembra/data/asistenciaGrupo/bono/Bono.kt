@@ -20,4 +20,13 @@ data class Bono(
     val editado: Boolean = false,
     @Ignore
     val delete: Boolean = false,
-)
+) {
+    constructor(
+        id: Long = 0,
+        idBono: String? = null,
+        total: Double,
+        idTrabajador: String,
+        fecha: Date,
+        editado: Boolean = false,
+    ) : this(id, idBono, total, idTrabajador, fecha, editado, false)
+}

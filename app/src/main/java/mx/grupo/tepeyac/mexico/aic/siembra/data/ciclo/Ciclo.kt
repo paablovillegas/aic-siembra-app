@@ -29,4 +29,29 @@ data class Ciclo(
     val editado: Boolean = false,
     @Ignore
     val delete: Boolean = false,
-)
+) {
+    constructor(
+        id: Long = 0,
+        idCiclo: String? = null,
+        ciclo: String,
+        idTabla: String,
+        idProducto: String,
+        fechaInicio: Date,
+        fechaSiembra: Date? = null,
+        fechaCosecha: Date? = null,
+        fechaFin: Date? = null,
+        editado: Boolean = false,
+    ) : this(
+        id,
+        idCiclo,
+        ciclo,
+        idTabla,
+        idProducto,
+        fechaInicio,
+        fechaSiembra,
+        fechaCosecha,
+        fechaFin,
+        editado,
+        false
+    )
+}
