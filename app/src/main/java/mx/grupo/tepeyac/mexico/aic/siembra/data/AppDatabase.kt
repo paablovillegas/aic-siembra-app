@@ -20,6 +20,10 @@ import mx.grupo.tepeyac.mexico.aic.siembra.data.cosecha.corte.Corte
 import mx.grupo.tepeyac.mexico.aic.siembra.data.cosecha.empaque.Empaque
 import mx.grupo.tepeyac.mexico.aic.siembra.data.cosecha.granel.Granel
 import mx.grupo.tepeyac.mexico.aic.siembra.data.cosecha.transporte.Transporte
+import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.Rancho
+import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.RanchoDao
+import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.tabla.Tabla
+import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.tabla.TablaDao
 import mx.grupo.tepeyac.mexico.aic.siembra.utils.DatabaseDateConverter
 import mx.grupo.tepeyac.mexico.aic.siembra.utils.SingletonHolder
 
@@ -43,12 +47,16 @@ import mx.grupo.tepeyac.mexico.aic.siembra.utils.SingletonHolder
         Empaque::class,
         Granel::class,
         Transporte::class,
+        Rancho::class,
+        Tabla::class,
     ],
     version = 1,
     exportSchema = true
 )
 @TypeConverters(DatabaseDateConverter::class)
 abstract class AppDatabase : RoomDatabase() {
+    abstract val ranchoDao: RanchoDao
+    abstract val tablaDao: TablaDao
 
     companion object : SingletonHolder<AppDatabase, Context>({
         Room.databaseBuilder(it.applicationContext, AppDatabase::class.java, DB_NAME)

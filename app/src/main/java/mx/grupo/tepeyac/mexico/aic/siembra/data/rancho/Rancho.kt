@@ -1,8 +1,8 @@
 package mx.grupo.tepeyac.mexico.aic.siembra.data.rancho
 
-import androidx.room.*
-import com.google.gson.annotations.SerializedName
-import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.tabla.Tabla
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
 @Entity
 data class Rancho(

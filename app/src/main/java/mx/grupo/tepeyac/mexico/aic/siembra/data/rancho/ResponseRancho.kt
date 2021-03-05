@@ -38,6 +38,7 @@ data class RanchoItem(
 }
 
 data class TablaItem(
+    @SerializedName("_id")
     val id: String,
     val tabla: String,
 ) {

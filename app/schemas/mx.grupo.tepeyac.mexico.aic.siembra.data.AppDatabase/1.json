@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "d0ded505310b51a4bd66a25475c68cb7",
+    "identityHash": "6c5154932a4f3d092ee732fc296cfe09",
     "entities": [
       {
         "tableName": "Actividad",
@@ -823,12 +823,100 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "Rancho",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_rancho` TEXT, `rancho` TEXT NOT NULL, `alias` TEXT, `editado` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id_interno",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idRancho",
+            "columnName": "id_rancho",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "rancho",
+            "columnName": "rancho",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "alias",
+            "columnName": "alias",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "editado",
+            "columnName": "editado",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_interno"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Tabla",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tabla` TEXT, `tabla` TEXT NOT NULL, `editado` INTEGER NOT NULL, `id_rancho` TEXT)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id_interno",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTabla",
+            "columnName": "id_tabla",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "tabla",
+            "columnName": "tabla",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "editado",
+            "columnName": "editado",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idRancho",
+            "columnName": "id_rancho",
+            "affinity": "TEXT",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_interno"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd0ded505310b51a4bd66a25475c68cb7')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6c5154932a4f3d092ee732fc296cfe09')"
     ]
   }
 }

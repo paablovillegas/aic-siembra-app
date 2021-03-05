@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object ServiceGenerator {
-    private const val BASE_URL = "http://192.168.2.1:4000/siembra/"
+    private const val BASE_URL = "http://10.11.0.27:4001/siembra/"
     //private const val BASE_URL = "https://e-sterling-inc.com:11020/siembra/"
 
     private val interceptor = HttpLoggingInterceptor().apply {
@@ -41,10 +41,10 @@ object ServiceGenerator {
         password: String
     ): T {
         if (clientId.isNotEmpty() && password.isNotEmpty()) {
-            httpClient.sslSocketFactory(
-                SSLService.getSslSocketFactory(context),
-                SSLService.trustManager
-            )
+//            httpClient.sslSocketFactory(
+//                SSLService.getSslSocketFactory(context),
+//                SSLService.trustManager
+//            )
             val authToken = Credentials.basic(clientId, password)
             val interceptor = AuthenticationInterceptor(authToken)
             if (!httpClient.interceptors().contains(interceptor)) {
@@ -59,10 +59,10 @@ object ServiceGenerator {
     fun <T> createService(context: Context, service: Class<T>, authToken: String): T {
         if (authToken.isNotEmpty()) {
             val interceptor = TokenInterceptor(authToken)
-            httpClient.sslSocketFactory(
-                SSLService.getSslSocketFactory(context),
-                SSLService.trustManager
-            )
+//            httpClient.sslSocketFactory(
+//                SSLService.getSslSocketFactory(context),
+//                SSLService.trustManager
+//            )
             if (!httpClient.interceptors().contains(interceptor)) {
                 httpClient.addInterceptor(interceptor)
                 builder.client(httpClient.build())
