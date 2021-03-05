@@ -8,11 +8,11 @@ interface RanchoApi {
     fun getRanchos(): Call<ResponseRanchoList>
 
     @POST("ranchos")
-    fun insertRancho(@Body body: RanchoItem): Call<ResponseRanchoItem>
+    fun insertRancho(@Body body: SendRanchoItem): Call<ResponseRanchoItem>
 
     @PUT("ranchos/{id_rancho}")
     fun updateRancho(
         @Path(value = "id_rancho") id: String,
-        @Body rancho: RanchoItem
+        @Body rancho: SendRanchoItem,
     ): Call<ResponseRanchoItem>
 }

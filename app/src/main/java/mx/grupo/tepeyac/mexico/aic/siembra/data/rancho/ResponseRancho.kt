@@ -28,7 +28,7 @@ data class RanchoItem(
         )
 
     fun getTablasEntities(): List<Tabla> =
-        tablas.map { it.toEntity(id) }
+        tablas.map { it.toEntity() }
 
     fun getRanchoWithTablas(): RanchoWithTablas =
         RanchoWithTablas(
@@ -42,10 +42,31 @@ data class TablaItem(
     val id: String,
     val tabla: String,
 ) {
-    fun toEntity(idRancho: String): Tabla =
+    fun toEntity(idRancho: Long = 0): Tabla =
         Tabla(
             idRancho = idRancho,
             idTabla = id,
             tabla = tabla
         )
 }
+
+data class SendRanchoItem(
+    val idRancho: String?,
+    val rancho: String,
+    val alias: String?,
+    val tablas: List<SendTablaItem>
+) {
+    constructor(rwt: RanchoWithTablas) :
+            this(
+                rwt.rancho.idRancho,
+                rwt.rancho.rancho,
+                rwt.rancho.alias,
+                rwt.tablas.mapNotNull { t -> t.toSendTablaItem() },
+            )
+}
+
+data class SendTablaItem(
+    @SerializedName("_id")
+    val id: String?,
+    val tabla: String,
+)

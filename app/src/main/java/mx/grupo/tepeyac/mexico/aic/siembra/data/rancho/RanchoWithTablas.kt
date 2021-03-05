@@ -8,17 +8,13 @@ data class RanchoWithTablas(
     @Embedded
     val rancho: Rancho,
     @Relation(
-        parentColumn = "id_rancho",
+        parentColumn = "id_interno",
         entityColumn = "id_rancho"
     )
     val tablas: List<Tabla>
 ) {
-    fun toResponseItem(): RanchoItem =
-        RanchoItem(
-            rancho.idRancho!!,
-            rancho.rancho,
-            rancho.alias,
-            tablas.filter { it.idTabla != null && !it.editado }
-                .map { it.toTablaItem() }
-        )
+    fun toRanchoItem(): RanchoItem? =
+        rancho.toRanchoItem(tablas.mapNotNull { it.toTablaItem() })
+
+    fun toSendRanchoItem(): SendRanchoItem = SendRanchoItem(this)
 }

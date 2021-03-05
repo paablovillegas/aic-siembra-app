@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "6c5154932a4f3d092ee732fc296cfe09",
+    "identityHash": "3647aff77bd4386df1cebdea400fe87d",
     "entities": [
       {
         "tableName": "Actividad",
@@ -870,7 +870,7 @@
       },
       {
         "tableName": "Tabla",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tabla` TEXT, `tabla` TEXT NOT NULL, `editado` INTEGER NOT NULL, `id_rancho` TEXT)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_tabla` TEXT, `tabla` TEXT NOT NULL, `editado` INTEGER NOT NULL, `id_rancho` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -899,8 +899,8 @@
           {
             "fieldPath": "idRancho",
             "columnName": "id_rancho",
-            "affinity": "TEXT",
-            "notNull": false
+            "affinity": "INTEGER",
+            "notNull": true
           }
         ],
         "primaryKey": {
@@ -916,7 +916,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6c5154932a4f3d092ee732fc296cfe09')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '3647aff77bd4386df1cebdea400fe87d')"
     ]
   }
 }

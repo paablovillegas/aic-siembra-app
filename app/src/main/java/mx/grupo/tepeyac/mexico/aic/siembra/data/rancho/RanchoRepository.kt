@@ -2,8 +2,6 @@ package mx.grupo.tepeyac.mexico.aic.siembra.data.rancho
 
 import android.content.Context
 import android.util.Log
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import mx.grupo.tepeyac.mexico.aic.siembra.data.AppDatabase
 import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.tabla.Tabla
 import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.tabla.TablaDao
@@ -18,28 +16,39 @@ class RanchoRepository(context: Context) {
     private val ranchoApi: RanchoApi = ServiceGenerator
         .createService(context, RanchoApi::class.java, "1")
 
-    fun getRanchos(): List<RanchoItem> {
-        val data =
-            "{\"ok\":true,\"ranchos\":[{\"_id\":\"603935b0afbf59217c1afc1d\",\"rancho\":\"Santa Cruz\",\"alias\":\"SC\",\"tablas\":[{\"_id\":\"6039390d8f00b52f08780408\",\"tabla\":\"Tabla 1\",\"libre\":true},{\"_id\":\"6039483445bc750a5ce98873\",\"tabla\":\"Tabla 3\",\"libre\":true},{\"_id\":\"6039450b0b62433674e6c5c9\",\"tabla\":\"Tabla 10\",\"libre\":true}],\"__v\":6}]}"
-        val gson: Gson = GsonBuilder().create()
-        val ranchoResponse = gson.fromJson(data, ResponseRanchoList::class.java)
-        return ranchoResponse.ranchos
+    fun insert(rwt: RanchoWithTablas) {
+        val id = ranchoDao.insert(rwt.rancho)
+        tablaDao.insert(rwt.tablas.map { it.copy(idRancho = id) })
     }
 
-    fun getRanchos2() = ranchoDao.getRanchos()
+    fun update(rwt: RanchoWithTablas) {
+        ranchoDao.update(rwt.rancho)
+        tablaDao.update(rwt.tablas)
+    }
 
-    fun updateDatabaseRanchos(ranchosWithTablas: List<List<RanchoWithTablas>>) {
-        if (ranchosWithTablas.size != 3)
-            return
-        ranchosWithTablas[0].forEach { rancho ->
-            ranchoDao.insert(rancho.rancho)
-            updateDatabaseTablas(rancho.tablas)
+    fun getRanchos(): List<RanchoWithTablas> = ranchoDao.getRanchos()
+    fun getRanchosNoSubidos(): List<RanchoWithTablas> = ranchoDao.getRanchosNoSubidos()
+
+    fun syncRanchos() {
+        getRanchosNoSubidos().forEach {
+            insertRancho(it)
         }
-        ranchosWithTablas[1].forEach { rancho ->
+    }
+
+    fun updateDatabaseRanchos(rwt: List<List<RanchoWithTablas>>) {
+        if (rwt.size != 3)
+            return
+        rwt[0].forEach { rancho ->
+            val id = ranchoDao.insert(rancho.rancho)
+            updateDatabaseTablas(rancho.tablas
+                .map { tabla -> tabla.copy(idRancho = id) }
+            )
+        }
+        rwt[1].forEach { rancho ->
             ranchoDao.update(rancho.rancho)
             updateDatabaseTablas(rancho.tablas)
         }
-        ranchosWithTablas[0].forEach { rancho ->
+        rwt[2].forEach { rancho ->
             ranchoDao.delete(rancho.rancho)
             updateDatabaseTablas(rancho.tablas)
         }
@@ -71,7 +80,10 @@ class RanchoRepository(context: Context) {
             if (interno != null)
                 return@mapNotNull RanchoWithTablas(
                     rancho = externo.rancho.copy(id = interno.rancho.id),
-                    tablas = compareTablas(interno.tablas, externo.tablas)
+                    tablas = compareTablas(
+                        interno.tablas,
+                        externo.tablas.map { it.copy(idRancho = interno.rancho.id) }
+                    )
                 )
             return@mapNotNull null
         }
@@ -81,10 +93,8 @@ class RanchoRepository(context: Context) {
                     externo.rancho.idRancho == interno.rancho.idRancho
                 } == null
             }
-            .map { tabla ->
-                tabla.copy(
-                    tablas = tabla.tablas.map { table -> table.copy(delete = true) }
-                )
+            .map { rancho ->
+                rancho.copy(tablas = rancho.tablas.map { table -> table.copy(delete = true) })
             }
         return listOf(inserts, updates, deletes)
     }
@@ -99,7 +109,11 @@ class RanchoRepository(context: Context) {
             val interno = internos.find { interno ->
                 interno.idTabla == externo.idTabla && !interno.editado
             }
-            if (interno != null) externo.copy(id = interno.id)
+            if (interno != null)
+                externo.copy(
+                    id = interno.id,
+                    idRancho = interno.idRancho,
+                )
             else null
         }
         val deletes = internos.filter { interno ->
@@ -117,11 +131,9 @@ class RanchoRepository(context: Context) {
                 response: Response<ResponseRanchoList>
             ) {
                 response.body()?.let { r ->
-                    val responseRanchoList = r.ranchos
-                    val ranchosWithTablas = responseRanchoList
-                        .map { it.getRanchoWithTablas() }
-                    val interno = ranchoDao.getRanchos()
-                    val data = compareRanchos(interno, ranchosWithTablas)
+                    val ranchos = r.ranchos
+                    val ranchosWithTablas = ranchos.map { it.getRanchoWithTablas() }
+                    val data = compareRanchos(ranchoDao.getRanchos(), ranchosWithTablas)
                     Log.i(
                         "TAG",
                         "onResponse: I:${data[0].size} U:${data[1].size} D:${data[2].size}"
@@ -136,40 +148,59 @@ class RanchoRepository(context: Context) {
         })
     }
 
-    fun insertRancho(rancho: RanchoItem) {
-        ranchoApi.insertRancho(rancho).enqueue(object : Callback<ResponseRanchoItem> {
-            override fun onResponse(
-                call: Call<ResponseRanchoItem>,
-                response: Response<ResponseRanchoItem>
-            ) {
-                response.body()?.let {
-                    //ranchoDao.insert(it.rancho.toEntity().copy(id = ))
+    private fun insertRancho(rancho: RanchoWithTablas) {
+        rancho.toSendRanchoItem().let { sri ->
+            ranchoApi.insertRancho(sri).enqueue(object : Callback<ResponseRanchoItem> {
+                override fun onResponse(
+                    call: Call<ResponseRanchoItem>,
+                    response: Response<ResponseRanchoItem>
+                ) {
+                    response.body()?.let { ranchoItem ->
+                        val nuevo = rancho.tablas
+                            .zip(ranchoItem.rancho.getTablasEntities()) { i, e ->
+                                i.copy(idTabla = e.idTabla)
+                            }
+                        update(
+                            RanchoWithTablas(
+                                rancho = ranchoItem.rancho.toEntity()
+                                    .copy(id = rancho.rancho.id),
+                                tablas = nuevo
+                            )
+                        )
+                    }
                 }
-            }
 
-            override fun onFailure(call: Call<ResponseRanchoItem>, t: Throwable) {
-                t.printStackTrace()
-            }
-        })
+                override fun onFailure(call: Call<ResponseRanchoItem>, t: Throwable) {
+                    Log.e("TAG", "onFailure: ${t.stackTraceToString()}")
+                }
+            })
+        }
     }
 
     fun updateRancho(rancho: RanchoWithTablas) {
-        rancho.rancho.idRancho?.let {
-            ranchoApi.updateRancho(it, rancho.toResponseItem())
-                .enqueue(object : Callback<ResponseRanchoItem> {
-                    override fun onResponse(
-                        call: Call<ResponseRanchoItem>,
-                        response: Response<ResponseRanchoItem>
-                    ) {
-                        response.body()?.let { res ->
-                            Log.i("TAG", "onResponse: $res")
+        /*
+        rancho.rancho.idRancho?.let { idRancho ->
+            rancho.toRanchoItem()?.let { ranchoItem ->
+                ranchoApi.updateRancho(idRancho, ranchoItem)
+                    .enqueue(object : Callback<ResponseRanchoItem> {
+                        override fun onResponse(
+                            call: Call<ResponseRanchoItem>,
+                            response: Response<ResponseRanchoItem>
+                        ) {
+                            response.body()?.let { res ->
+                                res.rancho.getRanchoWithTablas().let { rwt ->
+                                    ranchoDao.update(rwt.rancho.copy(id = rancho.rancho.id))
+                                    Log.i("TAG", "onResponse: ${rwt.tablas}")
+                                }
+                            }
                         }
-                    }
 
-                    override fun onFailure(call: Call<ResponseRanchoItem>, t: Throwable) {
-                        t.printStackTrace()
-                    }
-                })
-        }
+                        override fun onFailure(call: Call<ResponseRanchoItem>, t: Throwable) {
+                            t.printStackTrace()
+                        }
+                    })
+
+            }
+        } */
     }
 }

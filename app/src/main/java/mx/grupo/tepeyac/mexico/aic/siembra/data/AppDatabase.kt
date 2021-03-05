@@ -64,6 +64,6 @@ abstract class AppDatabase : RoomDatabase() {
             .fallbackToDestructiveMigration()
             .build()
     }) {
-        const val DB_NAME = "embarque"
+        const val DB_NAME = "siembradb"
     }
 }

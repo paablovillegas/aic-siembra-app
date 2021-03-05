@@ -14,4 +14,10 @@ data class Rancho(
     var rancho: String,
     var alias: String?,
     var editado: Boolean = false,
-)
+) {
+    fun toRanchoItem(tablas: List<TablaItem>): RanchoItem? =
+        when (idRancho) {
+            null -> null
+            else -> RanchoItem(idRancho!!, rancho, alias, tablas)
+        }
+}

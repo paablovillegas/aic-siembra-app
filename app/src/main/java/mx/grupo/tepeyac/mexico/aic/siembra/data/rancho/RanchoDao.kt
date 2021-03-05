@@ -25,4 +25,8 @@ interface RanchoDao {
     @Transaction
     @Query("SELECT * FROM Rancho WHERE id_rancho IS NOT NULL")
     fun getRanchos(): List<RanchoWithTablas>
+
+    @Transaction
+    @Query("SELECT * FROM Rancho WHERE id_rancho IS NULL")
+    fun getRanchosNoSubidos(): List<RanchoWithTablas>
 }
