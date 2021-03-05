@@ -178,29 +178,31 @@ class RanchoRepository(context: Context) {
     }
 
     fun updateRancho(rancho: RanchoWithTablas) {
-        /*
-        rancho.rancho.idRancho?.let { idRancho ->
-            rancho.toRanchoItem()?.let { ranchoItem ->
-                ranchoApi.updateRancho(idRancho, ranchoItem)
-                    .enqueue(object : Callback<ResponseRanchoItem> {
-                        override fun onResponse(
-                            call: Call<ResponseRanchoItem>,
-                            response: Response<ResponseRanchoItem>
-                        ) {
-                            response.body()?.let { res ->
-                                res.rancho.getRanchoWithTablas().let { rwt ->
-                                    ranchoDao.update(rwt.rancho.copy(id = rancho.rancho.id))
-                                    Log.i("TAG", "onResponse: ${rwt.tablas}")
-                                }
-                            }
+        rancho.rancho.idRancho?.let {
+            rancho.toSendRanchoItem().let { sri ->
+                ranchoApi.updateRancho(it, sri).enqueue(object : Callback<ResponseRanchoItem> {
+                    override fun onResponse(
+                        call: Call<ResponseRanchoItem>,
+                        response: Response<ResponseRanchoItem>
+                    ) {
+                        response.body()?.let {
+                            val rwt = it.rancho.getRanchoWithTablas()
+                            update(
+                                RanchoWithTablas(
+                                    rwt.rancho.copy(id = rancho.rancho.id),
+                                    rwt.tablas.zip(rancho.tablas) { e, i ->
+                                        e.copy(id = i.id, idRancho = i.idRancho)
+                                    }
+                                )
+                            )
                         }
+                    }
 
-                        override fun onFailure(call: Call<ResponseRanchoItem>, t: Throwable) {
-                            t.printStackTrace()
-                        }
-                    })
-
+                    override fun onFailure(call: Call<ResponseRanchoItem>, t: Throwable) {
+                        t.printStackTrace()
+                    }
+                })
             }
-        } */
+        }
     }
 }
