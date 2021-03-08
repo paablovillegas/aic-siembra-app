@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "189ab515a53167725dd53b48b4845c08",
+    "identityHash": "c3922b162380dccf46ed655f33a97334",
     "entities": [
       {
         "tableName": "Asistencia",
@@ -949,12 +949,220 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "Grupo",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_grupo` TEXT, `grupo` TEXT NOT NULL, `tipo_grupo` TEXT NOT NULL, `flete_regular` REAL, `flete_persona` REAL, `flete_cabraliego` REAL, `flete_incompleto` REAL, `flete_escondida` REAL, `editado` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id_interno",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idGrupo",
+            "columnName": "id_grupo",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "grupo",
+            "columnName": "grupo",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tipoGrupo",
+            "columnName": "tipo_grupo",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fleteRegular",
+            "columnName": "flete_regular",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fletePersona",
+            "columnName": "flete_persona",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fleteCabraliego",
+            "columnName": "flete_cabraliego",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fleteIncompleto",
+            "columnName": "flete_incompleto",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fleteEscondida",
+            "columnName": "flete_escondida",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "editado",
+            "columnName": "editado",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_interno"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Trabajador",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_trabajador` TEXT, `nombres` TEXT NOT NULL, `apellido_paterno` TEXT NOT NULL, `apellido_materno` TEXT, `nss` TEXT, `curp` TEXT, `rfc` TEXT, `ine` TEXT, `genero` TEXT, `domicilio` TEXT, `fecha_alta` INTEGER NOT NULL, `fecha_nacimiento` INTEGER, `activo` INTEGER NOT NULL, `tarjeta` INTEGER NOT NULL, `sueldo` REAL NOT NULL, `extra` REAL, `bono` REAL, `editado` INTEGER NOT NULL, `id_grupo` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id_interno",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTrabajador",
+            "columnName": "id_trabajador",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nombres",
+            "columnName": "nombres",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "apellidoPaterno",
+            "columnName": "apellido_paterno",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "apellidoMaterno",
+            "columnName": "apellido_materno",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "nss",
+            "columnName": "nss",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "curp",
+            "columnName": "curp",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "rfc",
+            "columnName": "rfc",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "ine",
+            "columnName": "ine",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "genero",
+            "columnName": "genero",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "domicilio",
+            "columnName": "domicilio",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "fechaAlta",
+            "columnName": "fecha_alta",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fechaNacimiento",
+            "columnName": "fecha_nacimiento",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "activo",
+            "columnName": "activo",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tarjeta",
+            "columnName": "tarjeta",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "sueldo",
+            "columnName": "sueldo",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "extra",
+            "columnName": "extra",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "bono",
+            "columnName": "bono",
+            "affinity": "REAL",
+            "notNull": false
+          },
+          {
+            "fieldPath": "editado",
+            "columnName": "editado",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idGrupo",
+            "columnName": "id_grupo",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_interno"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '189ab515a53167725dd53b48b4845c08')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c3922b162380dccf46ed655f33a97334')"
     ]
   }
 }

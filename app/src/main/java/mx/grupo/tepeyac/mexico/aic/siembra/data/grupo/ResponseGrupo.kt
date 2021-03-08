@@ -39,7 +39,7 @@ data class GrupoItem(
         )
 
     fun toTrabajadoresEntities(): List<Trabajador> =
-        trabajadores.map { it.toEntity(id) }
+        trabajadores.map { it.toEntity() }
 
     fun getGrupoWithTrabajadores(): GrupoWithTrabajadores =
         GrupoWithTrabajadores(
@@ -79,7 +79,7 @@ data class ResponseTrabajador(
     val salario: ResponseSalario,
     val evidencias: ResponseEvidencias? = null,
 ) {
-    fun toEntity(idGrupo: String): Trabajador =
+    fun toEntity(idGrupo: Long = 0): Trabajador =
         Trabajador(
             idTrabajador = id,
             nombres = nombres,
@@ -112,3 +112,22 @@ data class ResponseEvidencias(
     val perfil: String?,
     val ine: String?,
 )
+
+data class SendGrupoItem(
+    val idGrupo: String?,
+    @SerializedName("lugar")
+    val grupo: String,
+    val flete: ResponseFlete,
+    @SerializedName("tipo_lugar")
+    val tipoGrupo: String,
+    val trabajadores: List<String>
+) {
+    constructor(gwt: GrupoWithTrabajadores) :
+            this(
+                gwt.grupo.idGrupo,
+                gwt.grupo.grupo,
+                gwt.getFletes(),
+                gwt.grupo.tipoGrupo,
+                gwt.trabajadores.mapNotNull { it.idTrabajador },
+            )
+}

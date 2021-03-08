@@ -22,6 +22,10 @@ import mx.grupo.tepeyac.mexico.aic.siembra.data.cosecha.corte.Corte
 import mx.grupo.tepeyac.mexico.aic.siembra.data.cosecha.empaque.Empaque
 import mx.grupo.tepeyac.mexico.aic.siembra.data.cosecha.granel.Granel
 import mx.grupo.tepeyac.mexico.aic.siembra.data.cosecha.transporte.Transporte
+import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.Grupo
+import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.GrupoDao
+import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.trabajador.Trabajador
+import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.trabajador.TrabajadorDao
 import mx.grupo.tepeyac.mexico.aic.siembra.data.producto.Producto
 import mx.grupo.tepeyac.mexico.aic.siembra.data.producto.ProductoDao
 import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.Rancho
@@ -54,6 +58,8 @@ import mx.grupo.tepeyac.mexico.aic.siembra.utils.SingletonHolder
         Producto::class,
         Area::class,
         Actividad::class,
+        Grupo::class,
+        Trabajador::class,
     ],
     version = 1,
     exportSchema = true
@@ -65,6 +71,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract val productoDao: ProductoDao
     abstract val areaDao: AreaDao
     abstract val actividadDao: ActividadDao
+    abstract val grupoDao: GrupoDao
+    abstract val trabajadorDao: TrabajadorDao
 
     companion object : SingletonHolder<AppDatabase, Context>({
         Room.databaseBuilder(it.applicationContext, AppDatabase::class.java, DB_NAME)

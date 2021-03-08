@@ -4,27 +4,53 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
-import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.trabajador.Trabajador
 
 @Entity
 data class Grupo(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_interno")
-    var id: Long = 0,
+    val id: Long = 0,
     @ColumnInfo(name = "id_grupo")
-    var idGrupo: String? = null,
-    var grupo: String,
+    val idGrupo: String? = null,
+    val grupo: String,
     @ColumnInfo(name = "tipo_grupo")
-    var tipoGrupo: String,
+    val tipoGrupo: String,
     @ColumnInfo(name = "flete_regular")
-    var fleteRegular: Double? = null,
+    val fleteRegular: Double? = null,
     @ColumnInfo(name = "flete_persona")
-    var fletePersona: Double? = null,
+    val fletePersona: Double? = null,
     @ColumnInfo(name = "flete_cabraliego")
-    var fleteCabraliego: Double? = null,
+    val fleteCabraliego: Double? = null,
     @ColumnInfo(name = "flete_incompleto")
-    var fleteIncompleto: Double? = null,
+    val fleteIncompleto: Double? = null,
     @ColumnInfo(name = "flete_escondida")
-    var fleteEscondida: Double? = null,
-)
+    val fleteEscondida: Double? = null,
+    val editado: Boolean = false,
+    @Ignore
+    val delete: Boolean = false,
+) {
+    constructor(
+        id: Long = 0,
+        idGrupo: String? = null,
+        grupo: String,
+        tipoGrupo: String,
+        fleteRegular: Double? = null,
+        fletePersona: Double? = null,
+        fleteCabraliego: Double? = null,
+        fleteIncompleto: Double? = null,
+        fleteEscondida: Double? = null,
+        editado: Boolean = false,
+    ) : this(
+        id,
+        idGrupo,
+        grupo,
+        tipoGrupo,
+        fleteRegular,
+        fletePersona,
+        fleteCabraliego,
+        fleteIncompleto,
+        fleteEscondida,
+        editado,
+        false,
+    )
+}

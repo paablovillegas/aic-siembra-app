@@ -10,9 +10,9 @@ import java.util.*
 data class Trabajador(
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_interno")
-    var id: Long = 0,
+    val id: Long = 0,
     @ColumnInfo(name = "id_trabajador")
-    var idTrabajador: String? = null,
+    val idTrabajador: String? = null,
     val nombres: String,
     @ColumnInfo(name = "apellido_paterno")
     val apellidoPaterno: String,
@@ -35,8 +35,53 @@ data class Trabajador(
     val bono: Double? = 0.0,
     val editado: Boolean = false,
     @ColumnInfo(name = "id_grupo")
-    val idGrupo: String,
+    val idGrupo: Long,
     @Ignore
     val delete: Boolean = false,
-)
+) {
+    constructor(
+        id: Long = 0,
+        idTrabajador: String? = null,
+        nombres: String,
+        apellidoPaterno: String,
+        apellidoMaterno: String? = null,
+        nss: String? = null,
+        curp: String? = null,
+        rfc: String? = null,
+        ine: String? = null,
+        genero: String? = null,
+        domicilio: String? = null,
+        fechaAlta: Date = Date(),
+        fechaNacimiento: Date? = null,
+        activo: Boolean = true,
+        tarjeta: Boolean = false,
+        sueldo: Double = 0.0,
+        extra: Double? = 0.0,
+        bono: Double? = 0.0,
+        editado: Boolean = false,
+        idGrupo: Long,
+    ) : this(
+        id,
+        idTrabajador,
+        nombres,
+        apellidoPaterno,
+        apellidoMaterno,
+        nss,
+        curp,
+        rfc,
+        ine,
+        genero,
+        domicilio,
+        fechaAlta,
+        fechaNacimiento,
+        activo,
+        tarjeta,
+        sueldo,
+        extra,
+        bono,
+        editado,
+        idGrupo,
+        false,
+    )
+}
 //TODO: Agregar evidencias: Nueva tabla? ? ?

@@ -30,9 +30,7 @@ class RanchoRepository(context: Context) {
     fun getRanchosNoSubidos(): List<RanchoWithTablas> = ranchoDao.getRanchosNoSubidos()
 
     fun syncRanchos() {
-        getRanchosNoSubidos().forEach {
-            insertRancho(it)
-        }
+        getRanchosNoSubidos().forEach { insertRancho(it) }
     }
 
     fun updateDatabaseRanchos(rwt: List<List<RanchoWithTablas>>) {
