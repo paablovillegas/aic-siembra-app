@@ -26,8 +26,8 @@ data class AreaItem(
         )
 
     fun toActividadesEntities(): List<Actividad> =
-        actividades.map{
-                act -> act.toEntity(id)
+        actividades.map { act ->
+            act.toEntity()
         }
 
     fun getAreaWithActividades(): AreaWithActividades =
@@ -42,10 +42,29 @@ data class ActividadItem(
     val id: String,
     val actividad: String,
 ) {
-    fun toEntity(idArea: String): Actividad =
+    fun toEntity(idArea: Long = 0): Actividad =
         Actividad(
             idActividad = id,
             actividad = actividad,
             idArea = idArea,
         )
 }
+
+data class SendAreaItem(
+    val idArea: String?,
+    val area: String,
+    val actividades: List<SendActividadItem>
+) {
+    constructor(awa: AreaWithActividades) :
+            this(
+                awa.area.idArea,
+                awa.area.area,
+                awa.actividades.map { it.toSendActividadItem() }
+            )
+}
+
+data class SendActividadItem(
+    @SerializedName("_id")
+    val idActividad: String?,
+    val actividad: String,
+)

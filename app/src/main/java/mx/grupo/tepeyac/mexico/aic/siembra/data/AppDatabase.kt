@@ -7,7 +7,9 @@ import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
 import mx.grupo.tepeyac.mexico.aic.siembra.data.AppDatabase.Companion.DB_NAME
 import mx.grupo.tepeyac.mexico.aic.siembra.data.area.Area
+import mx.grupo.tepeyac.mexico.aic.siembra.data.area.AreaDao
 import mx.grupo.tepeyac.mexico.aic.siembra.data.area.actividad.Actividad
+import mx.grupo.tepeyac.mexico.aic.siembra.data.area.actividad.ActividadDao
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.actividadTrabajador.ActividadTrabajador
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.asistencia.Asistencia
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.bono.Bono
@@ -35,8 +37,6 @@ import mx.grupo.tepeyac.mexico.aic.siembra.utils.SingletonHolder
 @Database
     (
     entities = [
-        Actividad::class,
-        Area::class,
         Asistencia::class,
         ActividadTrabajador::class,
         Bono::class,
@@ -52,6 +52,8 @@ import mx.grupo.tepeyac.mexico.aic.siembra.utils.SingletonHolder
         Rancho::class,
         Tabla::class,
         Producto::class,
+        Area::class,
+        Actividad::class,
     ],
     version = 1,
     exportSchema = true
@@ -61,6 +63,8 @@ abstract class AppDatabase : RoomDatabase() {
     abstract val ranchoDao: RanchoDao
     abstract val tablaDao: TablaDao
     abstract val productoDao: ProductoDao
+    abstract val areaDao: AreaDao
+    abstract val actividadDao: ActividadDao
 
     companion object : SingletonHolder<AppDatabase, Context>({
         Room.databaseBuilder(it.applicationContext, AppDatabase::class.java, DB_NAME)

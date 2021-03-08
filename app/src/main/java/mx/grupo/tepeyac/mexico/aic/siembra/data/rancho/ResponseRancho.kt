@@ -61,7 +61,7 @@ data class SendRanchoItem(
                 rwt.rancho.idRancho,
                 rwt.rancho.rancho,
                 rwt.rancho.alias,
-                rwt.tablas.mapNotNull { t -> t.toSendTablaItem() },
+                rwt.tablas.mapNotNull { it.toSendTablaItem() },
             )
 }
 

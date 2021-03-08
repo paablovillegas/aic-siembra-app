@@ -8,8 +8,15 @@ data class AreaWithActividades(
     @Embedded
     val area: Area,
     @Relation(
-        parentColumn = "id_area",
+        parentColumn = "id_interno",
         entityColumn = "id_area"
     )
     val actividades: List<Actividad>,
-)
+) {
+    fun toSendAreaItem(): SendAreaItem =
+        SendAreaItem(
+            area.idArea,
+            area.area,
+            actividades.map { it.toSendActividadItem() }
+        )
+}

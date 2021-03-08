@@ -16,6 +16,6 @@ class Main : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        viewModel.getRanchos()
+        viewModel.getInfo()
     }
 }

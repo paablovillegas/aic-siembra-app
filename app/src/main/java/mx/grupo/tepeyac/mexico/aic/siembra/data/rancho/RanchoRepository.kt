@@ -132,7 +132,8 @@ class RanchoRepository(context: Context) {
             ) {
                 response.body()?.let { r ->
                     val ranchos = r.ranchos
-                    val ranchosWithTablas = ranchos.map { it.getRanchoWithTablas() }
+                    val ranchosWithTablas: List<RanchoWithTablas> =
+                        ranchos.map { it.getRanchoWithTablas() }
                     val data = compareRanchos(ranchoDao.getRanchos(), ranchosWithTablas)
                     Log.i(
                         "TAG",

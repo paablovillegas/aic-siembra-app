@@ -4,6 +4,7 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
+import mx.grupo.tepeyac.mexico.aic.siembra.data.area.SendActividadItem
 
 @Entity
 data class Actividad(
@@ -15,7 +16,7 @@ data class Actividad(
     var actividad: String,
     val editado: Boolean = false,
     @ColumnInfo(name = "id_area")
-    var idArea: String? = null,
+    var idArea: Long,
     @Ignore
     val delete: Boolean = false,
 ) {
@@ -23,7 +24,10 @@ data class Actividad(
         id: Long = 0,
         idActividad: String? = null,
         actividad: String,
-        idArea: String?,
+        idArea: Long,
         editado: Boolean
     ) : this(id, idActividad, actividad, editado, idArea, false)
+
+    fun toSendActividadItem(): SendActividadItem =
+        SendActividadItem(idActividad, actividad)
 }
