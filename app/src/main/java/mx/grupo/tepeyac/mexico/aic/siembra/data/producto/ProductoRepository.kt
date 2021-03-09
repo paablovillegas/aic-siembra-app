@@ -14,6 +14,8 @@ class ProductoRepository(context: Context) {
         .createService(context, ProductoApi::class.java, "A")
 
     fun getProductos(): List<Producto> = productoDao.getProductos()
+    fun getProductoID(id: String): Long? = productoDao.getProductoID(id)
+    fun getProductoID(id: Long): String? = productoDao.getProductoID(id)
 
     fun compareProductos(
         internos: List<Producto>,

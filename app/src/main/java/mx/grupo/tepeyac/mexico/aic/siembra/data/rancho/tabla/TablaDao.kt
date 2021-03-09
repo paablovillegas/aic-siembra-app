@@ -21,4 +21,10 @@ interface TablaDao {
 
     @Delete
     fun delete(tabla: List<Tabla>)
+
+    @Query(" SELECT id_interno FROM Tabla WHERE id_tabla = :id")
+    fun getTablaID(id: String): Long?
+
+    @Query(" SELECT id_tabla FROM Tabla WHERE id_interno = :id")
+    fun getTablaID(id: Long): String?
 }

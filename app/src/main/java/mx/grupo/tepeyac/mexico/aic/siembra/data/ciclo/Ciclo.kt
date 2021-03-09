@@ -15,9 +15,9 @@ data class Ciclo(
     val idCiclo: String? = null,
     val ciclo: String,
     @ColumnInfo(name = "id_tabla")
-    val idTabla: String,
+    val idTabla: Long = 0,
     @ColumnInfo(name = "id_producto")
-    val idProducto: String,
+    val idProducto: Long = 0,
     @ColumnInfo(name = "fecha_inicio")
     val fechaInicio: Date,
     @ColumnInfo(name = "fecha_siembra")
@@ -34,8 +34,8 @@ data class Ciclo(
         id: Long = 0,
         idCiclo: String? = null,
         ciclo: String,
-        idTabla: String,
-        idProducto: String,
+        idTabla: Long,
+        idProducto: Long,
         fechaInicio: Date,
         fechaSiembra: Date? = null,
         fechaCosecha: Date? = null,
@@ -54,4 +54,16 @@ data class Ciclo(
         editado,
         false
     )
+
+    fun toSendCicloItem(idTabla: String, idProducto: String): SendCicloItem =
+        SendCicloItem(
+            idCiclo,
+            ciclo,
+            idTabla,
+            idProducto,
+            fechaInicio,
+            fechaSiembra,
+            fechaCosecha,
+            fechaFin,
+        )
 }

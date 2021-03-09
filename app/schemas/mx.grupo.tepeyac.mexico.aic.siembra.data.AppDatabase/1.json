@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c3922b162380dccf46ed655f33a97334",
+    "identityHash": "bb0c5e586d02ee74c5532750d0541bbe",
     "entities": [
       {
         "tableName": "Asistencia",
@@ -274,7 +274,7 @@
       },
       {
         "tableName": "Ciclo",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_ciclo` TEXT, `ciclo` TEXT NOT NULL, `id_tabla` TEXT NOT NULL, `id_producto` TEXT NOT NULL, `fecha_inicio` INTEGER NOT NULL, `fecha_siembra` INTEGER, `fecha_cosecha` INTEGER, `fecha_fin` INTEGER, `editado` INTEGER NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_ciclo` TEXT, `ciclo` TEXT NOT NULL, `id_tabla` INTEGER NOT NULL, `id_producto` INTEGER NOT NULL, `fecha_inicio` INTEGER NOT NULL, `fecha_siembra` INTEGER, `fecha_cosecha` INTEGER, `fecha_fin` INTEGER, `editado` INTEGER NOT NULL)",
         "fields": [
           {
             "fieldPath": "id",
@@ -297,13 +297,13 @@
           {
             "fieldPath": "idTabla",
             "columnName": "id_tabla",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
             "fieldPath": "idProducto",
             "columnName": "id_producto",
-            "affinity": "TEXT",
+            "affinity": "INTEGER",
             "notNull": true
           },
           {
@@ -1162,7 +1162,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c3922b162380dccf46ed655f33a97334')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'bb0c5e586d02ee74c5532750d0541bbe')"
     ]
   }
 }

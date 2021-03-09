@@ -27,4 +27,10 @@ interface ProductoDao {
 
     @Query("SELECT * FROM Producto WHERE id_producto IS NULL")
     fun getProductosNoSubidos(): List<Producto>
+
+    @Query("SELECT id_interno FROM Producto WHERE id_producto = :id")
+    fun getProductoID(id: String): Long?
+
+    @Query("SELECT id_producto FROM Producto WHERE id_interno = :id")
+    fun getProductoID(id: Long): String?
 }

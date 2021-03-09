@@ -15,9 +15,9 @@ interface GrupoApi {
     @POST("lugares_trabajo")
     fun insertGrupo(@Body body: SendGrupoItem): Call<ResponseGrupoItem>
 
-    @PUT("lugares_trabajo/{id_rancho}")
+    @PUT("lugares_trabajo/{id}")
     fun updateGrupo(
-        @Path(value = "id_rancho") id: String,
+        @Path(value = "id") id: String,
         @Body rancho: SendGrupoItem,
     ): Call<ResponseGrupoItem>
 }

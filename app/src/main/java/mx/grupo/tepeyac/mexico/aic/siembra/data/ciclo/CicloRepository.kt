@@ -1,17 +1,27 @@
 package mx.grupo.tepeyac.mexico.aic.siembra.data.ciclo
 
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
+import android.content.Context
+import android.util.Log
+import mx.grupo.tepeyac.mexico.aic.siembra.data.AppDatabase
+import mx.grupo.tepeyac.mexico.aic.siembra.data.producto.ProductoRepository
+import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.RanchoRepository
+import mx.grupo.tepeyac.mexico.aic.siembra.network.ServiceGenerator
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
-class CicloRepository {
-
-    fun getCiclos(): List<CicloItem> {
-        val data =
-            "{\"ok\":true,\"ciclos\":[{\"_id\":\"60397ee0b8acb743a4d2e29e\",\"ciclo\":\"Ciclo 1\",\"tabla\":\"6039390d8f00b52f08780408\",\"producto\":{\"_id\":\"60397652f5e0a43f2018f93e\",\"producto\":\"Brócoli\",\"__v\":0},\"fechas\":{\"inicio\":\"2020-01-19T16:26:20.690Z\"},\"__v\":0},{\"_id\":\"60397f3f99670c165063ad2f\",\"ciclo\":\"Ciclo 2\",\"tabla\":\"6039390d8f00b52f08780408\",\"producto\":{\"_id\":\"60397652f5e0a43f2018f93e\",\"producto\":\"Brócoli\",\"__v\":0},\"fechas\":{\"inicio\":\"2021-01-19T16:26:20.690Z\"},\"__v\":0}]}"
-        val gson: Gson = GsonBuilder().create()
-        val cicloResponse = gson.fromJson(data, ResponseCicloList::class.java)
-        return cicloResponse.ciclos
+class CicloRepository(context: Context) {
+    private val cicloDao: CicloDao = AppDatabase.getInstance(context).cicloDao
+    private val ranchoRepository: RanchoRepository by lazy {
+        RanchoRepository(context)
     }
+    private val productoRepository: ProductoRepository by lazy {
+        ProductoRepository(context)
+    }
+    private val cicloApi: CicloApi =
+        ServiceGenerator.createService(context, CicloApi::class.java, "a")
+
+    fun getCiclos(): List<Ciclo> = cicloDao.getCiclos()
 
     fun compareProductos(
         internos: List<Ciclo>,
@@ -35,5 +45,90 @@ class CicloRepository {
             } == null
         }.map { i -> i.copy(delete = true) }
         return listOf(inserts, updates, deletes).flatten()
+    }
+
+    private fun updateDatabaseCiclos(tablas: List<Ciclo>) {
+        tablas.forEach { tabla ->
+            when {
+                tabla.delete -> cicloDao.delete(tabla)
+                tabla.id > 0 -> cicloDao.update(tabla)
+                else -> cicloDao.insert(tabla)
+            }
+        }
+    }
+
+    fun downloadCiclos() {
+        cicloApi.getCiclos().enqueue(object : Callback<ResponseCicloList> {
+            override fun onResponse(
+                call: Call<ResponseCicloList>,
+                response: Response<ResponseCicloList>
+            ) {
+                response.body()?.let { c ->
+                    val ciclos = c.ciclos.mapNotNull { ciclo ->
+                        val idTabla = ranchoRepository.getTablaID(ciclo.tabla)
+                        val idProducto = productoRepository.getProductoID(ciclo.producto.id)
+                        if (idTabla == null || idProducto == null)
+                            return@mapNotNull null
+                        return@mapNotNull ciclo.toEntity(idTabla, idProducto)
+                    }
+                    val data = compareProductos(getCiclos(), ciclos)
+                    updateDatabaseCiclos(data)
+                }
+            }
+
+            override fun onFailure(call: Call<ResponseCicloList>, t: Throwable) {
+                t.printStackTrace()
+            }
+        })
+    }
+
+    fun insertCiclo(ciclo: Ciclo) {
+        val idTabla: String? = ranchoRepository.getTablaID(ciclo.idTabla)
+        val idProducto: String? = productoRepository.getProductoID(ciclo.idProducto)
+        if (idTabla == null || idProducto == null)
+            return
+        ciclo.toSendCicloItem(idTabla, idProducto).let { sci ->
+            cicloApi.insertCiclo(sci).enqueue(object : Callback<ResponseCicloItem> {
+                override fun onResponse(
+                    call: Call<ResponseCicloItem>,
+                    response: Response<ResponseCicloItem>
+                ) {
+                    response.body()?.let {
+                        Log.i("TAG", "onResponse: $it")
+                    }
+                }
+
+                override fun onFailure(call: Call<ResponseCicloItem>, t: Throwable) {
+                    t.printStackTrace()
+                }
+            })
+        }
+    }
+
+    fun updateCiclo(ciclo: Ciclo) {
+        val idTabla: String? = ranchoRepository.getTablaID(ciclo.idTabla)
+        val idProducto: String? = productoRepository.getProductoID(ciclo.idProducto)
+        if (idTabla == null || idProducto == null)
+            return
+        ciclo.idCiclo?.let { idCiclo ->
+            ciclo.toSendCicloItem(idTabla, idProducto).let { sci ->
+                cicloApi.updateCiclo(idCiclo, sci).enqueue(object : Callback<ResponseCicloItem> {
+                    override fun onResponse(
+                        call: Call<ResponseCicloItem>,
+                        response: Response<ResponseCicloItem>
+                    ) {
+                        response.body()?.let {
+                            Log.i("TAG", "onResponse: $it")
+                        }
+                    }
+
+                    override fun onFailure(call: Call<ResponseCicloItem>, t: Throwable) {
+                        t.printStackTrace()
+                    }
+                })
+            }
+
+        }
+
     }
 }
