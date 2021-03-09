@@ -95,10 +95,7 @@ data class ResponseTrabajador(
             fechaNacimiento = fechaNacimiento,
             activo = activo,
             tarjeta = tarjeta,
-            sueldo = salario.sueldo,
-            extra = salario.extra,
-            bono = salario.bono,
-            idGrupo = idGrupo
+            idGrupo = idGrupo,
         )
 }
 

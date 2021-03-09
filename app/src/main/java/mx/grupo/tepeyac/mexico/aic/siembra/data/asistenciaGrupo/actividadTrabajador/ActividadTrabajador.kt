@@ -14,11 +14,11 @@ data class ActividadTrabajador(
     @ColumnInfo(name = "id_actividad_trabajador")
     val idActividadTrabajador: String? = null,
     @ColumnInfo(name = "id_actividad")
-    val idActividad: String,
+    val idActividad: Long,
     @ColumnInfo(name = "id_trabajador")
-    val idTrabajador: String,
+    val idTrabajador: Long,
     @ColumnInfo(name = "id_tabla")
-    val idTabla: String,
+    val idTabla: Long,
     val fecha: Date,
     val editado: Boolean = false,
     @Ignore
@@ -29,9 +29,9 @@ data class ActividadTrabajador(
     constructor(
         id: Long = 0,
         idActividadTrabajador: String? = null,
-        idActividad: String,
-        idTrabajador: String,
-        idTabla: String,
+        idActividad: Long,
+        idTrabajador: Long,
+        idTabla: Long,
         fecha: Date,
         editado: Boolean = false,
     ) : this(

@@ -10,6 +10,7 @@ import mx.grupo.tepeyac.mexico.aic.siembra.data.area.Area
 import mx.grupo.tepeyac.mexico.aic.siembra.data.area.AreaDao
 import mx.grupo.tepeyac.mexico.aic.siembra.data.area.actividad.Actividad
 import mx.grupo.tepeyac.mexico.aic.siembra.data.area.actividad.ActividadDao
+import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.AsistenciaGrupo
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.actividadTrabajador.ActividadTrabajador
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.asistencia.Asistencia
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.bono.Bono
@@ -61,6 +62,7 @@ import mx.grupo.tepeyac.mexico.aic.siembra.utils.SingletonHolder
         Grupo::class,
         Trabajador::class,
         Ciclo::class,
+        AsistenciaGrupo::class,
     ],
     version = 1,
     exportSchema = true

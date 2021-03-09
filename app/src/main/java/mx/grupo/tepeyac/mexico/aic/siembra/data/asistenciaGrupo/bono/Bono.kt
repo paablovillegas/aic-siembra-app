@@ -15,7 +15,7 @@ data class Bono(
     val idBono: String? = null,
     var total: Double,
     @ColumnInfo(name = "id_trabajador")
-    val idTrabajador: String,
+    val idTrabajador: Long,
     val fecha: Date,
     val editado: Boolean = false,
     @Ignore
@@ -25,7 +25,7 @@ data class Bono(
         id: Long = 0,
         idBono: String? = null,
         total: Double,
-        idTrabajador: String,
+        idTrabajador: Long,
         fecha: Date,
         editado: Boolean = false,
     ) : this(id, idBono, total, idTrabajador, fecha, editado, false)

@@ -28,6 +28,8 @@ class RanchoRepository(context: Context) {
 
     fun getRanchos(): List<RanchoWithTablas> = ranchoDao.getRanchos()
     fun getRanchosNoSubidos(): List<RanchoWithTablas> = ranchoDao.getRanchosNoSubidos()
+    fun getRanchoID(id: String): Long? = ranchoDao.getRanchoID(id)
+    fun getRanchoID(id: Long): String? = ranchoDao.getRanchoID(id)
     fun getTablaID(id: String): Long? = tablaDao.getTablaID(id)
     fun getTablaID(id: Long): String? = tablaDao.getTablaID(id)
 

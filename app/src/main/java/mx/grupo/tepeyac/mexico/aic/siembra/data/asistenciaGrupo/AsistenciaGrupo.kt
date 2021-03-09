@@ -4,22 +4,29 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
-import com.google.gson.annotations.SerializedName
-import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.asistenciaTrabajador.AsistenciaTrabajador
 import java.util.*
 
 @Entity
 data class AsistenciaGrupo(
     @PrimaryKey
     @ColumnInfo(name = "id_interno")
-    var idInterno: Long = 0,
-    @SerializedName("_id")
+    val id: Long = 0,
     @ColumnInfo(name = "id_asistencia_grupo")
-    var idAsistenciaGrupo: String? = null,
+    val idAsistenciaGrupo: String? = null,
     @ColumnInfo(name = "id_rancho")
-    var rancho: String,
-    var flete: Double,
-    var fecha: Date,
+    val rancho: Long,
+    val flete: Double?,
+    val fecha: Date,
+    val editado: Boolean = false,
     @Ignore
-    var trabajadores: List<AsistenciaTrabajador> = emptyList()
-)
+    val eliminado: Boolean = false,
+) {
+    constructor(
+        id: Long = 0,
+        idAsistenciaGrupo: String? = null,
+        rancho: Long,
+        flete: Double?,
+        fecha: Date,
+        editado: Boolean = false,
+    ) : this(id, idAsistenciaGrupo, rancho, flete, fecha, editado, false)
+}

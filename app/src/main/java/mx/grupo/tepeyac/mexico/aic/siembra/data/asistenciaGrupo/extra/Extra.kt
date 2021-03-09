@@ -16,7 +16,7 @@ data class Extra(
     var horas: Int,
     var total: Double,
     @ColumnInfo(name = "id_trabajador")
-    val idTrabajador: String,
+    val idTrabajador: Long,
     val fecha: Date,
     val editado: Boolean = false,
     @Ignore
@@ -27,7 +27,7 @@ data class Extra(
         idExtra: String? = null,
         horas: Int,
         total: Double,
-        idTrabajador: String,
+        idTrabajador: Long,
         fecha: Date,
         editado: Boolean = false,
     ) : this(id, idExtra, horas, total, idTrabajador, fecha, editado, false)

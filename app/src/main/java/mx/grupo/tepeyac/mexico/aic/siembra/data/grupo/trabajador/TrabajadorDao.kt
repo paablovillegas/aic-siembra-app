@@ -26,4 +26,10 @@ interface TrabajadorDao {
 
     @Delete
     fun delete(trabajadores: List<Trabajador>)
+
+    @Query("SELECT id_trabajador FROM Trabajador WHERE id_interno = :id")
+    fun getTrabajadorID(id: Long): String?
+
+    @Query("SELECT id_interno FROM Trabajador WHERE id_trabajador = :id")
+    fun getTrabajadorID(id: String): Long?
 }

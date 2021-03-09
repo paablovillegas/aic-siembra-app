@@ -2,14 +2,11 @@ package mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo
 
 import com.google.gson.annotations.SerializedName
 import mx.grupo.tepeyac.mexico.aic.siembra.data.area.ActividadItem
-import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.actividadTrabajador.ActividadTrabajador
-import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.actividadTrabajador.TipoActividadTrabajador
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.asistencia.Asistencia
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.bono.Bono
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.descuento.Descuento
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.extra.Extra
 import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.GrupoItem
-import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.ResponseTrabajador
 import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.RanchoItem
 import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.TablaItem
 import java.util.*
@@ -34,58 +31,47 @@ data class AsistenciaGrupoItem(
     val fecha: Date,
     val trabajadores: List<TrabajadorAsistenciaItem>
 ) {
-    fun getAsistencias(): List<Asistencia> =
-        trabajadores.map { it.getAsistencia() }
-
-    fun getExras(): List<Extra> =
-        trabajadores.map { it.getExtras(fecha) }
-            .flatten()
-
-    fun getBonos(): List<Bono> =
-        trabajadores.map { it.getBonos(fecha) }
-            .flatten()
-
-    fun getDescuentos(): List<Descuento> =
-        trabajadores.map { it.getDescuentos(fecha) }
-            .flatten()
-
-    fun getActividadesTrabajador(): List<ActividadTrabajador> =
-        trabajadores.map { it.getActividades(fecha) }
-            .flatten()
+    fun toEntity(idRancho: Long): AsistenciaGrupo =
+        AsistenciaGrupo(
+            idAsistenciaGrupo = id,
+            rancho = idRancho,
+            flete = flete,
+            fecha = fecha,
+        )
 }
 
 data class TrabajadorAsistenciaItem(
     @SerializedName("_id")
     val id: String,
-    val trabajador: ResponseTrabajador,
+    val trabajador: TrabajadorItem,
     val asistencia: AsistenciaTrabajadorItem,
     val extras: List<ExtraTrabajadorItem>,
     val bonos: List<BonoTrabajadorItem>,
     val descuentos: List<DescuentoTrabajadorItem>,
 ) {
-    fun getAsistencia(): Asistencia =
-        asistencia.toEntity(trabajador.id)
+    fun getAsistencia(idTrabajador: Long = 0): Asistencia =
+        asistencia.toEntity(idTrabajador)
 
-    fun getExtras(fecha: Date): List<Extra> =
-        extras.map { it.toEntity(trabajador.id, fecha) }
+    fun getExtras(idTrabajador: Long, fecha: Date): List<Extra> =
+        extras.map { it.toEntity(idTrabajador, fecha) }
 
-    fun getBonos(fecha: Date): List<Bono> =
-        bonos.map { it.toEntity(trabajador.id, fecha) }
+    fun getBonos(idTrabajador: Long, fecha: Date): List<Bono> =
+        bonos.map { it.toEntity(idTrabajador, fecha) }
 
-    fun getDescuentos(fecha: Date): List<Descuento> =
-        descuentos.map { it.toEntity(trabajador.id, fecha) }
-
-    fun getActividades(fecha: Date): List<ActividadTrabajador> =
-        listOf(
-            asistencia.getActividadesList(trabajador.id, fecha),
-            extras.map {
-                it.getActividadesList(trabajador.id, fecha)
-            }.flatten(),
-            bonos.map {
-                it.getActividadesList(trabajador.id, fecha)
-            }.flatten(),
-        ).flatten()
+    fun getDescuentos(idTrabajador: Long, fecha: Date): List<Descuento> =
+        descuentos.map { it.toEntity(idTrabajador, fecha) }
 }
+
+data class TrabajadorItem(
+    @SerializedName("_id")
+    val id: String,
+    val nombres: String,
+    val apellido_paterno: String,
+    val apellido_materno: String?,
+    val sueldo: Double,
+    val extra: Double?,
+    val bono: Double?,
+)
 
 data class AsistenciaTrabajadorItem(
     @SerializedName("_id")
@@ -95,24 +81,12 @@ data class AsistenciaTrabajadorItem(
     val salida: Date?,
     val actividades: List<ActividadTrabajadorItem>
 ) {
-    fun toEntity(idTrabajador: String): Asistencia = Asistencia(
+    fun toEntity(idTrabajador: Long): Asistencia = Asistencia(
         idAsistencia = id,
         entrada = entrada,
         salida = salida,
         idTrabajador = idTrabajador,
     )
-
-    fun getActividadesList(
-        idTrabajador: String,
-        fecha: Date
-    ): List<ActividadTrabajador> =
-        actividades.map {
-            it.toListEntities(
-                idTrabajador,
-                fecha,
-                TipoActividadTrabajador.REGULAR
-            )
-        }.flatten()
 }
 
 data class ExtraTrabajadorItem(
@@ -122,25 +96,13 @@ data class ExtraTrabajadorItem(
     val total: Double,
     val actividades: List<ActividadTrabajadorItem>
 ) {
-    fun toEntity(idTrabajador: String, fecha: Date): Extra = Extra(
+    fun toEntity(idTrabajador: Long, fecha: Date): Extra = Extra(
         idTrabajador = idTrabajador,
         idExtra = id,
         horas = horas,
         total = total,
         fecha = fecha,
     )
-
-    fun getActividadesList(
-        idTrabajador: String,
-        fecha: Date
-    ): List<ActividadTrabajador> =
-        actividades.map {
-            it.toListEntities(
-                idTrabajador,
-                fecha,
-                TipoActividadTrabajador.EXTRA
-            )
-        }.flatten()
 }
 
 data class BonoTrabajadorItem(
@@ -149,24 +111,12 @@ data class BonoTrabajadorItem(
     val total: Double,
     val actividades: List<ActividadTrabajadorItem>
 ) {
-    fun toEntity(idTrabajador: String, fecha: Date): Bono = Bono(
+    fun toEntity(idTrabajador: Long, fecha: Date): Bono = Bono(
         idBono = id,
         total = total,
         idTrabajador = idTrabajador,
         fecha = fecha,
     )
-
-    fun getActividadesList(
-        idTrabajador: String,
-        fecha: Date
-    ): List<ActividadTrabajador> =
-        actividades.map {
-            it.toListEntities(
-                idTrabajador,
-                fecha,
-                TipoActividadTrabajador.BONO
-            )
-        }.flatten()
 }
 
 data class DescuentoTrabajadorItem(
@@ -175,7 +125,7 @@ data class DescuentoTrabajadorItem(
     val total: Double,
     val motivo: String,
 ) {
-    fun toEntity(idTrabajador: String, fecha: Date): Descuento = Descuento(
+    fun toEntity(idTrabajador: Long, fecha: Date): Descuento = Descuento(
         idDescuento = id,
         total = total,
         motivo = motivo,
@@ -189,20 +139,8 @@ data class ActividadTrabajadorItem(
     val id: String,
     val actividad: ActividadItem,
     val tablas: List<TablaItem>
-) {
-    fun toListEntities(
-        idTrabajador: String,
-        fecha: Date,
-        type: TipoActividadTrabajador
-    ): List<ActividadTrabajador> =
-        tablas.map {
-            ActividadTrabajador(
-                idActividadTrabajador = id,
-                idActividad = actividad.id,
-                idTrabajador = idTrabajador,
-                idTabla = it.id,
-                fecha = fecha,
-                type = type
-            )
-        }
-}
+)
+
+data class SendAsistenciaGrupoItem(
+    val idAsistenciaGrupo: String?,
+)

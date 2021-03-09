@@ -26,4 +26,10 @@ interface ActividadDao {
 
     @Delete
     fun delete(area: List<Actividad>)
+
+    @Query("SELECT id_actividad FROM Actividad WHERE id_interno = :id")
+    fun getActividadID(id: Long): String?
+
+    @Query("SELECT id_interno FROM Actividad WHERE id_actividad = :id")
+    fun getActividadID(id: String): Long?
 }

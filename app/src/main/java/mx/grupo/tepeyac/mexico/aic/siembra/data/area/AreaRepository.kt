@@ -17,6 +17,9 @@ class AreaRepository(context: Context) {
     private val areaDao: AreaDao = AppDatabase.getInstance(context).areaDao
     private val actividadDao: ActividadDao = AppDatabase.getInstance(context).actividadDao
 
+    fun getActividadID(id: String): Long? = actividadDao.getActividadID(id)
+    fun getActividadID(id: Long): String? = actividadDao.getActividadID(id)
+
     fun insert(awa: AreaWithActividades) {
         val id = areaDao.insert(awa.area)
         actividadDao.insert(awa.actividades.map { it.copy(idArea = id) })

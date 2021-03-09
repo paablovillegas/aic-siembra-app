@@ -16,7 +16,7 @@ data class Asistencia(
     val entrada: Date,
     val salida: Date? = null,
     @ColumnInfo(name = "id_trabajador")
-    val idTrabajador: String? = null,
+    val idTrabajador: Long,
     val editado: Boolean = false,
     @Ignore
     val delete: Boolean = false,
@@ -26,7 +26,7 @@ data class Asistencia(
         idAsistencia: String? = null,
         entrada: Date,
         salida: Date?,
-        idTrabajador: String? = null,
+        idTrabajador: Long,
         editado: Boolean = false
     ) : this(id, idAsistencia, entrada, salida, idTrabajador, editado, false)
 }

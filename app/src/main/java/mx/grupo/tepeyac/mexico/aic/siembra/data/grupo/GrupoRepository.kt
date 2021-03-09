@@ -18,6 +18,9 @@ class GrupoRepository(context: Context) {
     private val grupoDao: GrupoDao = AppDatabase.getInstance(context).grupoDao
     private val trabajadorDao: TrabajadorDao = AppDatabase.getInstance(context).trabajadorDao
 
+    fun getTrabajadorID(id: String): Long? = trabajadorDao.getTrabajadorID(id)
+    fun getTrabajadorID(id: Long): String? = trabajadorDao.getTrabajadorID(id)
+
     fun insert(rwt: GrupoWithTrabajadores) {
         val id = grupoDao.insert(rwt.grupo)
         trabajadorDao.insert(rwt.trabajadores.map { it.copy(idGrupo = id) })
