@@ -8,7 +8,7 @@ import androidx.room.*
  * @since 08/03/21
  */
 @Dao
-interface AsistenciaDao {
+interface AsistenciaGrupoDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(asistenciaGrupo: AsistenciaGrupo): Long
 

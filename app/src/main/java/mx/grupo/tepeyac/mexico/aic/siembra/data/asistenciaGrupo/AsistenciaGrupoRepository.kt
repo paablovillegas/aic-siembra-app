@@ -120,22 +120,26 @@ class AsistenciaGrupoRepository(context: Context) {
     private fun getActividades(
         idTrabajador: Long,
         fecha: Date,
-        actividades: List<ActividadTrabajadorItem>
+        actividades: List<ActividadTrabajadorItem>,
+        idAsistenciaGrupo: Long = 0,
     ): List<ActividadTrabajador> =
         getActividadesTrabajador(
+            idAsistenciaGrupo,
             idTrabajador,
             fecha,
             actividades,
-            TipoActividadTrabajador.REGULAR
+            TipoActividadTrabajador.REGULAR,
         )
 
     private fun getExtras(
         idTrabajador: Long,
         fecha: Date,
-        extras: List<ExtraTrabajadorItem>
+        extras: List<ExtraTrabajadorItem>,
+        idAsistenciaGrupo: Long = 0,
     ): List<ActividadTrabajador> =
         extras.map { extra ->
             getActividadesTrabajador(
+                idAsistenciaGrupo,
                 idTrabajador,
                 fecha,
                 extra.actividades,
@@ -146,10 +150,12 @@ class AsistenciaGrupoRepository(context: Context) {
     private fun getBonos(
         idTrabajador: Long,
         fecha: Date,
-        bonos: List<BonoTrabajadorItem>
+        bonos: List<BonoTrabajadorItem>,
+        idAsistenciaGrupo: Long = 0,
     ): List<ActividadTrabajador> =
         bonos.map { bono ->
             getActividadesTrabajador(
+                idAsistenciaGrupo,
                 idTrabajador,
                 fecha,
                 bono.actividades,
@@ -158,6 +164,7 @@ class AsistenciaGrupoRepository(context: Context) {
         }.flatten()
 
     private fun getActividadesTrabajador(
+        idAsistenciaGrupo: Long,
         idTrabajador: Long,
         fecha: Date,
         actividades: List<ActividadTrabajadorItem>,
@@ -166,26 +173,29 @@ class AsistenciaGrupoRepository(context: Context) {
         actividades.mapNotNull { actividad ->
             val idActividad: Long = getActividadID(actividad.id) ?: return@mapNotNull null
             return@mapNotNull getActividadesTrabajadorTabla(
+                idAsistenciaGrupo,
                 idTrabajador,
                 idActividad,
                 fecha,
                 actividad.tablas,
-                type
+                type,
             )
         }.flatten()
 
     private fun getActividadesTrabajadorTabla(
+        idAsistenciaGrupo: Long,
         idTrabajador: Long,
         idActividad: Long,
         fecha: Date,
-        tablas: List<TablaItem>,
+        tablas: List<String>,
         type: TipoActividadTrabajador
     ): List<ActividadTrabajador> =
         tablas.mapNotNull { tabla ->
-            val idTabla: Long = getTablaID(tabla.id) ?: return@mapNotNull null
+            val idTabla: Long = getTablaID(tabla) ?: return@mapNotNull null
             return@mapNotNull ActividadTrabajador(
                 idActividad = idActividad,
                 idTrabajador = idTrabajador,
+                idAsistenciaGrupo = idAsistenciaGrupo,
                 idTabla = idTabla,
                 fecha = fecha,
                 type = type,

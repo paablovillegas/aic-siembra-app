@@ -19,12 +19,13 @@ data class ActividadTrabajador(
     val idTrabajador: Long,
     @ColumnInfo(name = "id_tabla")
     val idTabla: Long,
+    @ColumnInfo(name = "id_asistencia_grupo")
+    val idAsistenciaGrupo: Long,
     val fecha: Date,
     val editado: Boolean = false,
+    val type: TipoActividadTrabajador?,
     @Ignore
     val delete: Boolean = false,
-    @Ignore
-    val type: TipoActividadTrabajador?,
 ) {
     constructor(
         id: Long = 0,
@@ -32,19 +33,20 @@ data class ActividadTrabajador(
         idActividad: Long,
         idTrabajador: Long,
         idTabla: Long,
+        idAsistenciaGrupo: Long,
         fecha: Date,
         editado: Boolean = false,
+        type: TipoActividadTrabajador?,
     ) : this(
         id,
         idActividadTrabajador,
         idActividad,
         idTrabajador,
         idTabla,
+        idAsistenciaGrupo,
         fecha,
         editado,
+        type,
         false,
-        null
     )
 }
-
-enum class TipoActividadTrabajador { REGULAR, EXTRA, BONO }

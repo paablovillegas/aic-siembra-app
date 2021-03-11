@@ -17,6 +17,8 @@ data class Asistencia(
     val salida: Date? = null,
     @ColumnInfo(name = "id_trabajador")
     val idTrabajador: Long,
+    @ColumnInfo(name = "id_asistencia_grupo")
+    val idAsistenciaGrupo: Long,
     val editado: Boolean = false,
     @Ignore
     val delete: Boolean = false,
@@ -27,6 +29,16 @@ data class Asistencia(
         entrada: Date,
         salida: Date?,
         idTrabajador: Long,
+        idAsistenciaGrupo: Long,
         editado: Boolean = false
-    ) : this(id, idAsistencia, entrada, salida, idTrabajador, editado, false)
+    ) : this(
+        id,
+        idAsistencia,
+        entrada,
+        salida,
+        idTrabajador,
+        idAsistenciaGrupo,
+        editado,
+        false
+    )
 }

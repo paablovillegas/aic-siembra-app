@@ -19,11 +19,11 @@ class MainViewModel @Inject constructor(app: Application) : AndroidViewModel(app
     private val asistenciaGrupoRepository: AsistenciaGrupoRepository = AsistenciaGrupoRepository(app)
 
     fun getInfo() {
-        //ranchoRepository.downloadRanchos()
-        //productoRepository.downloadProductos()
-        //areaRepository.downloadAreas()
-        //grupoRepository.downloadGrupos()
-        //cicloRepository.downloadCiclos()
+        ranchoRepository.downloadRanchos()
+        productoRepository.downloadProductos()
+        areaRepository.downloadAreas()
+        grupoRepository.downloadGrupos()
+        cicloRepository.downloadCiclos()
         asistenciaGrupoRepository.downloadAsistenciaGrupo()
     }
 }

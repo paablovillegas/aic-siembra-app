@@ -16,6 +16,8 @@ data class Bono(
     var total: Double,
     @ColumnInfo(name = "id_trabajador")
     val idTrabajador: Long,
+    @ColumnInfo(name = "id_asistencia_grupo")
+    val idAsistenciaGrupo: Long,
     val fecha: Date,
     val editado: Boolean = false,
     @Ignore
@@ -26,7 +28,17 @@ data class Bono(
         idBono: String? = null,
         total: Double,
         idTrabajador: Long,
+        idAsistenciaGrupo: Long,
         fecha: Date,
         editado: Boolean = false,
-    ) : this(id, idBono, total, idTrabajador, fecha, editado, false)
+    ) : this(
+        id,
+        idBono,
+        total,
+        idTrabajador,
+        idAsistenciaGrupo,
+        fecha,
+        editado,
+        false
+    )
 }

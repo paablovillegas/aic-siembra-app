@@ -17,6 +17,8 @@ data class Extra(
     var total: Double,
     @ColumnInfo(name = "id_trabajador")
     val idTrabajador: Long,
+    @ColumnInfo(name = "id_asistencia_grupo")
+    val idAsistenciaGrupo: Long,
     val fecha: Date,
     val editado: Boolean = false,
     @Ignore
@@ -28,7 +30,18 @@ data class Extra(
         horas: Int,
         total: Double,
         idTrabajador: Long,
+        idAsistenciaGrupo: Long,
         fecha: Date,
         editado: Boolean = false,
-    ) : this(id, idExtra, horas, total, idTrabajador, fecha, editado, false)
+    ) : this(
+        id,
+        idExtra,
+        horas,
+        total,
+        idTrabajador,
+        idAsistenciaGrupo,
+        fecha,
+        editado,
+        false
+    )
 }

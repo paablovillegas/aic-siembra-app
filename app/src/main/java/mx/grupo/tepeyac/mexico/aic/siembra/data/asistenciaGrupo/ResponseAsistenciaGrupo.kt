@@ -81,11 +81,12 @@ data class AsistenciaTrabajadorItem(
     val salida: Date?,
     val actividades: List<ActividadTrabajadorItem>
 ) {
-    fun toEntity(idTrabajador: Long): Asistencia = Asistencia(
+    fun toEntity(idTrabajador: Long, idAsistenciaGrupo: Long = 0): Asistencia = Asistencia(
         idAsistencia = id,
         entrada = entrada,
         salida = salida,
         idTrabajador = idTrabajador,
+        idAsistenciaGrupo = idAsistenciaGrupo,
     )
 }
 
@@ -96,8 +97,9 @@ data class ExtraTrabajadorItem(
     val total: Double,
     val actividades: List<ActividadTrabajadorItem>
 ) {
-    fun toEntity(idTrabajador: Long, fecha: Date): Extra = Extra(
+    fun toEntity(idTrabajador: Long, fecha: Date, idAsistenciaGrupo: Long = 0): Extra = Extra(
         idTrabajador = idTrabajador,
+        idAsistenciaGrupo = idAsistenciaGrupo,
         idExtra = id,
         horas = horas,
         total = total,
@@ -111,10 +113,11 @@ data class BonoTrabajadorItem(
     val total: Double,
     val actividades: List<ActividadTrabajadorItem>
 ) {
-    fun toEntity(idTrabajador: Long, fecha: Date): Bono = Bono(
+    fun toEntity(idTrabajador: Long, fecha: Date, idAsistenciaGrupo: Long = 0): Bono = Bono(
         idBono = id,
         total = total,
         idTrabajador = idTrabajador,
+        idAsistenciaGrupo = idAsistenciaGrupo,
         fecha = fecha,
     )
 }
@@ -125,20 +128,22 @@ data class DescuentoTrabajadorItem(
     val total: Double,
     val motivo: String,
 ) {
-    fun toEntity(idTrabajador: Long, fecha: Date): Descuento = Descuento(
-        idDescuento = id,
-        total = total,
-        motivo = motivo,
-        idTrabajador = idTrabajador,
-        fecha = fecha,
-    )
+    fun toEntity(idTrabajador: Long, fecha: Date, idAsistenciaGrupo: Long = 0): Descuento =
+        Descuento(
+            idDescuento = id,
+            total = total,
+            motivo = motivo,
+            idTrabajador = idTrabajador,
+            idAsistenciaGrupo = idAsistenciaGrupo,
+            fecha = fecha,
+        )
 }
 
 data class ActividadTrabajadorItem(
     @SerializedName("_id")
     val id: String,
     val actividad: ActividadItem,
-    val tablas: List<TablaItem>
+    val tablas: List<String>
 )
 
 data class SendAsistenciaGrupoItem(

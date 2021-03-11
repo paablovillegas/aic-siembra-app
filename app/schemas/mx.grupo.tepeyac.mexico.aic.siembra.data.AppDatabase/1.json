@@ -2,276 +2,8 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "c09d082d2eafc99ee403d4e36e8b23c8",
+    "identityHash": "4f9d75d43b40a83f7a3c05c465b0b6f0",
     "entities": [
-      {
-        "tableName": "Asistencia",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_asistencia` TEXT, `entrada` INTEGER NOT NULL, `salida` INTEGER, `id_trabajador` INTEGER NOT NULL, `editado` INTEGER NOT NULL)",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id_interno",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "idAsistencia",
-            "columnName": "id_asistencia",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "entrada",
-            "columnName": "entrada",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "salida",
-            "columnName": "salida",
-            "affinity": "INTEGER",
-            "notNull": false
-          },
-          {
-            "fieldPath": "idTrabajador",
-            "columnName": "id_trabajador",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "editado",
-            "columnName": "editado",
-            "affinity": "INTEGER",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id_interno"
-          ],
-          "autoGenerate": true
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "ActividadTrabajador",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_actividad_trabajador` TEXT, `id_actividad` INTEGER NOT NULL, `id_trabajador` INTEGER NOT NULL, `id_tabla` INTEGER NOT NULL, `fecha` INTEGER NOT NULL, `editado` INTEGER NOT NULL)",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id_interno",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "idActividadTrabajador",
-            "columnName": "id_actividad_trabajador",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "idActividad",
-            "columnName": "id_actividad",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "idTrabajador",
-            "columnName": "id_trabajador",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "idTabla",
-            "columnName": "id_tabla",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "fecha",
-            "columnName": "fecha",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "editado",
-            "columnName": "editado",
-            "affinity": "INTEGER",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id_interno"
-          ],
-          "autoGenerate": true
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "Bono",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_bono` TEXT, `total` REAL NOT NULL, `id_trabajador` INTEGER NOT NULL, `fecha` INTEGER NOT NULL, `editado` INTEGER NOT NULL)",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id_interno",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "idBono",
-            "columnName": "id_bono",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "total",
-            "columnName": "total",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "idTrabajador",
-            "columnName": "id_trabajador",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "fecha",
-            "columnName": "fecha",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "editado",
-            "columnName": "editado",
-            "affinity": "INTEGER",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id_interno"
-          ],
-          "autoGenerate": true
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "Descuento",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_descuento` TEXT, `total` REAL NOT NULL, `motivo` TEXT NOT NULL, `fecha` INTEGER NOT NULL, `id_trabajador` INTEGER NOT NULL, `editado` INTEGER NOT NULL)",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id_interno",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "idDescuento",
-            "columnName": "id_descuento",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "total",
-            "columnName": "total",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "motivo",
-            "columnName": "motivo",
-            "affinity": "TEXT",
-            "notNull": true
-          },
-          {
-            "fieldPath": "fecha",
-            "columnName": "fecha",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "idTrabajador",
-            "columnName": "id_trabajador",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "editado",
-            "columnName": "editado",
-            "affinity": "INTEGER",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id_interno"
-          ],
-          "autoGenerate": true
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
-      {
-        "tableName": "Extra",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_extra` TEXT, `horas` INTEGER NOT NULL, `total` REAL NOT NULL, `id_trabajador` INTEGER NOT NULL, `fecha` INTEGER NOT NULL, `editado` INTEGER NOT NULL)",
-        "fields": [
-          {
-            "fieldPath": "id",
-            "columnName": "id_interno",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "idExtra",
-            "columnName": "id_extra",
-            "affinity": "TEXT",
-            "notNull": false
-          },
-          {
-            "fieldPath": "horas",
-            "columnName": "horas",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "total",
-            "columnName": "total",
-            "affinity": "REAL",
-            "notNull": true
-          },
-          {
-            "fieldPath": "idTrabajador",
-            "columnName": "id_trabajador",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "fecha",
-            "columnName": "fecha",
-            "affinity": "INTEGER",
-            "notNull": true
-          },
-          {
-            "fieldPath": "editado",
-            "columnName": "editado",
-            "affinity": "INTEGER",
-            "notNull": true
-          }
-        ],
-        "primaryKey": {
-          "columnNames": [
-            "id_interno"
-          ],
-          "autoGenerate": true
-        },
-        "indices": [],
-        "foreignKeys": []
-      },
       {
         "tableName": "Cosecha",
         "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_cosecha` TEXT, `folio` INTEGER NOT NULL, `fecha` INTEGER NOT NULL, `tipo` TEXT NOT NULL, `estatus` INTEGER NOT NULL)",
@@ -1207,12 +939,316 @@
         },
         "indices": [],
         "foreignKeys": []
+      },
+      {
+        "tableName": "Asistencia",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_asistencia` TEXT, `entrada` INTEGER NOT NULL, `salida` INTEGER, `id_trabajador` INTEGER NOT NULL, `id_asistencia_grupo` INTEGER NOT NULL, `editado` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id_interno",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idAsistencia",
+            "columnName": "id_asistencia",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "entrada",
+            "columnName": "entrada",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "salida",
+            "columnName": "salida",
+            "affinity": "INTEGER",
+            "notNull": false
+          },
+          {
+            "fieldPath": "idTrabajador",
+            "columnName": "id_trabajador",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idAsistenciaGrupo",
+            "columnName": "id_asistencia_grupo",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "editado",
+            "columnName": "editado",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_interno"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Extra",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_extra` TEXT, `horas` INTEGER NOT NULL, `total` REAL NOT NULL, `id_trabajador` INTEGER NOT NULL, `id_asistencia_grupo` INTEGER NOT NULL, `fecha` INTEGER NOT NULL, `editado` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id_interno",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idExtra",
+            "columnName": "id_extra",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "horas",
+            "columnName": "horas",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "total",
+            "columnName": "total",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTrabajador",
+            "columnName": "id_trabajador",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idAsistenciaGrupo",
+            "columnName": "id_asistencia_grupo",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fecha",
+            "columnName": "fecha",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "editado",
+            "columnName": "editado",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_interno"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Bono",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_bono` TEXT, `total` REAL NOT NULL, `id_trabajador` INTEGER NOT NULL, `id_asistencia_grupo` INTEGER NOT NULL, `fecha` INTEGER NOT NULL, `editado` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id_interno",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idBono",
+            "columnName": "id_bono",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "total",
+            "columnName": "total",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTrabajador",
+            "columnName": "id_trabajador",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idAsistenciaGrupo",
+            "columnName": "id_asistencia_grupo",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fecha",
+            "columnName": "fecha",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "editado",
+            "columnName": "editado",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_interno"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "Descuento",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_descuento` TEXT, `total` REAL NOT NULL, `motivo` TEXT NOT NULL, `fecha` INTEGER NOT NULL, `id_trabajador` INTEGER NOT NULL, `id_asistencia_grupo` INTEGER NOT NULL, `editado` INTEGER NOT NULL)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id_interno",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idDescuento",
+            "columnName": "id_descuento",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "total",
+            "columnName": "total",
+            "affinity": "REAL",
+            "notNull": true
+          },
+          {
+            "fieldPath": "motivo",
+            "columnName": "motivo",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fecha",
+            "columnName": "fecha",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTrabajador",
+            "columnName": "id_trabajador",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idAsistenciaGrupo",
+            "columnName": "id_asistencia_grupo",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "editado",
+            "columnName": "editado",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_interno"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
+        "tableName": "ActividadTrabajador",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_actividad_trabajador` TEXT, `id_actividad` INTEGER NOT NULL, `id_trabajador` INTEGER NOT NULL, `id_tabla` INTEGER NOT NULL, `id_asistencia_grupo` INTEGER NOT NULL, `fecha` INTEGER NOT NULL, `editado` INTEGER NOT NULL, `type` INTEGER)",
+        "fields": [
+          {
+            "fieldPath": "id",
+            "columnName": "id_interno",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idActividadTrabajador",
+            "columnName": "id_actividad_trabajador",
+            "affinity": "TEXT",
+            "notNull": false
+          },
+          {
+            "fieldPath": "idActividad",
+            "columnName": "id_actividad",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTrabajador",
+            "columnName": "id_trabajador",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idTabla",
+            "columnName": "id_tabla",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "idAsistenciaGrupo",
+            "columnName": "id_asistencia_grupo",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "fecha",
+            "columnName": "fecha",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "editado",
+            "columnName": "editado",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "type",
+            "columnName": "type",
+            "affinity": "INTEGER",
+            "notNull": false
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "id_interno"
+          ],
+          "autoGenerate": true
+        },
+        "indices": [],
+        "foreignKeys": []
       }
     ],
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'c09d082d2eafc99ee403d4e36e8b23c8')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4f9d75d43b40a83f7a3c05c465b0b6f0')"
     ]
   }
 }

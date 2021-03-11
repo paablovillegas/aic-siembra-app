@@ -18,6 +18,8 @@ data class Descuento(
     val fecha: Date,
     @ColumnInfo(name = "id_trabajador")
     val idTrabajador: Long,
+    @ColumnInfo(name = "id_asistencia_grupo")
+    val idAsistenciaGrupo: Long,
     val editado: Boolean = false,
     @Ignore
     val delete: Boolean = false,
@@ -29,6 +31,17 @@ data class Descuento(
         motivo: String,
         fecha: Date,
         idTrabajador: Long,
+        idAsistenciaGrupo: Long,
         editado: Boolean = false,
-    ) : this(id, idDescuento, total, motivo, fecha, idTrabajador, editado, false)
+    ) : this(
+        id,
+        idDescuento,
+        total,
+        motivo,
+        fecha,
+        idTrabajador,
+        idAsistenciaGrupo,
+        editado,
+        false
+    )
 }
