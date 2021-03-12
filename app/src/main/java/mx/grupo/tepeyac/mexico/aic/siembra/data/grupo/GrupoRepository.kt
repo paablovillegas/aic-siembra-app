@@ -146,7 +146,6 @@ class GrupoRepository(context: Context) {
                     val gruposWithTrabajadores: List<GrupoWithTrabajadores> =
                         grupos.map { it.getGrupoWithTrabajadores() }
                     val data = compareGrupos(grupoDao.getGrupos(), gruposWithTrabajadores)
-                    Log.i("TAG", "onResponse: $data")
                     updateDatabaseGrupos(data)
                 }
             }

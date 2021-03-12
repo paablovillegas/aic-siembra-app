@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "4f9d75d43b40a83f7a3c05c465b0b6f0",
+    "identityHash": "d75cb1ed832f667462e312b0367c63b8",
     "entities": [
       {
         "tableName": "Cosecha",
@@ -1178,7 +1178,7 @@
       },
       {
         "tableName": "ActividadTrabajador",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_actividad_trabajador` TEXT, `id_actividad` INTEGER NOT NULL, `id_trabajador` INTEGER NOT NULL, `id_tabla` INTEGER NOT NULL, `id_asistencia_grupo` INTEGER NOT NULL, `fecha` INTEGER NOT NULL, `editado` INTEGER NOT NULL, `type` INTEGER)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `id_actividad_trabajador` TEXT, `id_actividad` INTEGER NOT NULL, `id_trabajador` INTEGER NOT NULL, `id_tabla` INTEGER, `id_asistencia_grupo` INTEGER NOT NULL, `fecha` INTEGER NOT NULL, `editado` INTEGER NOT NULL, `type` INTEGER)",
         "fields": [
           {
             "fieldPath": "id",
@@ -1208,7 +1208,7 @@
             "fieldPath": "idTabla",
             "columnName": "id_tabla",
             "affinity": "INTEGER",
-            "notNull": true
+            "notNull": false
           },
           {
             "fieldPath": "idAsistenciaGrupo",
@@ -1248,7 +1248,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4f9d75d43b40a83f7a3c05c465b0b6f0')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd75cb1ed832f667462e312b0367c63b8')"
     ]
   }
 }

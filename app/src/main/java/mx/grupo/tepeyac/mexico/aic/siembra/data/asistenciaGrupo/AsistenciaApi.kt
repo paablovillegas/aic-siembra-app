@@ -9,13 +9,13 @@ import retrofit2.http.*
  * @since 08/03/21
  */
 interface AsistenciaApi {
-    @GET("asistencias")
+    @GET("asistencias_lugar")
     fun getAsistenciasGrupo(): Call<ResponseAsistenciaGrupoList>
 
-    @POST("asistencias")
+    @POST("asistencias_lugar")
     fun insertAsistenciaGrupo(@Body body: SendAsistenciaGrupoItem): Call<ResponseAsistenciaGrupoItem>
 
-    @PUT("asistencias/{id_asistencia}")
+    @PUT("asistencias_lugar/{id_asistencia}")
     fun updateAsistenciaGrupo(
         @Path(value = "id_asistencia") id: String,
         @Body rancho: SendAsistenciaGrupoItem,

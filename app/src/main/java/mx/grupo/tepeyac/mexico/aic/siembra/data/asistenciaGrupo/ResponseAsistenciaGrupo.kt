@@ -7,6 +7,7 @@ import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.bono.Bono
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.descuento.Descuento
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.extra.Extra
 import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.GrupoItem
+import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.ResponseTrabajador
 import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.RanchoItem
 import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.TablaItem
 import java.util.*
@@ -43,7 +44,7 @@ data class AsistenciaGrupoItem(
 data class TrabajadorAsistenciaItem(
     @SerializedName("_id")
     val id: String,
-    val trabajador: TrabajadorItem,
+    val trabajador: ResponseTrabajador,
     val asistencia: AsistenciaTrabajadorItem,
     val extras: List<ExtraTrabajadorItem>,
     val bonos: List<BonoTrabajadorItem>,
@@ -61,17 +62,6 @@ data class TrabajadorAsistenciaItem(
     fun getDescuentos(idTrabajador: Long, fecha: Date): List<Descuento> =
         descuentos.map { it.toEntity(idTrabajador, fecha) }
 }
-
-data class TrabajadorItem(
-    @SerializedName("_id")
-    val id: String,
-    val nombres: String,
-    val apellido_paterno: String,
-    val apellido_materno: String?,
-    val sueldo: Double,
-    val extra: Double?,
-    val bono: Double?,
-)
 
 data class AsistenciaTrabajadorItem(
     @SerializedName("_id")
@@ -143,7 +133,7 @@ data class ActividadTrabajadorItem(
     @SerializedName("_id")
     val id: String,
     val actividad: ActividadItem,
-    val tablas: List<String>
+    val tablas: List<TablaItem>?
 )
 
 data class SendAsistenciaGrupoItem(

@@ -2,6 +2,7 @@ package mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo
 
 import android.content.Context
 import android.util.Log
+import mx.grupo.tepeyac.mexico.aic.siembra.data.AppDatabase
 import mx.grupo.tepeyac.mexico.aic.siembra.data.area.AreaRepository
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.actividadTrabajador.ActividadTrabajador
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.actividadTrabajador.TipoActividadTrabajador
@@ -28,12 +29,11 @@ class AsistenciaGrupoRepository(context: Context) {
     private val areaRepository: AreaRepository by lazy {
         AreaRepository(context)
     }
+    private val asistenciaGrupoDao: AsistenciaGrupoDao by lazy {
+        AppDatabase.getInstance(context).asistenciaGrupoDao
+    }
     private val asistenciaApi: AsistenciaApi =
         ServiceGenerator.createService(context, AsistenciaApi::class.java, "a")
-
-    fun getAsistenciasGrupo(): List<AsistenciaGrupoItem> {
-        return emptyList()
-    }
 
     fun getRanchoID(id: String): Long? = ranchoRepository.getRanchoID(id)
     fun getRanchoID(id: Long): String? = ranchoRepository.getRanchoID(id)
@@ -44,6 +44,44 @@ class AsistenciaGrupoRepository(context: Context) {
     fun getTrabajadorID(id: String): Long? = grupoRepository.getTrabajadorID(id)
     fun getTrabajadorID(id: Long): String? = grupoRepository.getTrabajadorID(id)
 
+    fun getAsistenciasGrupo(): List<AsistenciaGrupoWithInfo> =
+        asistenciaGrupoDao.getAsistenciaGrupos()
+
+    fun compareAsistenciasGrupos(
+        internos: List<AsistenciaGrupoWithInfo>,
+        externos: List<AsistenciaGrupoWithInfo>
+    ): List<List<AsistenciaGrupoWithInfo>> {
+        val inserts = externos.filter { e ->
+            internos.find { i ->
+                i.asistenciaGrupo.idAsistenciaGrupo == e.asistenciaGrupo.idAsistenciaGrupo
+            } == null
+        }
+        val updates = externos.mapNotNull { e ->
+            val interno: AsistenciaGrupoWithInfo? = internos.find { i ->
+                i.asistenciaGrupo.idAsistenciaGrupo == e.asistenciaGrupo.idAsistenciaGrupo
+            }
+            if (interno != null)
+                return@mapNotNull null
+            return@mapNotNull null
+        }
+        val deletes = internos
+            .filter { i ->
+                externos.find { e ->
+                    e.asistenciaGrupo.idAsistenciaGrupo == i.asistenciaGrupo.idAsistenciaGrupo
+                } == null
+            }
+            .map { a ->
+                a.copy(
+                    asistencias = a.asistencias.map { it.copy(delete = true) },
+                    extras = a.extras.map { it.copy(delete = true) },
+                    bonos = a.bonos.map { it.copy(delete = true) },
+                    descuento = a.descuento.map { it.copy(delete = true) },
+                    actividades = a.actividades.map { it.copy(delete = true) }
+                )
+            }
+        return listOf(inserts, updates, deletes)
+    }
+
     fun downloadAsistenciaGrupo() {
         asistenciaApi.getAsistenciasGrupo().enqueue(object : Callback<ResponseAsistenciaGrupoList> {
             override fun onResponse(
@@ -53,7 +91,8 @@ class AsistenciaGrupoRepository(context: Context) {
                 response.body()?.let { a ->
                     val asistenciaGrupo: List<AsistenciaGrupoWithInfo> =
                         parseAsistenciasGrupo(a.asistencias)
-                    Log.i("TAG", "onResponse: $asistenciaGrupo")
+                    val data = compareAsistenciasGrupos(getAsistenciasGrupo(), asistenciaGrupo)
+                    Log.i("TAG", "onResponse: $data")
                 }
             }
 
@@ -171,7 +210,8 @@ class AsistenciaGrupoRepository(context: Context) {
         type: TipoActividadTrabajador
     ): List<ActividadTrabajador> =
         actividades.mapNotNull { actividad ->
-            val idActividad: Long = getActividadID(actividad.id) ?: return@mapNotNull null
+            val idActividad: Long = getActividadID(actividad.actividad.id)
+                ?: return@mapNotNull null
             return@mapNotNull getActividadesTrabajadorTabla(
                 idAsistenciaGrupo,
                 idTrabajador,
@@ -187,11 +227,11 @@ class AsistenciaGrupoRepository(context: Context) {
         idTrabajador: Long,
         idActividad: Long,
         fecha: Date,
-        tablas: List<String>,
+        tablas: List<TablaItem>?,
         type: TipoActividadTrabajador
     ): List<ActividadTrabajador> =
-        tablas.mapNotNull { tabla ->
-            val idTabla: Long = getTablaID(tabla) ?: return@mapNotNull null
+        tablas?.mapNotNull { tabla ->
+            val idTabla: Long = getTablaID(tabla.id) ?: return@mapNotNull null
             return@mapNotNull ActividadTrabajador(
                 idActividad = idActividad,
                 idTrabajador = idTrabajador,
@@ -201,5 +241,14 @@ class AsistenciaGrupoRepository(context: Context) {
                 type = type,
             )
             //TODO: Agregar idActividadTrabajador! ! !
-        }
+        } ?: listOf(
+            ActividadTrabajador(
+                idActividad = idActividad,
+                idTrabajador = idTrabajador,
+                idAsistenciaGrupo = idAsistenciaGrupo,
+                idTabla = null,
+                fecha = fecha,
+                type = type,
+            )
+        )
 }

@@ -22,7 +22,7 @@ data class Extra(
     val fecha: Date,
     val editado: Boolean = false,
     @Ignore
-    val eliminar: Boolean = false,
+    val delete: Boolean = false,
 ) {
     constructor(
         id: Long = 0,

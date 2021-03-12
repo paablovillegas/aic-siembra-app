@@ -18,7 +18,7 @@ data class ActividadTrabajador(
     @ColumnInfo(name = "id_trabajador")
     val idTrabajador: Long,
     @ColumnInfo(name = "id_tabla")
-    val idTabla: Long,
+    val idTabla: Long?,
     @ColumnInfo(name = "id_asistencia_grupo")
     val idAsistenciaGrupo: Long,
     val fecha: Date,
@@ -32,7 +32,7 @@ data class ActividadTrabajador(
         idActividadTrabajador: String? = null,
         idActividad: Long,
         idTrabajador: Long,
-        idTabla: Long,
+        idTabla: Long?,
         idAsistenciaGrupo: Long,
         fecha: Date,
         editado: Boolean = false,
