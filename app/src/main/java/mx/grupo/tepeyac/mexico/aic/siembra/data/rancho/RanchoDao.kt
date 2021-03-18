@@ -1,5 +1,6 @@
 package mx.grupo.tepeyac.mexico.aic.siembra.data.rancho
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -21,6 +22,14 @@ interface RanchoDao {
 
     @Delete
     fun delete(rancho: List<Rancho>)
+
+    @Transaction
+    @Query("SELECT * FROM Rancho")
+    fun getRanchosLD(): LiveData<List<RanchoWithTablas>>
+
+    @Transaction
+    @Query("SELECT * FROM Rancho WHERE id_interno = :idRancho")
+    fun getRanchosLD(idRancho: Long): LiveData<RanchoWithTablas>
 
     @Transaction
     @Query("SELECT * FROM Rancho WHERE id_rancho IS NOT NULL")

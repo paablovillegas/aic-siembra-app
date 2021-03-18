@@ -14,7 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import java.util.concurrent.TimeUnit
 
 object ServiceGenerator {
-    private const val BASE_URL = "http://192.168.2.1:4001/siembra/"
+    private const val BASE_URL = "http://10.11.0.27:4001/siembra/"
     //private const val BASE_URL = "https://e-sterling-inc.com:11020/siembra/"
 
     private val interceptor = HttpLoggingInterceptor().apply {

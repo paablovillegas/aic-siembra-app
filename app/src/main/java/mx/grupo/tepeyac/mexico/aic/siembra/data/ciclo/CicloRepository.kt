@@ -2,6 +2,7 @@ package mx.grupo.tepeyac.mexico.aic.siembra.data.ciclo
 
 import android.content.Context
 import android.util.Log
+import androidx.lifecycle.LiveData
 import mx.grupo.tepeyac.mexico.aic.siembra.data.AppDatabase
 import mx.grupo.tepeyac.mexico.aic.siembra.data.producto.ProductoRepository
 import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.RanchoRepository
@@ -22,6 +23,7 @@ class CicloRepository(context: Context) {
         ServiceGenerator.createService(context, CicloApi::class.java, "a")
 
     fun getCiclos(): List<Ciclo> = cicloDao.getCiclos()
+    fun getCiclosLD(): LiveData<List<Ciclo>> = cicloDao.getCiclosLD()
 
     fun compareProductos(
         internos: List<Ciclo>,

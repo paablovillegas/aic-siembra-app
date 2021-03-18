@@ -2,6 +2,7 @@ package mx.grupo.tepeyac.mexico.aic.siembra.data.rancho
 
 import android.content.Context
 import android.util.Log
+import androidx.lifecycle.LiveData
 import mx.grupo.tepeyac.mexico.aic.siembra.data.AppDatabase
 import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.tabla.Tabla
 import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.tabla.TablaDao
@@ -28,6 +29,8 @@ class RanchoRepository(context: Context) {
 
     fun getRanchos(): List<RanchoWithTablas> = ranchoDao.getRanchos()
     fun getRanchosNoSubidos(): List<RanchoWithTablas> = ranchoDao.getRanchosNoSubidos()
+    fun getRanchosLD(): LiveData<List<RanchoWithTablas>> = ranchoDao.getRanchosLD()
+    fun getRanchosLD(idRancho: Long): LiveData<RanchoWithTablas> = ranchoDao.getRanchosLD(idRancho)
     fun getRanchoID(id: String): Long? = ranchoDao.getRanchoID(id)
     fun getRanchoID(id: Long): String? = ranchoDao.getRanchoID(id)
     fun getTablaID(id: String): Long? = tablaDao.getTablaID(id)

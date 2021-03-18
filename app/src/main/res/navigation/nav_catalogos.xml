@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_catalogos"
+    app:startDestination="@id/catalogos_fragment">
+
+    <fragment
+        android:id="@+id/catalogos_fragment"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.CatalogosFragment"
+        android:label="CatalogosFragment"
+        tools:layout="@layout/lista_fragment">
+        <action
+            android:id="@+id/action_catalogosFragment_to_listaRanchos"
+            app:destination="@id/lista_ranchos" />
+    </fragment>
+    <fragment
+        android:id="@+id/lista_ranchos"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.ranchos.ListaRanchos"
+        android:label="lista_fragment"
+        tools:layout="@layout/lista_fragment">
+        <action
+            android:id="@+id/action_lista_ranchos_to_listaTablas"
+            app:destination="@id/lista_tablas" />
+    </fragment>
+    <fragment
+        android:id="@+id/lista_tablas"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.tablas.ListaTablas"
+        android:label="lista_tablas_fragment"
+        tools:layout="@layout/lista_fragment">
+        <action
+            android:id="@+id/action_lista_tablas_to_lista_ciclos"
+            app:destination="@id/lista_ciclos" />
+    </fragment>
+    <fragment
+        android:id="@+id/lista_ciclos"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.ciclos.ListaCiclos"
+        android:label="ListaCiclos"
+        tools:layout="@layout/lista_fragment" />
+</navigation>

@@ -1,5 +1,6 @@
 package mx.grupo.tepeyac.mexico.aic.siembra.data.ciclo
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 /*
@@ -27,11 +28,12 @@ interface CicloDao {
     @Delete
     fun delete(ciclo: List<Ciclo>)
 
-    @Transaction
+    @Query("SELECT * FROM Ciclo WHERE id_ciclo IS NOT NULL")
+    fun getCiclosLD(): LiveData<List<Ciclo>>
+
     @Query("SELECT * FROM Ciclo WHERE id_ciclo IS NOT NULL")
     fun getCiclos(): List<Ciclo>
 
-    @Transaction
     @Query("SELECT * FROM Ciclo WHERE id_ciclo IS NULL")
     fun getCiclosNoSubidos(): List<Ciclo>
 }
