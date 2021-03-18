@@ -37,6 +37,7 @@ class Catalogos : AppCompatActivity() {
                 R.id.lista_ciclos -> supportActionBar?.setTitle("Ciclos")
                 R.id.lista_areas -> supportActionBar?.setTitle("Areas")
                 R.id.lista_actividades -> supportActionBar?.setTitle("Actividades")
+                R.id.lista_productos -> supportActionBar?.setTitle("Productos")
             }
         }
     }
@@ -59,6 +60,7 @@ class Catalogos : AppCompatActivity() {
                         R.id.lista_actividades -> viewmodel.downloadAreas()
                         R.id.lista_grupos,
                         R.id.lista_trabajadores -> viewmodel.downloadGrupos()
+                        R.id.lista_productos -> viewmodel.downloadProductos()
                     }
                 }
             }

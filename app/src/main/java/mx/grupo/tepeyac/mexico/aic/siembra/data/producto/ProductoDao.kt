@@ -1,5 +1,6 @@
 package mx.grupo.tepeyac.mexico.aic.siembra.data.producto
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -21,6 +22,9 @@ interface ProductoDao {
 
     @Delete
     fun delete(producto: List<Producto>)
+
+    @Query("SELECT * FROM Producto")
+    fun getProductosLD(): LiveData<List<Producto>>
 
     @Query("SELECT * FROM Producto WHERE id_producto IS NOT NULL")
     fun getProductos(): List<Producto>

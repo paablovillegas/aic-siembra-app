@@ -24,6 +24,7 @@ class CatalogoViewHolder(private val binding: ItemListaSimpleBinding) :
                 0 -> it.findNavController().navigate(R.id.action_catalogosFragment_to_listaRanchos)
                 1 -> it.findNavController().navigate(R.id.action_catalogos_fragment_to_listaAreas)
                 2 -> it.findNavController().navigate(R.id.action_catalogos_fragment_to_lista_grupos)
+                3 -> it.findNavController().navigate(R.id.action_catalogos_fragment_to_listaProductos)
             }
         }
     }

@@ -2,6 +2,7 @@ package mx.grupo.tepeyac.mexico.aic.siembra.data.producto
 
 import android.content.Context
 import android.util.Log
+import androidx.lifecycle.LiveData
 import mx.grupo.tepeyac.mexico.aic.siembra.data.AppDatabase
 import mx.grupo.tepeyac.mexico.aic.siembra.network.ServiceGenerator
 import retrofit2.Call
@@ -14,6 +15,7 @@ class ProductoRepository(context: Context) {
         .createService(context, ProductoApi::class.java, "A")
 
     fun getProductos(): List<Producto> = productoDao.getProductos()
+    fun getProductosLD(): LiveData<List<Producto>> = productoDao.getProductosLD()
     fun getProductoID(id: String): Long? = productoDao.getProductoID(id)
     fun getProductoID(id: Long): String? = productoDao.getProductoID(id)
 
