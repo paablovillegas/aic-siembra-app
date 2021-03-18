@@ -22,13 +22,14 @@ class CatalogoViewHolder(private val binding: ItemListaSimpleBinding) :
         binding.root.setOnClickListener {
             when (index) {
                 0 -> it.findNavController().navigate(R.id.action_catalogosFragment_to_listaRanchos)
+                1 -> it.findNavController().navigate(R.id.action_catalogos_fragment_to_listaAreas)
             }
         }
     }
 
     fun bindRancho(idRancho: Long) {
         binding.root.setOnClickListener {
-            val bundle  = Bundle().apply {
+            val bundle = Bundle().apply {
                 this.putLong("id", idRancho)
             }
             it.findNavController().navigate(R.id.action_lista_ranchos_to_listaTablas, bundle)
@@ -41,6 +42,15 @@ class CatalogoViewHolder(private val binding: ItemListaSimpleBinding) :
                 this.putLong("id", idTabla)
             }
             it.findNavController().navigate(R.id.action_lista_tablas_to_lista_ciclos, bundle)
+        }
+    }
+
+    fun bindArea(idArea: Long) {
+        binding.root.setOnClickListener {
+            val bundle = Bundle().apply {
+                this.putLong("id", idArea)
+            }
+            it.findNavController().navigate(R.id.action_listaAreas_to_listaActividades, bundle)
         }
     }
 

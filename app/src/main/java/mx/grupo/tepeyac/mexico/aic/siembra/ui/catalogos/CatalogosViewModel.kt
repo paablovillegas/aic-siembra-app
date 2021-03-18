@@ -2,6 +2,7 @@ package mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
+import mx.grupo.tepeyac.mexico.aic.siembra.data.area.AreaRepository
 import mx.grupo.tepeyac.mexico.aic.siembra.data.ciclo.CicloRepository
 import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.RanchoRepository
 
@@ -11,6 +12,9 @@ class CatalogosViewModel(app: Application) : AndroidViewModel(app) {
     }
     private val cicloRepository: CicloRepository by lazy {
         CicloRepository(app)
+    }
+    private val areaRepository: AreaRepository by lazy {
+        AreaRepository(app)
     }
 
     val catalogos: List<String> = listOf(
@@ -25,6 +29,10 @@ class CatalogosViewModel(app: Application) : AndroidViewModel(app) {
 
     fun downloadCiclos() {
         cicloRepository.downloadCiclos()
+    }
+
+    fun downloadAreas() {
+        areaRepository.downloadAreas()
     }
 
 }

@@ -35,7 +35,8 @@ class Catalogos : AppCompatActivity() {
                 R.id.lista_ranchos -> supportActionBar?.setTitle("Ranchos")
                 R.id.lista_tablas -> supportActionBar?.setTitle("Tablas")
                 R.id.lista_ciclos -> supportActionBar?.setTitle("Ciclos")
-
+                R.id.lista_areas -> supportActionBar?.setTitle("Areas")
+                R.id.lista_actividades -> supportActionBar?.setTitle("Actividades")
             }
         }
     }
@@ -54,6 +55,8 @@ class Catalogos : AppCompatActivity() {
                         R.id.lista_ranchos,
                         R.id.lista_tablas -> viewmodel.downloadRanchos()
                         R.id.lista_ciclos -> viewmodel.downloadCiclos()
+                        R.id.lista_areas,
+                        R.id.lista_actividades -> viewmodel.downloadAreas()
                     }
                 }
             }

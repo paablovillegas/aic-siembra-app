@@ -2,6 +2,7 @@ package mx.grupo.tepeyac.mexico.aic.siembra.data.area
 
 import android.content.Context
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import mx.grupo.tepeyac.mexico.aic.siembra.data.AppDatabase
@@ -19,6 +20,8 @@ class AreaRepository(context: Context) {
 
     fun getActividadID(id: String): Long? = actividadDao.getActividadID(id)
     fun getActividadID(id: Long): String? = actividadDao.getActividadID(id)
+    fun getAreasLD(): LiveData<List<AreaWithActividades>> = areaDao.getAreasLD()
+    fun getAreaLD(id: Long): LiveData<AreaWithActividades> = areaDao.getAreaLD(id)
 
     fun insert(awa: AreaWithActividades) {
         val id = areaDao.insert(awa.area)

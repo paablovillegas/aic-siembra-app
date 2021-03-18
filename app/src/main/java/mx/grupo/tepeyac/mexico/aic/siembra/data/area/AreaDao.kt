@@ -1,5 +1,6 @@
 package mx.grupo.tepeyac.mexico.aic.siembra.data.area
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 /*
@@ -30,6 +31,14 @@ interface AreaDao {
     @Transaction
     @Query("SELECT * FROM Area WHERE id_area IS NOT NULL")
     fun getAreas(): List<AreaWithActividades>
+
+    @Transaction
+    @Query("SELECT * FROM Area WHERE id_interno = :id ")
+    fun getAreaLD(id: Long): LiveData<AreaWithActividades>
+
+    @Transaction
+    @Query("SELECT * FROM Area")
+    fun getAreasLD(): LiveData<List<AreaWithActividades>>
 
     @Transaction
     @Query("SELECT * FROM Area WHERE id_area IS NULL")
