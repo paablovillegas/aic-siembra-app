@@ -2,6 +2,7 @@ package mx.grupo.tepeyac.mexico.aic.siembra.data.grupo
 
 import android.content.Context
 import android.util.Log
+import androidx.lifecycle.LiveData
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import mx.grupo.tepeyac.mexico.aic.siembra.data.AppDatabase
@@ -20,6 +21,8 @@ class GrupoRepository(context: Context) {
 
     fun getTrabajadorID(id: String): Long? = trabajadorDao.getTrabajadorID(id)
     fun getTrabajadorID(id: Long): String? = trabajadorDao.getTrabajadorID(id)
+    fun getGruposLD(): LiveData<List<GrupoWithTrabajadores>> = grupoDao.getGruposLD()
+    fun getGrupoLD(id: Long): LiveData<GrupoWithTrabajadores> = grupoDao.getGrupoLD(id)
 
     fun insert(rwt: GrupoWithTrabajadores) {
         val id = grupoDao.insert(rwt.grupo)

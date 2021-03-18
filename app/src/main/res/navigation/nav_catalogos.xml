@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_catalogos_fragment_to_listaAreas"
             app:destination="@id/lista_areas" />
+        <action
+            android:id="@+id/action_catalogos_fragment_to_lista_grupos"
+            app:destination="@id/lista_grupos" />
     </fragment>
     <fragment
         android:id="@+id/lista_ranchos"
@@ -53,5 +56,19 @@
         android:id="@+id/lista_actividades"
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.actividades.ListaActividades"
         android:label="ListaActividades"
+        tools:layout="@layout/lista_fragment" />
+    <fragment
+        android:id="@+id/lista_grupos"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.grupos.ListaGrupos"
+        android:label="ListaGrupos"
+        tools:layout="@layout/lista_fragment" >
+        <action
+            android:id="@+id/action_lista_grupos_to_lista_trabajadores"
+            app:destination="@id/lista_trabajadores" />
+    </fragment>
+    <fragment
+        android:id="@+id/lista_trabajadores"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.trabajadores.ListaTrabajadores"
+        android:label="ListaTrabajadores"
         tools:layout="@layout/lista_fragment" />
 </navigation>

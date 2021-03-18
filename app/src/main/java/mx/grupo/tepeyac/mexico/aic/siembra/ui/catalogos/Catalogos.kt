@@ -57,6 +57,8 @@ class Catalogos : AppCompatActivity() {
                         R.id.lista_ciclos -> viewmodel.downloadCiclos()
                         R.id.lista_areas,
                         R.id.lista_actividades -> viewmodel.downloadAreas()
+                        R.id.lista_grupos,
+                        R.id.lista_trabajadores -> viewmodel.downloadGrupos()
                     }
                 }
             }

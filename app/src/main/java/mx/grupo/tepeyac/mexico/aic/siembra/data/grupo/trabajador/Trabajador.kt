@@ -83,5 +83,10 @@ data class Trabajador(
         idGrupo,
         false,
     )
+
+    fun getNombreCompleto(): String =
+        if (apellidoMaterno == null) "$nombres $apellidoPaterno"
+        else "$nombres $apellidoPaterno $apellidoMaterno"
+
 }
 //TODO: Agregar evidencias: Nueva tabla? ? ?

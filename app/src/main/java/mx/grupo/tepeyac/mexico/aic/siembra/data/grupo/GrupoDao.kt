@@ -1,5 +1,6 @@
 package mx.grupo.tepeyac.mexico.aic.siembra.data.grupo
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 /*
@@ -26,6 +27,12 @@ interface GrupoDao {
 
     @Delete
     fun delete(grupo: List<Grupo>)
+
+    @Query("SELECT * FROM Grupo")
+    fun getGruposLD(): LiveData<List<GrupoWithTrabajadores>>
+
+    @Query("SELECT * FROM Grupo WHERE id_interno = :id")
+    fun getGrupoLD(id: Long): LiveData<GrupoWithTrabajadores>
 
     @Transaction
     @Query("SELECT * FROM Grupo WHERE id_grupo IS NOT NULL")

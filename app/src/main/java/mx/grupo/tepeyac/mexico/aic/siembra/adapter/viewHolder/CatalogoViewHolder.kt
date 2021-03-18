@@ -23,6 +23,7 @@ class CatalogoViewHolder(private val binding: ItemListaSimpleBinding) :
             when (index) {
                 0 -> it.findNavController().navigate(R.id.action_catalogosFragment_to_listaRanchos)
                 1 -> it.findNavController().navigate(R.id.action_catalogos_fragment_to_listaAreas)
+                2 -> it.findNavController().navigate(R.id.action_catalogos_fragment_to_lista_grupos)
             }
         }
     }
@@ -51,6 +52,15 @@ class CatalogoViewHolder(private val binding: ItemListaSimpleBinding) :
                 this.putLong("id", idArea)
             }
             it.findNavController().navigate(R.id.action_listaAreas_to_listaActividades, bundle)
+        }
+    }
+
+    fun bindGrupo(idGrupo: Long) {
+        binding.root.setOnClickListener {
+            val bundle = Bundle().apply {
+                this.putLong("id", idGrupo)
+            }
+            it.findNavController().navigate(R.id.action_lista_grupos_to_lista_trabajadores, bundle)
         }
     }
 
