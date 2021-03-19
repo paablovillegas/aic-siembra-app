@@ -28,11 +28,14 @@ interface CicloDao {
     @Delete
     fun delete(ciclo: List<Ciclo>)
 
-    @Query("SELECT * FROM Ciclo WHERE id_ciclo IS NOT NULL")
-    fun getCiclosLD(): LiveData<List<Ciclo>>
+    @Query("SELECT * FROM Ciclo WHERE id_tabla = :idTabla")
+    fun getCiclosLD(idTabla: Long): LiveData<List<Ciclo>>
 
     @Query("SELECT * FROM Ciclo WHERE id_ciclo IS NOT NULL")
     fun getCiclos(): List<Ciclo>
+
+    @Query("SELECT * FROM Ciclo WHERE id_interno = :id")
+    fun getCiclo(id: Long): Ciclo
 
     @Query("SELECT * FROM Ciclo WHERE id_ciclo IS NULL")
     fun getCiclosNoSubidos(): List<Ciclo>

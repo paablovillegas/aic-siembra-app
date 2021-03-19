@@ -1,10 +1,45 @@
 package mx.grupo.tepeyac.mexico.aic.siembra.utils
 
 import androidx.databinding.InverseMethod
+import mx.grupo.tepeyac.mexico.aic.siembra.utils.DateFormat.Companion.DATETIME_FORMAT
+import mx.grupo.tepeyac.mexico.aic.siembra.utils.DateFormat.Companion.DATE_FORMAT
+import java.util.*
 import kotlin.math.roundToInt
 
 class BindingConverter {
     companion object {
+        @JvmStatic
+        @InverseMethod("stringToDate")
+        fun dateToString(value: Date?): String? {
+            return if (value == null) ""
+            else DATE_FORMAT.format(value)
+        }
+
+        @JvmStatic
+        fun stringToDate(value: String): Date? {
+            return try {
+                DATE_FORMAT.parse(value)
+            } catch (e: Exception) {
+                null
+            }
+        }
+
+        @JvmStatic
+        @InverseMethod("stringToDateTime")
+        fun dateTimeToString(value: Date?): String? {
+            return if (value == null) ""
+            else DATETIME_FORMAT.format(value)
+        }
+
+        @JvmStatic
+        fun stringToDateTime(value: String): Date? {
+            return try {
+                DATETIME_FORMAT.parse(value)
+            } catch (e: Exception) {
+                null
+            }
+        }
+
         @JvmStatic
         @InverseMethod("stringToFloat")
         fun floatToString(value: Float): String? {

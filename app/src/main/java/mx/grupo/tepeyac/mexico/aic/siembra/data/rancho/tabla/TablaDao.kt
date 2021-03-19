@@ -27,4 +27,7 @@ interface TablaDao {
 
     @Query(" SELECT id_tabla FROM Tabla WHERE id_interno = :id")
     fun getTablaID(id: Long): String?
+
+    @Query(" SELECT * FROM Tabla WHERE id_interno = :id")
+    fun getTabla(id: Long): Tabla
 }

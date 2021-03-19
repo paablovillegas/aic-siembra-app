@@ -29,7 +29,10 @@ interface RanchoDao {
 
     @Transaction
     @Query("SELECT * FROM Rancho WHERE id_interno = :idRancho")
-    fun getRanchosLD(idRancho: Long): LiveData<RanchoWithTablas>
+    fun getRanchoLD(idRancho: Long): LiveData<RanchoWithTablas>
+
+    @Query("SELECT * FROM Rancho WHERE id_interno = :idRancho")
+    fun getRancho(idRancho: Long): Rancho
 
     @Transaction
     @Query("SELECT * FROM Rancho WHERE id_rancho IS NOT NULL")

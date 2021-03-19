@@ -24,7 +24,8 @@ class CatalogoViewHolder(private val binding: ItemListaSimpleBinding) :
                 0 -> it.findNavController().navigate(R.id.action_catalogosFragment_to_listaRanchos)
                 1 -> it.findNavController().navigate(R.id.action_catalogos_fragment_to_listaAreas)
                 2 -> it.findNavController().navigate(R.id.action_catalogos_fragment_to_lista_grupos)
-                3 -> it.findNavController().navigate(R.id.action_catalogos_fragment_to_listaProductos)
+                3 -> it.findNavController()
+                    .navigate(R.id.action_catalogos_fragment_to_listaProductos)
             }
         }
     }
@@ -36,14 +37,39 @@ class CatalogoViewHolder(private val binding: ItemListaSimpleBinding) :
             }
             it.findNavController().navigate(R.id.action_lista_ranchos_to_listaTablas, bundle)
         }
+        binding.root.setOnLongClickListener {
+            val bundle = Bundle().apply {
+                this.putLong("id", idRancho)
+            }
+            it.findNavController().navigate(R.id.action_lista_ranchos_to_formRancho, bundle)
+            return@setOnLongClickListener true
+        }
     }
 
-    fun bindTabla(idTabla: Long) {
+    fun bindTabla(idTabla: Long, idRancho: Long) {
         binding.root.setOnClickListener {
             val bundle = Bundle().apply {
                 this.putLong("id", idTabla)
             }
             it.findNavController().navigate(R.id.action_lista_tablas_to_lista_ciclos, bundle)
+        }
+        binding.root.setOnLongClickListener {
+            val bundle = Bundle().apply {
+                this.putLong("id", idTabla)
+                this.putLong("id_rancho", idRancho)
+            }
+            it.findNavController().navigate(R.id.action_lista_tablas_to_form_tabla, bundle)
+            return@setOnLongClickListener true
+        }
+    }
+
+    fun bindCiclo(idCiclo: Long, idTabla: Long) {
+        binding.root.setOnClickListener {
+            val bundle = Bundle().apply {
+                this.putLong("id", idCiclo)
+                this.putLong("id_tabla", idTabla)
+            }
+            it.findNavController().navigate(R.id.action_lista_ciclos_to_from_ciclo, bundle)
         }
     }
 

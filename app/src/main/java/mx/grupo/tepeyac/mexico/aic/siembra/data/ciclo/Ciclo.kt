@@ -13,19 +13,19 @@ data class Ciclo(
     val id: Long = 0,
     @ColumnInfo(name = "id_ciclo")
     val idCiclo: String? = null,
-    val ciclo: String,
+    var ciclo: String = "",
     @ColumnInfo(name = "id_tabla")
     val idTabla: Long = 0,
     @ColumnInfo(name = "id_producto")
-    val idProducto: Long = 0,
+    var idProducto: Long = 0,
     @ColumnInfo(name = "fecha_inicio")
-    val fechaInicio: Date,
+    var fechaInicio: Date,
     @ColumnInfo(name = "fecha_siembra")
-    val fechaSiembra: Date? = null,
+    var fechaSiembra: Date? = null,
     @ColumnInfo(name = "fecha_cosecha")
-    val fechaCosecha: Date? = null,
+    var fechaCosecha: Date? = null,
     @ColumnInfo(name = "fecha_fin")
-    val fechaFin: Date? = null,
+    var fechaFin: Date? = null,
     val editado: Boolean = false,
     @Ignore
     val delete: Boolean = false,
@@ -33,7 +33,7 @@ data class Ciclo(
     constructor(
         id: Long = 0,
         idCiclo: String? = null,
-        ciclo: String,
+        ciclo: String = "",
         idTabla: Long,
         idProducto: Long,
         fechaInicio: Date,
@@ -66,4 +66,7 @@ data class Ciclo(
             fechaCosecha,
             fechaFin,
         )
+
+    fun dataCorrect(): Boolean =
+        ciclo.isNotEmpty() && idTabla > 0 && idProducto > 0
 }

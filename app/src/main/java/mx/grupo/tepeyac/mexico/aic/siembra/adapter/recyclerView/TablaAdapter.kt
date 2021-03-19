@@ -23,7 +23,7 @@ class TablaAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
     override fun onBindViewHolder(holder: CatalogoViewHolder, position: Int) {
         val tabla = tablas[position]
         holder.bind(tabla.tabla)
-        holder.bindTabla(tabla.id)
+        holder.bindTabla(tabla.id, tabla.idRancho)
     }
 
     override fun getItemCount(): Int = tablas.size

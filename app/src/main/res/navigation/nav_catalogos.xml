@@ -31,6 +31,9 @@
         <action
             android:id="@+id/action_lista_ranchos_to_listaTablas"
             app:destination="@id/lista_tablas" />
+        <action
+            android:id="@+id/action_lista_ranchos_to_formRancho"
+            app:destination="@id/form_rancho" />
     </fragment>
     <fragment
         android:id="@+id/lista_tablas"
@@ -40,12 +43,19 @@
         <action
             android:id="@+id/action_lista_tablas_to_lista_ciclos"
             app:destination="@id/lista_ciclos" />
+        <action
+            android:id="@+id/action_lista_tablas_to_form_tabla"
+            app:destination="@id/form_tabla" />
     </fragment>
     <fragment
         android:id="@+id/lista_ciclos"
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.ciclos.ListaCiclos"
         android:label="ListaCiclos"
-        tools:layout="@layout/lista_fragment" />
+        tools:layout="@layout/lista_fragment" >
+        <action
+            android:id="@+id/action_lista_ciclos_to_from_ciclo"
+            app:destination="@id/form_ciclo" />
+    </fragment>
     <fragment
         android:id="@+id/lista_areas"
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.areas.ListaAreas"
@@ -64,7 +74,7 @@
         android:id="@+id/lista_grupos"
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.grupos.ListaGrupos"
         android:label="ListaGrupos"
-        tools:layout="@layout/lista_fragment" >
+        tools:layout="@layout/lista_fragment">
         <action
             android:id="@+id/action_lista_grupos_to_lista_trabajadores"
             app:destination="@id/lista_trabajadores" />
@@ -79,4 +89,19 @@
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.productos.ListaProductos"
         android:label="ListaProductos"
         tools:layout="@layout/lista_fragment" />
+    <fragment
+        android:id="@+id/form_rancho"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.ranchos.form.FormRancho"
+        android:label="FormRancho"
+        tools:layout="@layout/form_rancho" />
+    <fragment
+        android:id="@+id/form_tabla"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.tablas.form.FormTabla"
+        android:label="FormTabla"
+        tools:layout="@layout/form_tabla" />
+    <fragment
+        android:id="@+id/form_ciclo"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.ciclos.form.FormCiclo"
+        android:label="FromCiclo"
+        tools:layout="@layout/form_ciclo" />
 </navigation>

@@ -10,9 +10,9 @@ data class Rancho(
     @ColumnInfo(name = "id_interno")
     var id: Long = 0,
     @ColumnInfo(name = "id_rancho")
-    var idRancho: String?,
-    var rancho: String,
-    var alias: String?,
+    var idRancho: String? = null,
+    var rancho: String = "",
+    var alias: String? = null,
     var editado: Boolean = false,
 ) {
     fun toRanchoItem(tablas: List<TablaItem>): RanchoItem? =
@@ -20,4 +20,6 @@ data class Rancho(
             null -> null
             else -> RanchoItem(idRancho!!, rancho, alias, tablas)
         }
+
+    fun dataCorrect(): Boolean = rancho.isNotEmpty()
 }

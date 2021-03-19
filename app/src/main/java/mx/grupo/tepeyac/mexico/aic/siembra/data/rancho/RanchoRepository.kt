@@ -17,6 +17,11 @@ class RanchoRepository(context: Context) {
     private val ranchoApi: RanchoApi = ServiceGenerator
         .createService(context, RanchoApi::class.java, "1")
 
+    fun insert(rancho: Rancho) = ranchoDao.insert(rancho)
+    fun update(rancho: Rancho) = ranchoDao.update(rancho)
+    fun insert(tabla: Tabla) = tablaDao.insert(tabla)
+    fun update(tabla: Tabla) = tablaDao.update(tabla)
+
     fun insert(rwt: RanchoWithTablas) {
         val id = ranchoDao.insert(rwt.rancho)
         tablaDao.insert(rwt.tablas.map { it.copy(idRancho = id) })
@@ -30,11 +35,13 @@ class RanchoRepository(context: Context) {
     fun getRanchos(): List<RanchoWithTablas> = ranchoDao.getRanchos()
     fun getRanchosNoSubidos(): List<RanchoWithTablas> = ranchoDao.getRanchosNoSubidos()
     fun getRanchosLD(): LiveData<List<RanchoWithTablas>> = ranchoDao.getRanchosLD()
-    fun getRanchosLD(idRancho: Long): LiveData<RanchoWithTablas> = ranchoDao.getRanchosLD(idRancho)
+    fun getRanchoLD(idRancho: Long): LiveData<RanchoWithTablas> = ranchoDao.getRanchoLD(idRancho)
+    fun getRancho(idRancho: Long): Rancho = ranchoDao.getRancho(idRancho)
     fun getRanchoID(id: String): Long? = ranchoDao.getRanchoID(id)
     fun getRanchoID(id: Long): String? = ranchoDao.getRanchoID(id)
     fun getTablaID(id: String): Long? = tablaDao.getTablaID(id)
     fun getTablaID(id: Long): String? = tablaDao.getTablaID(id)
+    fun getTabla(idTabla: Long): Tabla = tablaDao.getTabla(idTabla)
 
     fun syncRanchos() {
         getRanchosNoSubidos().forEach { insertRancho(it) }

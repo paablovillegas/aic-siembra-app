@@ -9,11 +9,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import mx.grupo.tepeyac.mexico.aic.siembra.R
 
 class Catalogos : AppCompatActivity() {
     lateinit var viewmodel: CatalogosViewModel
-    lateinit var fragmentContainerView: FragmentContainerView
+    private lateinit var fragmentContainerView: FragmentContainerView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_catalogos)
@@ -26,18 +27,71 @@ class Catalogos : AppCompatActivity() {
 
         fragmentContainerView = findViewById(R.id.fragment)
 
+        val fab: FloatingActionButton = findViewById(R.id.fab_catalogos)
         val host: NavHostFragment =
             supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment
         val navController: NavController = host.navController
         navController.addOnDestinationChangedListener { _, destination, _ ->
+            fab.show()
             when (destination.id) {
-                R.id.catalogos_fragment -> supportActionBar?.setTitle("Catálogos")
-                R.id.lista_ranchos -> supportActionBar?.setTitle("Ranchos")
-                R.id.lista_tablas -> supportActionBar?.setTitle("Tablas")
-                R.id.lista_ciclos -> supportActionBar?.setTitle("Ciclos")
-                R.id.lista_areas -> supportActionBar?.setTitle("Areas")
-                R.id.lista_actividades -> supportActionBar?.setTitle("Actividades")
-                R.id.lista_productos -> supportActionBar?.setTitle("Productos")
+                R.id.catalogos_fragment -> {
+                    supportActionBar?.title = "Catálogos"
+                    fab.hide()
+                }
+                R.id.lista_ranchos -> supportActionBar?.title = "Ranchos"
+                R.id.lista_tablas -> supportActionBar?.title = "Tablas"
+                R.id.lista_ciclos -> supportActionBar?.title = "Ciclos"
+                R.id.lista_areas -> supportActionBar?.title = "Areas"
+                R.id.lista_actividades -> supportActionBar?.title = "Actividades"
+                R.id.lista_productos -> supportActionBar?.title = "Productos"
+                R.id.form_rancho -> {
+                    supportActionBar?.title = "Formulario Rancho"
+                    fab.hide()
+                }
+                R.id.form_tabla -> {
+                    supportActionBar?.title = "Formulario Tabla"
+                    fab.hide()
+                }
+                R.id.form_ciclo -> {
+                    supportActionBar?.title = "Formulario Ciclo"
+                    fab.hide()
+                }
+            }
+        }
+        fab.setOnClickListener {
+            navController.currentDestination?.let {
+                when (it.id) {
+                    R.id.lista_ranchos ->
+                        navController.navigate(R.id.action_lista_ranchos_to_formRancho)
+                    R.id.lista_tablas ->
+                        it.arguments["id_rancho"]?.defaultValue.let { id ->
+                            try {
+                                val bundle = Bundle().apply {
+                                    this.putLong("id_rancho", id as Long)
+                                }
+                                navController.navigate(
+                                    R.id.action_lista_tablas_to_form_tabla,
+                                    bundle
+                                )
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+                        }
+                    R.id.lista_ciclos ->
+                        it.arguments["id_tabla"]?.defaultValue.let { id ->
+                            try {
+                                val bundle = Bundle().apply {
+                                    this.putLong("id_tabla", id as Long)
+                                }
+                                navController.navigate(
+                                    R.id.action_lista_ciclos_to_from_ciclo,
+                                    bundle
+                                )
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+                        }
+                }
             }
         }
     }
@@ -54,12 +108,19 @@ class Catalogos : AppCompatActivity() {
                 fragmentContainerView.findNavController().currentDestination?.let {
                     when (it.id) {
                         R.id.lista_ranchos,
-                        R.id.lista_tablas -> viewmodel.downloadRanchos()
-                        R.id.lista_ciclos -> viewmodel.downloadCiclos()
+                        R.id.lista_tablas,
+                        R.id.form_rancho,
+                        R.id.form_tabla,
+                        -> viewmodel.downloadRanchos()
+                        R.id.lista_ciclos,
+                        R.id.form_ciclo,
+                        -> viewmodel.downloadCiclos()
                         R.id.lista_areas,
-                        R.id.lista_actividades -> viewmodel.downloadAreas()
+                        R.id.lista_actividades,
+                        -> viewmodel.downloadAreas()
                         R.id.lista_grupos,
-                        R.id.lista_trabajadores -> viewmodel.downloadGrupos()
+                        R.id.lista_trabajadores,
+                        -> viewmodel.downloadGrupos()
                         R.id.lista_productos -> viewmodel.downloadProductos()
                     }
                 }

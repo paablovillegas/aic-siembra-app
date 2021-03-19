@@ -22,8 +22,11 @@ class CicloRepository(context: Context) {
     private val cicloApi: CicloApi =
         ServiceGenerator.createService(context, CicloApi::class.java, "a")
 
+    fun insert(ciclo: Ciclo) = cicloDao.insert(ciclo)
+
     fun getCiclos(): List<Ciclo> = cicloDao.getCiclos()
-    fun getCiclosLD(): LiveData<List<Ciclo>> = cicloDao.getCiclosLD()
+    fun getCiclosLD(idTabla: Long): LiveData<List<Ciclo>> = cicloDao.getCiclosLD(idTabla)
+    fun getCiclo(idCiclo: Long): Ciclo = cicloDao.getCiclo(idCiclo)
 
     fun compareProductos(
         internos: List<Ciclo>,

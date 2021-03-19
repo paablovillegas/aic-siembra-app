@@ -23,6 +23,7 @@ class CicloAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
     override fun onBindViewHolder(holder: CatalogoViewHolder, position: Int) {
         val ciclo = ciclos[position]
         holder.bind(ciclo.ciclo)
+        holder.bindCiclo(ciclo.id, ciclo.idTabla)
     }
 
     override fun getItemCount(): Int = ciclos.size

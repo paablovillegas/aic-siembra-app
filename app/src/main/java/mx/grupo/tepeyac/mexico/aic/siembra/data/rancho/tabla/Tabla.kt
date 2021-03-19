@@ -14,7 +14,7 @@ data class Tabla(
     var id: Long = 0,
     @ColumnInfo(name = "id_tabla")
     var idTabla: String? = null,
-    var tabla: String,
+    var tabla: String = "",
     var editado: Boolean = false,
     @ColumnInfo(name = "id_rancho")
     var idRancho: Long,
@@ -24,7 +24,7 @@ data class Tabla(
     constructor(
         id: Long = 0,
         idTabla: String? = null,
-        tabla: String,
+        tabla: String = "",
         editado: Boolean = false,
         idRancho: Long,
     ) : this(id, idTabla, tabla, editado, idRancho, false)
@@ -37,4 +37,7 @@ data class Tabla(
 
     fun toSendTablaItem(): SendTablaItem? =
         SendTablaItem(idTabla, tabla)
+
+    fun dataCorrect(): Boolean =
+        tabla.isNotEmpty() && idRancho > 0
 }

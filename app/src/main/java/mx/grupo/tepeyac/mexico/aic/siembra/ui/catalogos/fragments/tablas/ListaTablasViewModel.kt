@@ -11,5 +11,5 @@ class ListaTablasViewModel(app: Application, idRancho: Long) : AndroidViewModel(
         RanchoRepository(app)
     }
 
-    val rancho: LiveData<RanchoWithTablas> = ranchoRepository.getRanchosLD(idRancho)
+    val rancho: LiveData<RanchoWithTablas> = ranchoRepository.getRanchoLD(idRancho)
 }

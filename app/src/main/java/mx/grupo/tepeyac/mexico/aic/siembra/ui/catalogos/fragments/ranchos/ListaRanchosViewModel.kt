@@ -3,7 +3,6 @@ package mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.ranchos
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.Rancho
 import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.RanchoRepository
 import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.RanchoWithTablas
 

@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">AIC Siembra</string>
     <string name="actualizar">Actualizar</string>
+    <string name="registrar">Registrar</string>
+    <string name="rancho">Rancho</string>
+    <string name="alias">Alias</string>
+    <string name="tabla">Tabla</string>
 </resources>
