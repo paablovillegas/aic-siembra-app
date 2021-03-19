@@ -42,7 +42,7 @@ class FormCicloViewModel(app: Application, idTabla: Long, idCiclo: Long?) : Andr
 
     fun registrarCiclo(): Boolean {
         if (ciclo.dataCorrect())
-            cicloRepository.insert(ciclo)
+            cicloRepository.insert(ciclo.copy(editado = true))
         else
             errorLD.value = "Datos erróneos"
         return ciclo.dataCorrect()

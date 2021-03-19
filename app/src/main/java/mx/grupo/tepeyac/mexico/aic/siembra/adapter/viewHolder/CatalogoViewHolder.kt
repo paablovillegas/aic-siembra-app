@@ -91,4 +91,12 @@ class CatalogoViewHolder(private val binding: ItemListaSimpleBinding) :
         }
     }
 
+    fun bindProducto(idProducto: Long) {
+        binding.root.setOnClickListener {
+            val bundle = Bundle().apply {
+                this.putLong("id", idProducto)
+            }
+            it.findNavController().navigate(R.id.action_lista_productos_to_form_producto, bundle)
+        }
+    }
 }

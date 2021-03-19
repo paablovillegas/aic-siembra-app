@@ -4,7 +4,7 @@ import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-class FromRanchoViewModelFactory(
+class FormRanchoViewModelFactory(
     private val app: Application,
     private val id: Long?,
 ) : ViewModelProvider.Factory {

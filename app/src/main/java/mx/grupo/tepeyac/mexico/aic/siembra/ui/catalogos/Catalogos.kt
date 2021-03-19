@@ -6,10 +6,16 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import mx.grupo.tepeyac.mexico.aic.siembra.R
 
 class Catalogos : AppCompatActivity() {
@@ -56,6 +62,10 @@ class Catalogos : AppCompatActivity() {
                     supportActionBar?.title = "Formulario Ciclo"
                     fab.hide()
                 }
+                R.id.form_producto -> {
+                    supportActionBar?.title = "Formulario Producto"
+                    fab.hide()
+                }
             }
         }
         fab.setOnClickListener {
@@ -91,6 +101,18 @@ class Catalogos : AppCompatActivity() {
                                 e.printStackTrace()
                             }
                         }
+                    R.id.lista_productos ->
+                        navController.navigate(R.id.action_lista_productos_to_form_producto)
+                }
+            }
+        }
+        val swipeActualizar: SwipeRefreshLayout = findViewById(R.id.refresh_catalogos)
+        swipeActualizar.setOnRefreshListener {
+            downloadData()
+            lifecycleScope.launch(Dispatchers.IO) {
+                delay(500)
+                withContext(Dispatchers.Main) {
+                    swipeActualizar.isRefreshing = false
                 }
             }
         }
@@ -104,28 +126,32 @@ class Catalogos : AppCompatActivity() {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             android.R.id.home -> fragmentContainerView.findNavController().popBackStack()
-            R.id.menu_actualizar -> {
-                fragmentContainerView.findNavController().currentDestination?.let {
-                    when (it.id) {
-                        R.id.lista_ranchos,
-                        R.id.lista_tablas,
-                        R.id.form_rancho,
-                        R.id.form_tabla,
-                        -> viewmodel.downloadRanchos()
-                        R.id.lista_ciclos,
-                        R.id.form_ciclo,
-                        -> viewmodel.downloadCiclos()
-                        R.id.lista_areas,
-                        R.id.lista_actividades,
-                        -> viewmodel.downloadAreas()
-                        R.id.lista_grupos,
-                        R.id.lista_trabajadores,
-                        -> viewmodel.downloadGrupos()
-                        R.id.lista_productos -> viewmodel.downloadProductos()
-                    }
-                }
-            }
+            R.id.menu_actualizar -> downloadData()
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun downloadData() {
+        fragmentContainerView.findNavController().currentDestination?.let {
+            when (it.id) {
+                R.id.lista_ranchos,
+                R.id.lista_tablas,
+                R.id.form_rancho,
+                R.id.form_tabla,
+                -> viewmodel.downloadRanchos()
+                R.id.lista_ciclos,
+                R.id.form_ciclo,
+                -> viewmodel.downloadCiclos()
+                R.id.lista_areas,
+                R.id.lista_actividades,
+                -> viewmodel.downloadAreas()
+                R.id.lista_grupos,
+                R.id.lista_trabajadores,
+                -> viewmodel.downloadGrupos()
+                R.id.lista_productos,
+                R.id.form_producto,
+                -> viewmodel.downloadProductos()
+            }
+        }
     }
 }

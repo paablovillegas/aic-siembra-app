@@ -88,7 +88,11 @@
         android:id="@+id/lista_productos"
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.productos.ListaProductos"
         android:label="ListaProductos"
-        tools:layout="@layout/lista_fragment" />
+        tools:layout="@layout/lista_fragment" >
+        <action
+            android:id="@+id/action_lista_productos_to_form_producto"
+            app:destination="@id/form_producto" />
+    </fragment>
     <fragment
         android:id="@+id/form_rancho"
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.ranchos.form.FormRancho"
@@ -104,4 +108,9 @@
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.ciclos.form.FormCiclo"
         android:label="FromCiclo"
         tools:layout="@layout/form_ciclo" />
+    <fragment
+        android:id="@+id/form_producto"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.productos.form.FormProducto"
+        android:label="FormProducto"
+        tools:layout="@layout/form_producto" />
 </navigation>

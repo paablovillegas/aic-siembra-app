@@ -14,10 +14,13 @@ class ProductoRepository(context: Context) {
     val productoApi: ProductoApi = ServiceGenerator
         .createService(context, ProductoApi::class.java, "A")
 
+    fun insert(producto: Producto) = productoDao.insert(producto)
+
     fun getProductos(): List<Producto> = productoDao.getProductos()
     fun getProductosLD(): LiveData<List<Producto>> = productoDao.getProductosLD()
     fun getProductoID(id: String): Long? = productoDao.getProductoID(id)
     fun getProductoID(id: Long): String? = productoDao.getProductoID(id)
+    fun getProducto(id: Long): Producto = productoDao.getProducto(id)
 
     fun compareProductos(
         internos: List<Producto>,

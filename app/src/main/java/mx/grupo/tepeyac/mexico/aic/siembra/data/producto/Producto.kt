@@ -12,7 +12,7 @@ data class Producto(
     var id: Long = 0,
     @ColumnInfo(name = "id_producto")
     var idProducto: String? = null,
-    var producto: String,
+    var producto: String = "",
     var editado: Boolean = false,
     @Ignore
     val delete: Boolean = false,
@@ -23,4 +23,7 @@ data class Producto(
         producto: String,
         editado: Boolean = false,
     ) : this(id, idProducto, producto, editado, false)
+
+    fun dataCorrect(): Boolean =
+        producto.isNotEmpty()
 }

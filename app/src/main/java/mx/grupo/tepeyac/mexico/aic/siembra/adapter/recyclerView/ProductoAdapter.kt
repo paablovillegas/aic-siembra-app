@@ -23,6 +23,7 @@ class ProductoAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
     override fun onBindViewHolder(holder: CatalogoViewHolder, position: Int) {
         val producto = productos[position]
         holder.bind(producto.producto)
+        holder.bindProducto(producto.id)
     }
 
     override fun getItemCount(): Int = productos.size

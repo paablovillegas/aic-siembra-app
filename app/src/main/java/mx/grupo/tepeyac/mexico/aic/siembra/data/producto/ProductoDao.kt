@@ -37,4 +37,7 @@ interface ProductoDao {
 
     @Query("SELECT id_producto FROM Producto WHERE id_interno = :id")
     fun getProductoID(id: Long): String?
+
+    @Query("SELECT * FROM Producto WHERE id_interno = :id")
+    fun getProducto(id: Long): Producto
 }
