@@ -6,4 +6,6 @@
     <string name="alias">Alias</string>
     <string name="tabla">Tabla</string>
     <string name="producto">Producto</string>
+    <string name="area">Area</string>
+    <string name="actividad">Actividad</string>
 </resources>

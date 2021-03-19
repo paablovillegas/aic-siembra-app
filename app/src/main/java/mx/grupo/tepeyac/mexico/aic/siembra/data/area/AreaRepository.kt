@@ -18,10 +18,15 @@ class AreaRepository(context: Context) {
     private val areaDao: AreaDao = AppDatabase.getInstance(context).areaDao
     private val actividadDao: ActividadDao = AppDatabase.getInstance(context).actividadDao
 
+    fun insert(area: Area) = areaDao.insert(area)
+    fun insert(actividad: Actividad) = actividadDao.insert(actividad)
+
     fun getActividadID(id: String): Long? = actividadDao.getActividadID(id)
     fun getActividadID(id: Long): String? = actividadDao.getActividadID(id)
+    fun getActividad(id: Long): Actividad = actividadDao.getActividad(id)
     fun getAreasLD(): LiveData<List<AreaWithActividades>> = areaDao.getAreasLD()
     fun getAreaLD(id: Long): LiveData<AreaWithActividades> = areaDao.getAreaLD(id)
+    fun getArea(id: Long): Area = areaDao.getArea(id)
 
     fun insert(awa: AreaWithActividades) {
         val id = areaDao.insert(awa.area)

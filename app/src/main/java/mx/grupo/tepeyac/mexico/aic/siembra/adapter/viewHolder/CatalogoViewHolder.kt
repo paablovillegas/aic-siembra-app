@@ -80,6 +80,23 @@ class CatalogoViewHolder(private val binding: ItemListaSimpleBinding) :
             }
             it.findNavController().navigate(R.id.action_listaAreas_to_listaActividades, bundle)
         }
+        binding.root.setOnLongClickListener {
+            val bundle = Bundle().apply {
+                this.putLong("id", idArea)
+            }
+            it.findNavController().navigate(R.id.action_lista_tablas_to_form_tabla, bundle)
+            return@setOnLongClickListener true
+        }
+    }
+
+    fun bindActividad(idActividad: Long, idArea: Long) {
+        binding.root.setOnClickListener {
+            val bundle = Bundle().apply {
+                this.putLong("id", idActividad)
+                this.putLong("id_area", idArea)
+            }
+            it.findNavController().navigate(R.id.action_lista_tablas_to_form_tabla, bundle)
+        }
     }
 
     fun bindGrupo(idGrupo: Long) {

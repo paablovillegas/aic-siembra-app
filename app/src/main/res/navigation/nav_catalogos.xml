@@ -64,12 +64,19 @@
         <action
             android:id="@+id/action_listaAreas_to_listaActividades"
             app:destination="@id/lista_actividades" />
+        <action
+            android:id="@+id/action_lista_areas_to_form_area"
+            app:destination="@id/form_area" />
     </fragment>
     <fragment
         android:id="@+id/lista_actividades"
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.actividades.ListaActividades"
         android:label="ListaActividades"
-        tools:layout="@layout/lista_fragment" />
+        tools:layout="@layout/lista_fragment" >
+        <action
+            android:id="@+id/action_lista_actividades_to_form_actividad"
+            app:destination="@id/form_actividad" />
+    </fragment>
     <fragment
         android:id="@+id/lista_grupos"
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.grupos.ListaGrupos"
@@ -113,4 +120,14 @@
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.productos.form.FormProducto"
         android:label="FormProducto"
         tools:layout="@layout/form_producto" />
+    <fragment
+        android:id="@+id/form_actividad"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.actividades.form.FormActividad"
+        android:label="FormActividad"
+        tools:layout="@layout/form_actividad"/>
+    <fragment
+        android:id="@+id/form_area"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.areas.form.FormArea"
+        android:label="FormArea"
+        tools:layout="@layout/form_area" />
 </navigation>

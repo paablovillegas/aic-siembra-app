@@ -23,6 +23,7 @@ class ActividadAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
     override fun onBindViewHolder(holder: CatalogoViewHolder, position: Int) {
         val actividad = actividades[position]
         holder.bind(actividad.actividad)
+        holder.bindActividad(actividad.id, actividad.idArea)
     }
 
     override fun getItemCount(): Int = actividades.size

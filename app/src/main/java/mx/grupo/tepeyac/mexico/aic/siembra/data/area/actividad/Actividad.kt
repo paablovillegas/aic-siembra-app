@@ -13,7 +13,7 @@ data class Actividad(
     var id: Long = 0,
     @ColumnInfo(name = "id_actividad")
     var idActividad: String? = null,
-    var actividad: String,
+    var actividad: String = "",
     val editado: Boolean = false,
     @ColumnInfo(name = "id_area")
     var idArea: Long,
@@ -30,4 +30,7 @@ data class Actividad(
 
     fun toSendActividadItem(): SendActividadItem =
         SendActividadItem(idActividad, actividad)
+
+    fun dataCorrect(): Boolean =
+        actividad.isNotEmpty()
 }

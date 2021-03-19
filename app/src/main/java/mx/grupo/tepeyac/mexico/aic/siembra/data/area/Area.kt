@@ -12,7 +12,7 @@ data class Area(
     var id: Long = 0,
     @ColumnInfo(name = "id_area")
     var idArea: String? = null,
-    var area: String,
+    var area: String = "",
     var editado: Boolean = false,
     @Ignore
     val delete: Boolean = false,
@@ -23,4 +23,7 @@ data class Area(
         area: String,
         editado: Boolean = false
     ) : this(id, idArea, area, editado, false)
+
+    fun dataCorrect(): Boolean =
+        area.isNotEmpty()
 }

@@ -103,6 +103,22 @@ class Catalogos : AppCompatActivity() {
                         }
                     R.id.lista_productos ->
                         navController.navigate(R.id.action_lista_productos_to_form_producto)
+                    R.id.lista_areas ->
+                        navController.navigate(R.id.action_lista_areas_to_form_area)
+                    R.id.lista_actividades ->
+                        it.arguments["id_area"]?.defaultValue.let { id ->
+                            try {
+                                val bundle = Bundle().apply {
+                                    this.putLong("id_area", id as Long)
+                                }
+                                navController.navigate(
+                                    R.id.action_lista_actividades_to_form_actividad,
+                                    bundle
+                                )
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+                        }
                 }
             }
         }
@@ -144,6 +160,8 @@ class Catalogos : AppCompatActivity() {
                 -> viewmodel.downloadCiclos()
                 R.id.lista_areas,
                 R.id.lista_actividades,
+                R.id.form_area,
+                R.id.form_actividad,
                 -> viewmodel.downloadAreas()
                 R.id.lista_grupos,
                 R.id.lista_trabajadores,

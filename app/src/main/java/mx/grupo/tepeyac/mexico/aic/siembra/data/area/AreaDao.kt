@@ -28,6 +28,9 @@ interface AreaDao {
     @Delete
     fun delete(area: List<Area>)
 
+    @Query("SELECT * FROM Area WHERE id_interno = :id ")
+    fun getArea(id: Long): Area
+
     @Transaction
     @Query("SELECT * FROM Area WHERE id_area IS NOT NULL")
     fun getAreas(): List<AreaWithActividades>
