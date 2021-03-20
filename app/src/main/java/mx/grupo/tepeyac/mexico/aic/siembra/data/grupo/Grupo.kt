@@ -12,19 +12,19 @@ data class Grupo(
     val id: Long = 0,
     @ColumnInfo(name = "id_grupo")
     val idGrupo: String? = null,
-    val grupo: String,
+    var grupo: String = "",
     @ColumnInfo(name = "tipo_grupo")
-    val tipoGrupo: String,
+    var tipoGrupo: String,
     @ColumnInfo(name = "flete_regular")
-    val fleteRegular: Double? = null,
+    var fleteRegular: Double? = null,
     @ColumnInfo(name = "flete_persona")
-    val fletePersona: Double? = null,
+    var fletePersona: Double? = null,
     @ColumnInfo(name = "flete_cabraliego")
-    val fleteCabraliego: Double? = null,
+    var fleteCabraliego: Double? = null,
     @ColumnInfo(name = "flete_incompleto")
-    val fleteIncompleto: Double? = null,
+    var fleteIncompleto: Double? = null,
     @ColumnInfo(name = "flete_escondida")
-    val fleteEscondida: Double? = null,
+    var fleteEscondida: Double? = null,
     val editado: Boolean = false,
     @Ignore
     val delete: Boolean = false,
@@ -53,4 +53,16 @@ data class Grupo(
         editado,
         false,
     )
+
+    fun dataCorrect(): Boolean =
+        grupo.isNotEmpty()
+
+    fun normalize(): Grupo =
+        this.copy(
+            fleteIncompleto = if (fleteIncompleto == 0.0) null else fleteIncompleto,
+            fleteRegular = if (fleteRegular == 0.0) null else fleteRegular,
+            fleteCabraliego = if (fleteCabraliego == 0.0) null else fleteCabraliego,
+            fleteEscondida = if (fleteEscondida == 0.0) null else fleteEscondida,
+            fletePersona = if (fletePersona == 0.0) null else fletePersona,
+        )
 }

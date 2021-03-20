@@ -110,7 +110,7 @@ class BindingConverter {
 
         @JvmStatic
         @InverseMethod("stringToDouble")
-        fun doubleToString(value: Double): String? {
+        fun doubleToString(value: Double): String {
             return try {
                 if (value == 0.0) {
                     return ""
@@ -127,6 +127,29 @@ class BindingConverter {
                 value.toDouble()
             } catch (e: Exception) {
                 return 0.0
+            }
+        }
+
+        @JvmStatic
+        @InverseMethod("stringToDoubleNull")
+        fun doubleToStringNull(value: Double?): String {
+            if (value == null) return ""
+            return try {
+                if (value == 0.0) {
+                    return ""
+                }
+                return value.toString()
+            } catch (e: Exception) {
+                ""
+            }
+        }
+
+        @JvmStatic
+        fun stringToDoubleNull(value: String): Double? {
+            return try {
+                value.toDouble()
+            } catch (e: Exception) {
+                return null
             }
         }
     }

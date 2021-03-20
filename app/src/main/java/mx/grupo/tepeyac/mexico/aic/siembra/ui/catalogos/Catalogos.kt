@@ -66,6 +66,10 @@ class Catalogos : AppCompatActivity() {
                     supportActionBar?.title = "Formulario Producto"
                     fab.hide()
                 }
+                R.id.form_grupo -> {
+                    supportActionBar?.title = "Formulario Grupo"
+                    fab.hide()
+                }
             }
         }
         fab.setOnClickListener {
@@ -119,6 +123,8 @@ class Catalogos : AppCompatActivity() {
                                 e.printStackTrace()
                             }
                         }
+                    R.id.lista_grupos ->
+                        navController.navigate(R.id.action_lista_grupos_to_form_grupo)
                 }
             }
         }

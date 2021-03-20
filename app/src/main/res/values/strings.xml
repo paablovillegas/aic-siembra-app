@@ -8,4 +8,11 @@
     <string name="producto">Producto</string>
     <string name="area">Area</string>
     <string name="actividad">Actividad</string>
+    <string name="grupo">Grupo</string>
+    <string name="tipo_grupo">Tipo Grupo</string>
+    <string name="flete_regular">Flete Regular</string>
+    <string name="flete_incompleto">Flete Incompleto</string>
+    <string name="flete_persona">Flete Por Persona</string>
+    <string name="flete_cabraliego">Flete Cabraliego</string>
+    <string name="flete_escondida">Flete Escondida</string>
 </resources>
