@@ -123,4 +123,15 @@ class CatalogoViewHolder(private val binding: ItemListaSimpleBinding) :
             it.findNavController().navigate(R.id.action_lista_productos_to_form_producto, bundle)
         }
     }
+
+    fun bindTrabajador(idTrabajador: Long, idGrupo: Long) {
+        binding.root.setOnClickListener {
+            val bundle = Bundle().apply {
+                this.putLong("id", idTrabajador)
+                this.putLong("id_grupo", idGrupo)
+            }
+            it.findNavController()
+                .navigate(R.id.action_lista_trabajadores_to_form_trabajador, bundle)
+        }
+    }
 }

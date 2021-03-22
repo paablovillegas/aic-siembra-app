@@ -3,8 +3,6 @@ package mx.grupo.tepeyac.mexico.aic.siembra.data.grupo
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
-import com.google.gson.Gson
-import com.google.gson.GsonBuilder
 import mx.grupo.tepeyac.mexico.aic.siembra.data.AppDatabase
 import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.trabajador.Trabajador
 import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.trabajador.TrabajadorDao
@@ -24,6 +22,7 @@ class GrupoRepository(context: Context) {
 
     fun getTrabajadorID(id: String): Long? = trabajadorDao.getTrabajadorID(id)
     fun getTrabajadorID(id: Long): String? = trabajadorDao.getTrabajadorID(id)
+    fun getTrabajador(id: Long): Trabajador = trabajadorDao.getTrabajador(id)
     fun getGruposLD(): LiveData<List<GrupoWithTrabajadores>> = grupoDao.getGruposLD()
     fun getGrupoLD(id: Long): LiveData<GrupoWithTrabajadores> = grupoDao.getGrupoLD(id)
     fun getGrupo(id: Long): Grupo = grupoDao.getGrupo(id)
@@ -36,14 +35,6 @@ class GrupoRepository(context: Context) {
     fun update(rwt: GrupoWithTrabajadores) {
         grupoDao.update(rwt.grupo)
         trabajadorDao.update(rwt.trabajadores)
-    }
-
-    fun getGrupos(): List<GrupoItem> {
-        val data =
-            "{\"ok\":true,\"lugares\":[{\"tipo_lugar\":\"cuadrilla\",\"trabajadores\":[{\"_id\":\"603d3300f8a6fb38386212e4\",\"nombres\":\"Luis Enrique\",\"apellido_paterno\":\"Cornejo\",\"fecha_alta\":\"1970-01-19T16:30:15.191Z\",\"salario\":{\"sueldo\":220},\"__v\":0},{\"_id\":\"603d473e0e3bd61e2cdb23d4\",\"nombres\":\"Danae\",\"apellido_paterno\":\"Villanueva\",\"fecha_alta\":\"1970-01-19T16:30:15.191Z\",\"salario\":{\"sueldo\":220},\"__v\":0}],\"_id\":\"603d07f42da8a318f86dfc74\",\"fletes\":{\"regular\":2200},\"lugar\":\"Juan Mata\",\"__v\":0}]}"
-        val gson: Gson = GsonBuilder().create()
-        val grupoResponse = gson.fromJson(data, ResponseGrupoList::class.java)
-        return grupoResponse.grupos
     }
 
     fun getGruposNoSubidos(): List<GrupoWithTrabajadores> = grupoDao.getGruposNoSubidos()

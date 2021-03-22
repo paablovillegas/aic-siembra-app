@@ -13,26 +13,26 @@ data class Trabajador(
     val id: Long = 0,
     @ColumnInfo(name = "id_trabajador")
     val idTrabajador: String? = null,
-    val nombres: String,
+    var nombres: String,
     @ColumnInfo(name = "apellido_paterno")
-    val apellidoPaterno: String,
+    var apellidoPaterno: String,
     @ColumnInfo(name = "apellido_materno")
-    val apellidoMaterno: String? = null,
-    val nss: String? = null,
-    val curp: String? = null,
-    val rfc: String? = null,
+    var apellidoMaterno: String? = null,
+    var nss: String? = null,
+    var curp: String? = null,
+    var rfc: String? = null,
     val ine: String? = null,
-    val genero: String? = null,
-    val domicilio: String? = null,
+    var genero: String? = null,
+    var domicilio: String? = null,
     @ColumnInfo(name = "fecha_alta")
     val fechaAlta: Date = Date(),
     @ColumnInfo(name = "fecha_nacimiento")
     val fechaNacimiento: Date? = null,
     val activo: Boolean = true,
     val tarjeta: Boolean = false,
-    val sueldo: Double = 0.0,
-    val extra: Double? = 0.0,
-    val bono: Double? = 0.0,
+    var sueldo: Double = 0.0,
+    var extra: Double? = 0.0,
+    var bono: Double? = 0.0,
     val editado: Boolean = false,
     @ColumnInfo(name = "id_grupo")
     val idGrupo: Long,
@@ -42,8 +42,8 @@ data class Trabajador(
     constructor(
         id: Long = 0,
         idTrabajador: String? = null,
-        nombres: String,
-        apellidoPaterno: String,
+        nombres: String = "",
+        apellidoPaterno: String = "",
         apellidoMaterno: String? = null,
         nss: String? = null,
         curp: String? = null,
@@ -55,9 +55,9 @@ data class Trabajador(
         fechaNacimiento: Date? = null,
         activo: Boolean = true,
         tarjeta: Boolean = false,
-        sueldo: Double = 0.0,
-        extra: Double? = 0.0,
-        bono: Double? = 0.0,
+        sueldo: Double = 220.0,
+        extra: Double? = null,
+        bono: Double? = null,
         editado: Boolean = false,
         idGrupo: Long,
     ) : this(
@@ -88,5 +88,7 @@ data class Trabajador(
         if (apellidoMaterno == null) "$nombres $apellidoPaterno"
         else "$nombres $apellidoPaterno $apellidoMaterno"
 
+    fun dataCorrect(): Boolean =
+        nombres.isNotEmpty() && apellidoPaterno.isNotEmpty()
 }
 //TODO: Agregar evidencias: Nueva tabla? ? ?

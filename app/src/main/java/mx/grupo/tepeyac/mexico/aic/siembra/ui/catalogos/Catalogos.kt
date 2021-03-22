@@ -70,6 +70,10 @@ class Catalogos : AppCompatActivity() {
                     supportActionBar?.title = "Formulario Grupo"
                     fab.hide()
                 }
+                R.id.form_trabajador -> {
+                    supportActionBar?.title = "Formulario Trabajador"
+                    fab.hide()
+                }
             }
         }
         fab.setOnClickListener {
@@ -125,6 +129,20 @@ class Catalogos : AppCompatActivity() {
                         }
                     R.id.lista_grupos ->
                         navController.navigate(R.id.action_lista_grupos_to_form_grupo)
+                    R.id.lista_trabajadores ->
+                        it.arguments["id_grupo"]?.defaultValue.let { id ->
+                            try {
+                                val bundle = Bundle().apply {
+                                    this.putLong("id_grupo", id as Long)
+                                }
+                                navController.navigate(
+                                    R.id.action_lista_trabajadores_to_form_trabajador,
+                                    bundle
+                                )
+                            } catch (e: Exception) {
+                                e.printStackTrace()
+                            }
+                        }
                 }
             }
         }
@@ -171,6 +189,8 @@ class Catalogos : AppCompatActivity() {
                 -> viewmodel.downloadAreas()
                 R.id.lista_grupos,
                 R.id.lista_trabajadores,
+                R.id.form_grupo,
+                R.id.form_trabajador,
                 -> viewmodel.downloadGrupos()
                 R.id.lista_productos,
                 R.id.form_producto,

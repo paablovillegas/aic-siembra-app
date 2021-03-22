@@ -8,11 +8,23 @@
     <string name="producto">Producto</string>
     <string name="area">Area</string>
     <string name="actividad">Actividad</string>
-    <string name="grupo">Grupo</string>
     <string name="tipo_grupo">Tipo Grupo</string>
     <string name="flete_regular">Flete Regular</string>
     <string name="flete_incompleto">Flete Incompleto</string>
     <string name="flete_persona">Flete Por Persona</string>
     <string name="flete_cabraliego">Flete Cabraliego</string>
     <string name="flete_escondida">Flete Escondida</string>
+    <string name="trabajador">Trabajador</string>
+    <string name="grupo">Grupo</string>
+    <string name="nombres">Nombres</string>
+    <string name="apellido_paterno">Apellido Paterno</string>
+    <string name="apellido_materno">Apellido Materno</string>
+    <string name="genero">Género</string>
+    <string name="seguro_social">Seguro Social</string>
+    <string name="curp">CURP</string>
+    <string name="rfc">RFC</string>
+    <string name="domicilio">Domicilio</string>
+    <string name="sueldo">Sueldo</string>
+    <string name="hora_extra">Hora Extra</string>
+    <string name="bono">Bono</string>
 </resources>

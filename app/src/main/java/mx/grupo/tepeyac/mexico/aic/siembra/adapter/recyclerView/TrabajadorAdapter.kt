@@ -23,6 +23,7 @@ class TrabajadorAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
     override fun onBindViewHolder(holder: CatalogoViewHolder, position: Int) {
         val trabajador = trabajadores[position]
         holder.bind(trabajador.getNombreCompleto())
+        holder.bindTrabajador(trabajador.id, trabajador.idGrupo)
     }
 
     override fun getItemCount(): Int = trabajadores.size

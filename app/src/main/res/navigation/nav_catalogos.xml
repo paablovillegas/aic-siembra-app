@@ -93,7 +93,11 @@
         android:id="@+id/lista_trabajadores"
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.trabajadores.ListaTrabajadores"
         android:label="ListaTrabajadores"
-        tools:layout="@layout/lista_fragment" />
+        tools:layout="@layout/lista_fragment" >
+        <action
+            android:id="@+id/action_lista_trabajadores_to_form_trabajador"
+            app:destination="@id/form_trabajador" />
+    </fragment>
     <fragment
         android:id="@+id/lista_productos"
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.productos.ListaProductos"
@@ -138,4 +142,9 @@
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.grupos.form.FormGrupo"
         android:label="FormGrupo"
         tools:layout="@layout/form_grupo" />
+    <fragment
+        android:id="@+id/form_trabajador"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.trabajadores.form.FormTrabajador"
+        android:label="FormTrabajador"
+        tools:layout="@layout/form_trabajador" />
 </navigation>
