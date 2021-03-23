@@ -5,11 +5,11 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import mx.grupo.tepeyac.mexico.aic.siembra.adapter.viewHolder.CatalogoViewHolder
-import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.AsistenciaGrupoWithAsistencias
+import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.AsistenciaGrupoWithActividades
 import mx.grupo.tepeyac.mexico.aic.siembra.databinding.ItemListaSimpleBinding
 
-class GrupoAsistenciasAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
-    private var gruposWithAsistencia: List<AsistenciaGrupoWithAsistencias> = emptyList()
+class GrupoActividadesAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
+    private var gruposWithActividades: List<AsistenciaGrupoWithActividades> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatalogoViewHolder =
         CatalogoViewHolder(
@@ -21,29 +21,29 @@ class GrupoAsistenciasAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
         )
 
     override fun onBindViewHolder(holder: CatalogoViewHolder, position: Int) {
-        val grupo = gruposWithAsistencia[position]
+        val grupo = gruposWithActividades[position]
         holder.bind(
             grupo.grupo.grupo,
-            String.format("%d asistencias", grupo.asistencias.size)
+            String.format("%d actividades", grupo.actividades.size)
         )
     }
 
-    override fun getItemCount(): Int = gruposWithAsistencia.size
+    override fun getItemCount(): Int = gruposWithActividades.size
 
-    fun combineGrupos(lista: List<AsistenciaGrupoWithAsistencias>) {
+    fun combineGrupos(lista: List<AsistenciaGrupoWithActividades>) {
         val diff = DiffUtil.calculateDiff(object : DiffUtil.Callback() {
-            override fun getOldListSize(): Int = gruposWithAsistencia.size
+            override fun getOldListSize(): Int = gruposWithActividades.size
 
             override fun getNewListSize(): Int = lista.size
 
             override fun areItemsTheSame(i: Int, j: Int): Boolean =
-                gruposWithAsistencia[i].grupo.id == lista[j].grupo.id
+                gruposWithActividades[i].grupo.id == lista[j].grupo.id
 
             override fun areContentsTheSame(i: Int, j: Int): Boolean =
-                gruposWithAsistencia[i].grupo.grupo == lista[j].grupo.grupo &&
-                        gruposWithAsistencia[i].asistencias.size == lista[j].asistencias.size
+                gruposWithActividades[i].grupo.grupo == lista[j].grupo.grupo &&
+                        gruposWithActividades[i].actividades.size == lista[j].actividades.size
         })
-        gruposWithAsistencia = lista
+        gruposWithActividades = lista
         diff.dispatchUpdatesTo(this)
     }
 }

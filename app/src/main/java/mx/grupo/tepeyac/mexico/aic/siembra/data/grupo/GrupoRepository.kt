@@ -4,12 +4,14 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import mx.grupo.tepeyac.mexico.aic.siembra.data.AppDatabase
+import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.AsistenciaGrupoWithAsistencias
 import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.trabajador.Trabajador
 import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.trabajador.TrabajadorDao
 import mx.grupo.tepeyac.mexico.aic.siembra.network.ServiceGenerator
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import java.util.*
 
 class GrupoRepository(context: Context) {
     private val grupoApi: GrupoApi =

@@ -12,7 +12,7 @@ android {
 
     defaultConfig {
         applicationId "mx.grupo.tepeyac.mexico.aic.siembra"
-        minSdkVersion 23
+        minSdkVersion 24
         targetSdkVersion 30
         versionCode 1
         versionName "0.1"

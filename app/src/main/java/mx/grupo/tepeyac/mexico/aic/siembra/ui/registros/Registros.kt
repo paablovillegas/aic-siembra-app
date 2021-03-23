@@ -1,5 +1,6 @@
 package mx.grupo.tepeyac.mexico.aic.siembra.ui.registros
 
+import android.app.DatePickerDialog
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -17,6 +18,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import mx.grupo.tepeyac.mexico.aic.siembra.R
+import java.util.*
 
 class Registros : AppCompatActivity() {
     lateinit var viewmodel: RegistrosViewModel
@@ -63,7 +65,7 @@ class Registros : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        menuInflater.inflate(R.menu.menu_catalogos, menu)
+        menuInflater.inflate(R.menu.menu_registros, menu)
         return true
     }
 
@@ -71,6 +73,7 @@ class Registros : AppCompatActivity() {
         when (item.itemId) {
             android.R.id.home -> fragmentContainerView.findNavController().popBackStack()
             R.id.menu_actualizar -> downloadData()
+            R.id.menu_fecha -> selectDate()
         }
         return super.onOptionsItemSelected(item)
     }
@@ -80,5 +83,18 @@ class Registros : AppCompatActivity() {
             when (it.id) {
             }
         }
+    }
+
+    private fun selectDate() {
+        val dpd = DatePickerDialog(
+            this,
+            { _, year, month, day -> viewmodel.setDate(year, month, day) },
+            viewmodel.getYear(),
+            viewmodel.getMonth(),
+            viewmodel.getDay()
+        )
+        dpd.datePicker.maxDate = Date().time
+        dpd.datePicker.minDate = viewmodel.getDay(-7)
+        dpd.show()
     }
 }

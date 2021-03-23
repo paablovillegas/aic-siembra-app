@@ -23,5 +23,5 @@ data class AsistenciaGrupoWithDescuentos(
         parentColumn = "id_interno",
         entityColumn = "id_asistencia_grupo"
     )
-    val descuento: List<Descuento>,
+    val descuentos: List<Descuento>,
 )

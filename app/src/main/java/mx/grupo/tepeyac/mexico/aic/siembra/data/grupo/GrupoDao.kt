@@ -2,6 +2,8 @@ package mx.grupo.tepeyac.mexico.aic.siembra.data.grupo
 
 import androidx.lifecycle.LiveData
 import androidx.room.*
+import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.AsistenciaGrupoWithAsistencias
+import java.util.*
 
 /*
  * @author pablovillegas

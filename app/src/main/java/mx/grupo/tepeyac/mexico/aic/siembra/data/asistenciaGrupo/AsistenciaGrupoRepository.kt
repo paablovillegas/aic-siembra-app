@@ -2,6 +2,8 @@ package mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo
 
 import android.content.Context
 import android.util.Log
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.distinctUntilChanged
 import mx.grupo.tepeyac.mexico.aic.siembra.data.AppDatabase
 import mx.grupo.tepeyac.mexico.aic.siembra.data.area.AreaRepository
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.actividadTrabajador.ActividadTrabajador
@@ -46,6 +48,21 @@ class AsistenciaGrupoRepository(context: Context) {
 
     fun getAsistenciasGrupo(): List<AsistenciaGrupoWithInfo> =
         asistenciaGrupoDao.getAsistenciaGrupos()
+
+    fun getGruposAsistencias(start: Date, end: Date): LiveData<List<AsistenciaGrupoWithAsistencias>> =
+        asistenciaGrupoDao.getGruposAsistencias(start, end).distinctUntilChanged()
+
+    fun getGruposActividades(start: Date, end: Date): LiveData<List<AsistenciaGrupoWithActividades>> =
+        asistenciaGrupoDao.getGruposActividades(start, end).distinctUntilChanged()
+
+    fun getGruposExtras(start: Date, end: Date): LiveData<List<AsistenciaGrupoWithExtras>> =
+        asistenciaGrupoDao.getGruposExtras(start, end).distinctUntilChanged()
+
+    fun getGruposBonos(start: Date, end: Date): LiveData<List<AsistenciaGrupoWithBonos>> =
+        asistenciaGrupoDao.getGruposBonos(start, end).distinctUntilChanged()
+
+    fun getGruposDescuentos(start: Date, end: Date): LiveData<List<AsistenciaGrupoWithDescuentos>> =
+        asistenciaGrupoDao.getGruposDescuentos(start, end).distinctUntilChanged()
 
     fun compareAsistenciasGrupos(
         internos: List<AsistenciaGrupoWithInfo>,
