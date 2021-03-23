@@ -134,4 +134,26 @@ class CatalogoViewHolder(private val binding: ItemListaSimpleBinding) :
                 .navigate(R.id.action_lista_trabajadores_to_form_trabajador, bundle)
         }
     }
+
+    fun bindRegistro(index: Int) {
+        binding.root.setOnClickListener {
+            val bundle = Bundle().apply {
+                this.putInt("id", index)
+            }
+            when (index) {
+                0 -> it.findNavController()
+                    .navigate(R.id.action_registros_fragment_to_lista_grupos_registros, bundle)
+            }
+        }
+    }
+
+    fun bindGrupoAsistencia(id_grupo: Long) {
+        binding.root.setOnClickListener {
+            val bundle = Bundle().apply {
+                this.putLong("id", id_grupo)
+            }
+            it.findNavController()
+                .navigate(R.id.action_lista_grupos_registros_to_lista_asistencias, bundle)
+        }
+    }
 }

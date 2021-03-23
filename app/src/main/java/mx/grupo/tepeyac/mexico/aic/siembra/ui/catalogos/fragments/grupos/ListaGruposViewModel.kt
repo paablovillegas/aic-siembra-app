@@ -7,7 +7,7 @@ import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.GrupoRepository
 import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.GrupoWithTrabajadores
 
 class ListaGruposViewModel(app: Application) : AndroidViewModel(app) {
-    val grupoRepository: GrupoRepository by lazy {
+    private val grupoRepository: GrupoRepository by lazy {
         GrupoRepository(app)
     }
 

@@ -6,7 +6,8 @@ import androidx.recyclerview.widget.RecyclerView
 import mx.grupo.tepeyac.mexico.aic.siembra.adapter.viewHolder.CatalogoViewHolder
 import mx.grupo.tepeyac.mexico.aic.siembra.databinding.ItemListaSimpleBinding
 
-class CatalogoAdapter(private val items: List<String>) : RecyclerView.Adapter<CatalogoViewHolder>() {
+class RegistroAdapter(private val items: List<String>) :
+    RecyclerView.Adapter<CatalogoViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatalogoViewHolder =
         CatalogoViewHolder(
             ItemListaSimpleBinding.inflate(
@@ -18,7 +19,7 @@ class CatalogoAdapter(private val items: List<String>) : RecyclerView.Adapter<Ca
 
     override fun onBindViewHolder(holder: CatalogoViewHolder, position: Int) {
         holder.bind(items[position])
-        holder.bindCatalogo(position)
+        holder.bindRegistro(position)
     }
 
     override fun getItemCount(): Int = items.size

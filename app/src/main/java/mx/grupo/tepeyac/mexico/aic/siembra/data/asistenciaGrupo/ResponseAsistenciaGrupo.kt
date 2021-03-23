@@ -32,9 +32,10 @@ data class AsistenciaGrupoItem(
     val fecha: Date,
     val trabajadores: List<TrabajadorAsistenciaItem>
 ) {
-    fun toEntity(idRancho: Long): AsistenciaGrupo =
+    fun toEntity(idGrupo: Long, idRancho: Long): AsistenciaGrupo =
         AsistenciaGrupo(
             idAsistenciaGrupo = id,
+            grupo = idGrupo,
             rancho = idRancho,
             flete = flete,
             fecha = fecha,

@@ -105,9 +105,11 @@ class AsistenciaGrupoRepository(context: Context) {
 
     fun parseAsistenciasGrupo(data: List<AsistenciaGrupoItem>): List<AsistenciaGrupoWithInfo> =
         data.mapNotNull { asistencia ->
+            val idGrupo: Long =
+                grupoRepository.getGrupoID(asistencia.grupo.id) ?: return@mapNotNull null
             val idRancho: Long = getRanchoID(asistencia.rancho.id) ?: return@mapNotNull null
             return@mapNotNull AsistenciaGrupoWithInfo(
-                asistencia.toEntity(idRancho),
+                asistencia.toEntity(idGrupo, idRancho),
                 getAsistencias(asistencia.trabajadores),
                 getExtras(asistencia),
                 getBonos(asistencia),

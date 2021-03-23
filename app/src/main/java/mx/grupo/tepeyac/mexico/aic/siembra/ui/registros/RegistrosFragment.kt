@@ -1,4 +1,4 @@
-package mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos
+package mx.grupo.tepeyac.mexico.aic.siembra.ui.registros
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,13 +9,14 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import mx.grupo.tepeyac.mexico.aic.siembra.R
-import mx.grupo.tepeyac.mexico.aic.siembra.adapter.recyclerView.CatalogoAdapter
+import mx.grupo.tepeyac.mexico.aic.siembra.adapter.recyclerView.RegistroAdapter
 
-class CatalogosFragment : Fragment() {
-    private lateinit var viewModel: CatalogosViewModel
+class RegistrosFragment : Fragment() {
+    private lateinit var viewModel: RegistrosViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(requireActivity()).get(CatalogosViewModel::class.java)
+        viewModel = ViewModelProvider(requireActivity()).get(RegistrosViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -28,11 +29,10 @@ class CatalogosFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val adapter = CatalogoAdapter(viewModel.catalogos)
+        val adapter = RegistroAdapter(viewModel.registros)
         val recyclerView: RecyclerView = view.findViewById(R.id.lista_general)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
     }
-
 }

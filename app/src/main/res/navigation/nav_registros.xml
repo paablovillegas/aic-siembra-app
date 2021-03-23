@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_registros"
+    app:startDestination="@id/registros_fragment">
+
+    <fragment
+        android:id="@+id/registros_fragment"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.RegistrosFragment"
+        android:label="RegistrosFragment"
+        tools:layout="@layout/lista_fragment">
+        <action
+            android:id="@+id/action_registros_fragment_to_lista_grupos_registros"
+            app:destination="@id/lista_grupos_registros" />
+    </fragment>
+    <fragment
+        android:id="@+id/lista_asistencias"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.asistencias.ListaAsistencias"
+        android:label="ListaAsistencias"
+        tools:layout="@layout/lista_fragment" />
+    <fragment
+        android:id="@+id/lista_grupos_registros"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.grupos.ListaGruposRegistros"
+        android:label="ListaGruposRegistros"
+        tools:layout="@layout/lista_fragment" >
+        <action
+            android:id="@+id/action_lista_grupos_registros_to_lista_asistencias"
+            app:destination="@id/lista_asistencias" />
+    </fragment>
+</navigation>

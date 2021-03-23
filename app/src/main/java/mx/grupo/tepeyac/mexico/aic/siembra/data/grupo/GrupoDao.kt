@@ -34,6 +34,12 @@ interface GrupoDao {
     @Query("SELECT * FROM Grupo WHERE id_interno = :id")
     fun getGrupo(id: Long): Grupo
 
+    @Query("SELECT id_grupo FROM Grupo WHERE id_interno = :id")
+    fun getGrupoID(id: Long): String?
+
+    @Query("SELECT id_interno FROM Grupo WHERE id_interno = :id")
+    fun getGrupoID(id: String): Long?
+
     @Transaction
     @Query("SELECT * FROM Grupo WHERE id_interno = :id")
     fun getGrupoLD(id: Long): LiveData<GrupoWithTrabajadores>

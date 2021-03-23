@@ -29,7 +29,6 @@ class Catalogos : AppCompatActivity() {
 
         setSupportActionBar(findViewById(R.id.toolbar_catalogos))
         supportActionBar?.title = "Catalogos"
-        supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
         fragmentContainerView = findViewById(R.id.fragment)
 
@@ -38,9 +37,11 @@ class Catalogos : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.fragment) as NavHostFragment
         val navController: NavController = host.navController
         navController.addOnDestinationChangedListener { _, destination, _ ->
+            supportActionBar?.setDisplayHomeAsUpEnabled(true)
             fab.show()
             when (destination.id) {
                 R.id.catalogos_fragment -> {
+                    supportActionBar?.setDisplayHomeAsUpEnabled(false)
                     supportActionBar?.title = "Catálogos"
                     fab.hide()
                 }

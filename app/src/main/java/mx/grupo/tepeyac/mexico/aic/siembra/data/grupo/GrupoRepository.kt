@@ -27,6 +27,8 @@ class GrupoRepository(context: Context) {
     fun getGrupoLD(id: Long): LiveData<GrupoWithTrabajadores> = grupoDao.getGrupoLD(id)
     fun getGrupo(id: Long): Grupo = grupoDao.getGrupo(id)
 
+    fun getGrupoID(id: Long): String? = grupoDao.getGrupoID(id)
+    fun getGrupoID(id: String): Long? = grupoDao.getGrupoID(id)
     fun insert(rwt: GrupoWithTrabajadores) {
         val id = grupoDao.insert(rwt.grupo)
         trabajadorDao.insert(rwt.trabajadores.map { it.copy(idGrupo = id) })

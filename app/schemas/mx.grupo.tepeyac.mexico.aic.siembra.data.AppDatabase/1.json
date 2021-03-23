@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "d75cb1ed832f667462e312b0367c63b8",
+    "identityHash": "9e3b84a5b82157b57841d127507f27b5",
     "entities": [
       {
         "tableName": "Cosecha",
@@ -892,7 +892,7 @@
       },
       {
         "tableName": "AsistenciaGrupo",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER NOT NULL, `id_asistencia_grupo` TEXT, `id_rancho` INTEGER NOT NULL, `flete` REAL, `fecha` INTEGER NOT NULL, `editado` INTEGER NOT NULL, PRIMARY KEY(`id_interno`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id_interno` INTEGER NOT NULL, `id_asistencia_grupo` TEXT, `id_grupo` INTEGER NOT NULL, `id_rancho` INTEGER NOT NULL, `flete` REAL, `fecha` INTEGER NOT NULL, `editado` INTEGER NOT NULL, PRIMARY KEY(`id_interno`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -905,6 +905,12 @@
             "columnName": "id_asistencia_grupo",
             "affinity": "TEXT",
             "notNull": false
+          },
+          {
+            "fieldPath": "grupo",
+            "columnName": "id_grupo",
+            "affinity": "INTEGER",
+            "notNull": true
           },
           {
             "fieldPath": "rancho",
@@ -1248,7 +1254,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'd75cb1ed832f667462e312b0367c63b8')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '9e3b84a5b82157b57841d127507f27b5')"
     ]
   }
 }

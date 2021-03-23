@@ -13,6 +13,8 @@ data class AsistenciaGrupo(
     val id: Long = 0,
     @ColumnInfo(name = "id_asistencia_grupo")
     val idAsistenciaGrupo: String? = null,
+    @ColumnInfo(name = "id_grupo")
+    val grupo: Long,
     @ColumnInfo(name = "id_rancho")
     val rancho: Long,
     val flete: Double?,
@@ -24,9 +26,10 @@ data class AsistenciaGrupo(
     constructor(
         id: Long = 0,
         idAsistenciaGrupo: String? = null,
+        grupo: Long,
         rancho: Long,
         flete: Double?,
         fecha: Date,
         editado: Boolean = false,
-    ) : this(id, idAsistenciaGrupo, rancho, flete, fecha, editado, false)
+    ) : this(id, idAsistenciaGrupo, grupo, rancho, flete, fecha, editado, false)
 }
