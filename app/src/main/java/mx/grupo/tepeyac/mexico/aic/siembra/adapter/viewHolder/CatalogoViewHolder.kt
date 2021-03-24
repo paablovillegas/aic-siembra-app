@@ -156,4 +156,44 @@ class CatalogoViewHolder(private val binding: ItemListaSimpleBinding) :
                 .navigate(R.id.action_lista_grupos_registros_to_lista_asistencias, bundle)
         }
     }
+
+    fun bindGrupoActividades(id_grupo: Long) {
+        binding.root.setOnClickListener {
+            val bundle = Bundle().apply {
+                this.putLong("id", id_grupo)
+            }
+            it.findNavController()
+                .navigate(R.id.action_lista_grupos_registros_to_listaActividades, bundle)
+        }
+    }
+
+    fun bindGrupoExtras(id_grupo: Long) {
+        binding.root.setOnClickListener {
+            val bundle = Bundle().apply {
+                this.putLong("id", id_grupo)
+            }
+            it.findNavController()
+                .navigate(R.id.action_lista_grupos_registros_to_listaExtras, bundle)
+        }
+    }
+
+    fun bindGrupoBonos(id_grupo: Long) {
+        binding.root.setOnClickListener {
+            val bundle = Bundle().apply {
+                this.putLong("id", id_grupo)
+            }
+            it.findNavController()
+                .navigate(R.id.action_lista_grupos_registros_to_listaBonos, bundle)
+        }
+    }
+
+    fun bindGrupoDescuentos(id_grupo: Long) {
+        binding.root.setOnClickListener {
+            val bundle = Bundle().apply {
+                this.putLong("id", id_grupo)
+            }
+            it.findNavController()
+                .navigate(R.id.action_lista_grupos_registros_to_listaDescuentos, bundle)
+        }
+    }
 }

@@ -23,9 +23,41 @@
         android:id="@+id/lista_grupos_registros"
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.grupos.ListaGruposRegistros"
         android:label="ListaGruposRegistros"
-        tools:layout="@layout/lista_fragment" >
+        tools:layout="@layout/lista_fragment">
         <action
             android:id="@+id/action_lista_grupos_registros_to_lista_asistencias"
             app:destination="@id/lista_asistencias" />
+        <action
+            android:id="@+id/action_lista_grupos_registros_to_listaBonos"
+            app:destination="@id/lista_bonos" />
+        <action
+            android:id="@+id/action_lista_grupos_registros_to_listaActividades"
+            app:destination="@id/lista_actividades" />
+        <action
+            android:id="@+id/action_lista_grupos_registros_to_listaExtras"
+            app:destination="@id/lista_extras" />
+        <action
+            android:id="@+id/action_lista_grupos_registros_to_listaDescuentos"
+            app:destination="@id/lista_descuentos" />
     </fragment>
+    <fragment
+        android:id="@+id/lista_bonos"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.bonos.ListaBonos"
+        android:label="ListaBonos"
+        tools:layout="@layout/lista_fragment" />
+    <fragment
+        android:id="@+id/lista_actividades"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.catalogos.fragments.actividades.ListaActividades"
+        android:label="ListaActividades"
+        tools:layout="@layout/lista_fragment" />
+    <fragment
+        android:id="@+id/lista_extras"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.extras.ListaExtras"
+        android:label="ListaExtras"
+        tools:layout="@layout/lista_fragment" />
+    <fragment
+        android:id="@+id/lista_descuentos"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.descuentos.ListaDescuentos"
+        android:label="ListaDescuentos"
+        tools:layout="@layout/lista_fragment" />
 </navigation>
