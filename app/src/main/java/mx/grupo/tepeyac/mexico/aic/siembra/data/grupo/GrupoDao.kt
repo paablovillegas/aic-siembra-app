@@ -53,4 +53,13 @@ interface GrupoDao {
     @Transaction
     @Query("SELECT * FROM Grupo WHERE id_grupo IS NULL")
     fun getGruposNoSubidos(): List<GrupoWithTrabajadores>
+
+    @Transaction
+    @Query("""
+        SELECT g.* FROM Grupo g
+        LEFT JOIN AsistenciaGrupo ag ON ag.id_grupo = g.id_interno
+            AND ag.fecha >= :start AND ag.fecha < :end
+        WHERE ag.id_interno IS NULL
+    """)
+    fun getGruposDisponibles(start: Date, end: Date): List<Grupo>
 }

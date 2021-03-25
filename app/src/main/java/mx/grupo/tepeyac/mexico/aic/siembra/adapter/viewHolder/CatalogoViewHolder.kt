@@ -6,6 +6,7 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import mx.grupo.tepeyac.mexico.aic.siembra.R
 import mx.grupo.tepeyac.mexico.aic.siembra.databinding.ItemListaSimpleBinding
+import mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.RegistrosViewModel
 
 class CatalogoViewHolder(private val binding: ItemListaSimpleBinding) :
     RecyclerView.ViewHolder(binding.root) {
@@ -135,15 +136,21 @@ class CatalogoViewHolder(private val binding: ItemListaSimpleBinding) :
         }
     }
 
+    fun bindRachoRegistro(idRancho: Long, vm: RegistrosViewModel) {
+        binding.root.setOnClickListener {
+            vm.idRancho = idRancho
+            it.findNavController()
+                .navigate(R.id.action_lista_ranchos_registros_to_registros_fragment)
+        }
+    }
+
     fun bindRegistro(index: Int) {
         binding.root.setOnClickListener {
             val bundle = Bundle().apply {
                 this.putInt("id", index)
             }
-            when (index) {
-                0 -> it.findNavController()
-                    .navigate(R.id.action_registros_fragment_to_lista_grupos_registros, bundle)
-            }
+            it.findNavController()
+                .navigate(R.id.action_registros_fragment_to_lista_grupos_registros, bundle)
         }
     }
 

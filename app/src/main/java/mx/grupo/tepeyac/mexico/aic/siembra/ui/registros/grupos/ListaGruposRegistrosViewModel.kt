@@ -4,6 +4,8 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.*
+import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.Grupo
+import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.GrupoRepository
 import java.util.*
 
 class ListaGruposRegistrosViewModel(app: Application, val type: Int?) : AndroidViewModel(app) {

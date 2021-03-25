@@ -3,6 +3,7 @@ package mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo
 import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.distinctUntilChanged
 import mx.grupo.tepeyac.mexico.aic.siembra.data.AppDatabase
 import mx.grupo.tepeyac.mexico.aic.siembra.data.area.AreaRepository
@@ -36,6 +37,8 @@ class AsistenciaGrupoRepository(context: Context) {
     }
     private val asistenciaApi: AsistenciaApi =
         ServiceGenerator.createService(context, AsistenciaApi::class.java, "a")
+
+    fun insert(asistenciaGrupo: AsistenciaGrupo) = asistenciaGrupoDao.insert(asistenciaGrupo)
 
     fun getRanchoID(id: String): Long? = ranchoRepository.getRanchoID(id)
     fun getRanchoID(id: Long): String? = ranchoRepository.getRanchoID(id)

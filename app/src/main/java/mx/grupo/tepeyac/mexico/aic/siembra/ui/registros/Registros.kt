@@ -1,7 +1,9 @@
 package mx.grupo.tepeyac.mexico.aic.siembra.ui.registros
 
+import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -43,14 +45,19 @@ class Registros : AppCompatActivity() {
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
             fab.show()
             when (destination.id) {
-                R.id.registros_fragment -> {
+                R.id.lista_ranchos_registros -> {
                     supportActionBar?.setDisplayHomeAsUpEnabled(false)
+                }
+                R.id.registros_fragment -> {
                     supportActionBar?.title = "Registros"
                     fab.hide()
                 }
             }
         }
         fab.setOnClickListener {
+            when (navController.currentDestination?.id) {
+                R.id.lista_grupos_registros -> insertGrupo()
+            }
         }
         val swipeActualizar: SwipeRefreshLayout = findViewById(R.id.refresh_registros)
         swipeActualizar.setOnRefreshListener {
@@ -96,5 +103,17 @@ class Registros : AppCompatActivity() {
         dpd.datePicker.maxDate = Date().time
         dpd.datePicker.minDate = viewmodel.getDay(-7)
         dpd.show()
+    }
+
+    private fun insertGrupo() {
+        val grupos = viewmodel.getGruposDisponibles()
+
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle("Nuevo Grupo")
+            .setItems(grupos.map { it.grupo }.toTypedArray()) { _, which ->
+                viewmodel.addGrupo(grupos[which].id)
+            }
+            .create()
+            .show()
     }
 }

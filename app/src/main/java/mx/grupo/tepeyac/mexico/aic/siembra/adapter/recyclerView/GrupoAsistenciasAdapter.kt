@@ -26,6 +26,7 @@ class GrupoAsistenciasAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
             grupo.grupo.grupo,
             String.format("%d asistencias", grupo.asistencias.size)
         )
+        holder.bindGrupoAsistencia(grupo.grupo.id)
     }
 
     override fun getItemCount(): Int = gruposWithAsistencia.size

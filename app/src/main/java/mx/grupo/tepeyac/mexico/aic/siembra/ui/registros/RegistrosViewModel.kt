@@ -1,10 +1,26 @@
 package mx.grupo.tepeyac.mexico.aic.siembra.ui.registros
 
+import android.app.Application
 import android.util.Log
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.AndroidViewModel
+import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.AsistenciaGrupo
+import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.AsistenciaGrupoRepository
+import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.Grupo
+import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.GrupoRepository
+import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.RanchoRepository
+import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.RanchoWithTablas
 import java.util.*
 
-class RegistrosViewModel : ViewModel() {
+class RegistrosViewModel(app: Application) : AndroidViewModel(app) {
+    private val grupoRepository: GrupoRepository by lazy {
+        GrupoRepository(app)
+    }
+    private val asistenciaGrupoRepository: AsistenciaGrupoRepository by lazy {
+        AsistenciaGrupoRepository(app)
+    }
+    private val ranchoRepository: RanchoRepository by lazy {
+        RanchoRepository(app)
+    }
     val registros: List<String> = listOf(
         "Asistencias",
         "Actividades",
@@ -17,6 +33,7 @@ class RegistrosViewModel : ViewModel() {
     private val fecha: Date
     val startDate: Date = Date()
     val endDate: Date = Date()
+    var idRancho: Long = 0L
 
     init {
         calendar.time = Date()
@@ -26,6 +43,16 @@ class RegistrosViewModel : ViewModel() {
         calendar.set(Calendar.HOUR_OF_DAY, 0)
         fecha = calendar.time
         setStartEnd()
+    }
+
+    fun getRanchos(): List<RanchoWithTablas> = ranchoRepository.getRanchos()
+
+    fun getGruposDisponibles(): List<Grupo> =
+        grupoRepository.geGruposDisponibles(startDate, endDate)
+
+    fun addGrupo(id: Long) {
+        val asistenciaGrupo = AsistenciaGrupo(grupo = id, fecha = startDate, rancho = idRancho)
+        asistenciaGrupoRepository.insert(asistenciaGrupo)
     }
 
     fun getDay(): Int = calendar.get(Calendar.DAY_OF_MONTH)

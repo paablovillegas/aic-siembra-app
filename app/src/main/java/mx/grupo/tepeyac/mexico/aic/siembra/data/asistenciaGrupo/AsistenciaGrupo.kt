@@ -8,7 +8,7 @@ import java.util.*
 
 @Entity
 data class AsistenciaGrupo(
-    @PrimaryKey
+    @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "id_interno")
     val id: Long = 0,
     @ColumnInfo(name = "id_asistencia_grupo")
@@ -17,7 +17,7 @@ data class AsistenciaGrupo(
     val grupo: Long,
     @ColumnInfo(name = "id_rancho")
     val rancho: Long,
-    val flete: Double?,
+    val flete: Double? = null,
     val fecha: Date,
     val editado: Boolean = false,
     @Ignore
@@ -28,7 +28,7 @@ data class AsistenciaGrupo(
         idAsistenciaGrupo: String? = null,
         grupo: Long,
         rancho: Long,
-        flete: Double?,
+        flete: Double? = null,
         fecha: Date,
         editado: Boolean = false,
     ) : this(id, idAsistenciaGrupo, grupo, rancho, flete, fecha, editado, false)

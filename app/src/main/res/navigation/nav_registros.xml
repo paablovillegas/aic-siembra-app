@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_registros"
-    app:startDestination="@id/registros_fragment">
+    app:startDestination="@id/lista_ranchos_registros">
 
     <fragment
         android:id="@+id/registros_fragment"
@@ -60,4 +60,13 @@
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.descuentos.ListaDescuentos"
         android:label="ListaDescuentos"
         tools:layout="@layout/lista_fragment" />
+    <fragment
+        android:id="@+id/lista_ranchos_registros"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.ranchos.ListaRanchosRegistros"
+        android:label="ListaRanchosRegistros"
+        tools:layout="@layout/lista_fragment" >
+        <action
+            android:id="@+id/action_lista_ranchos_registros_to_registros_fragment"
+            app:destination="@id/registros_fragment" />
+    </fragment>
 </navigation>

@@ -38,22 +38,22 @@ interface AsistenciaGrupoDao {
     fun getAsistenciaGruposNoSubidos(): List<AsistenciaGrupoWithInfo>
 
     @Transaction
-    @Query("SELECT * FROM AsistenciaGrupo WHERE fecha > :start AND fecha < :end")
+    @Query("SELECT * FROM AsistenciaGrupo WHERE fecha >= :start AND fecha < :end")
     fun getGruposAsistencias(start: Date, end: Date): LiveData<List<AsistenciaGrupoWithAsistencias>>
 
     @Transaction
-    @Query("SELECT * FROM AsistenciaGrupo WHERE fecha > :start AND fecha < :end")
+    @Query("SELECT * FROM AsistenciaGrupo WHERE fecha >= :start AND fecha < :end")
     fun getGruposActividades(start: Date, end: Date): LiveData<List<AsistenciaGrupoWithActividades>>
 
     @Transaction
-    @Query("SELECT * FROM AsistenciaGrupo WHERE fecha > :start AND fecha < :end")
+    @Query("SELECT * FROM AsistenciaGrupo WHERE fecha >= :start AND fecha < :end")
     fun getGruposExtras(start: Date, end: Date): LiveData<List<AsistenciaGrupoWithExtras>>
 
     @Transaction
-    @Query("SELECT * FROM AsistenciaGrupo WHERE fecha > :start AND fecha < :end")
+    @Query("SELECT * FROM AsistenciaGrupo WHERE fecha >= :start AND fecha < :end")
     fun getGruposBonos(start: Date, end: Date): LiveData<List<AsistenciaGrupoWithBonos>>
 
     @Transaction
-    @Query("SELECT * FROM AsistenciaGrupo WHERE fecha > :start AND fecha < :end")
+    @Query("SELECT * FROM AsistenciaGrupo WHERE fecha >= :start AND fecha < :end")
     fun getGruposDescuentos(start: Date, end: Date): LiveData<List<AsistenciaGrupoWithDescuentos>>
 }
