@@ -13,11 +13,11 @@ data class Descuento(
     val id: Long = 0,
     @ColumnInfo(name = "id_descuento")
     val idDescuento: String? = null,
-    var total: Double,
-    var motivo: String,
-    val fecha: Date,
+    var total: Double = 0.0,
+    var motivo: String = "",
+    val fecha: Date = Date(),
     @ColumnInfo(name = "id_trabajador")
-    val idTrabajador: Long,
+    var idTrabajador: Long,
     @ColumnInfo(name = "id_asistencia_grupo")
     val idAsistenciaGrupo: Long,
     val editado: Boolean = false,
@@ -27,9 +27,9 @@ data class Descuento(
     constructor(
         id: Long = 0,
         idDescuento: String? = null,
-        total: Double,
-        motivo: String,
-        fecha: Date,
+        total: Double = 0.0,
+        motivo: String = "",
+        fecha: Date = Date(),
         idTrabajador: Long,
         idAsistenciaGrupo: Long,
         editado: Boolean = false,
@@ -44,4 +44,9 @@ data class Descuento(
         editado,
         false
     )
+
+    fun dataCorrect(): Boolean = idTrabajador > 0 &&
+            idAsistenciaGrupo > 0 &&
+            total > 0 &&
+            motivo.isNotEmpty()
 }

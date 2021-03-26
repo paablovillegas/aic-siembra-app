@@ -24,8 +24,9 @@ class DescuentoAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
         val descuento = descuentos[position]
         holder.bind(
             descuento.trabajador.getNombreCompleto(),
-            String.format("%d asistencias", descuento.descuento.fecha.time)
+            String.format("$ %.2f", descuento.descuento.total)
         )
+        holder.bindDescuento(descuento.descuento.id)
     }
 
     override fun getItemCount(): Int = descuentos.size
@@ -41,7 +42,8 @@ class DescuentoAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
 
             override fun areContentsTheSame(i: Int, j: Int): Boolean =
                 descuentos[i].trabajador.getNombreCompleto() ==
-                        lista[j].trabajador.getNombreCompleto()
+                        lista[j].trabajador.getNombreCompleto() &&
+                        descuentos[i].descuento.total == lista[j].descuento.total
         })
         descuentos = lista
         diff.dispatchUpdatesTo(this)

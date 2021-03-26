@@ -48,7 +48,7 @@ class ListaGruposRegistros : Fragment() {
         }
     }
 
-    fun bindAsistencias() {
+    private fun bindAsistencias() {
         val adapter = GrupoAsistenciasAdapter(viewModelFechas)
         recyclerView.adapter = adapter
         viewModel.getAsistencias(
@@ -59,7 +59,7 @@ class ListaGruposRegistros : Fragment() {
         }
     }
 
-    fun bindActividades() {
+    private fun bindActividades() {
         val adapter = GrupoActividadesAdapter(viewModelFechas)
         recyclerView.adapter = adapter
         viewModel.getActividades(
@@ -70,7 +70,7 @@ class ListaGruposRegistros : Fragment() {
         }
     }
 
-    fun bindExtras() {
+    private fun bindExtras() {
         val adapter = GrupoExtrasAdapter(viewModelFechas)
         recyclerView.adapter = adapter
         viewModel.getExtras(
@@ -81,7 +81,7 @@ class ListaGruposRegistros : Fragment() {
         }
     }
 
-    fun bindBonos() {
+    private fun bindBonos() {
         val adapter = GrupoBonosAdapter(viewModelFechas)
         recyclerView.adapter = adapter
         viewModel.getBonos(
@@ -92,7 +92,7 @@ class ListaGruposRegistros : Fragment() {
         }
     }
 
-    fun bindDescuentos() {
+    private fun bindDescuentos() {
         val adapter = GrupoDescuentosAdapter(viewModelFechas)
         recyclerView.adapter = adapter
         viewModel.getDescuentos(

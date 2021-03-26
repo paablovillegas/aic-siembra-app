@@ -27,7 +27,7 @@ class GrupoExtrasAdapter(
         val grupo = gruposWithExtras[position]
         holder.bind(
             grupo.grupo.grupo,
-            String.format("%d asistencias", grupo.extras.size)
+            String.format("%d Extra(s)", grupo.extras.size)
         )
         holder.bindGrupoExtras(grupo.asistenciaGrupo.id, viewModel)
     }

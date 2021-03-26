@@ -27,7 +27,7 @@ class GrupoBonosAdapter(
         val grupo = gruposWithBonos[position]
         holder.bind(
             grupo.grupo.grupo,
-            String.format("%d asistencias", grupo.bonos.size)
+            String.format("%d Bono(s)", grupo.bonos.size)
         )
         holder.bindGrupoBonos(grupo.asistenciaGrupo.id, viewModel)
     }

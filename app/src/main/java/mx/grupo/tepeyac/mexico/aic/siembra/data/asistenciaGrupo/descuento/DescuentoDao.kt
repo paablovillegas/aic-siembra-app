@@ -1,5 +1,6 @@
 package mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.descuento
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 /*
@@ -26,4 +27,16 @@ interface DescuentoDao {
 
     @Delete
     fun delete(descuento: List<Descuento>)
+
+    @Query("SELECT * FROM Descuento WHERE id_interno = :id")
+    fun getDescuento(id: Long): Descuento
+
+    @Transaction
+    @Query("""
+        SELECT d.*
+        FROM Descuento d
+        INNER JOIN AsistenciaGrupo ag ON ag.id_interno = d.id_asistencia_grupo
+        WHERE ag.id_interno = :idAsistenciaGrupo
+    """)
+    fun getAsistenciasGrupo(idAsistenciaGrupo: Long): LiveData<List<DescuentoWithTrabajador>>
 }

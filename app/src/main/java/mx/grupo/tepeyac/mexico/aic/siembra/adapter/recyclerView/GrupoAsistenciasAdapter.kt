@@ -27,7 +27,7 @@ class GrupoAsistenciasAdapter(
         val grupo = gruposWithAsistencia[position]
         holder.bind(
             grupo.grupo.grupo,
-            String.format("%d asistencias", grupo.asistencias.size)
+            String.format("%d asistencia(s)", grupo.asistencias.size)
         )
         holder.bindGrupoAsistencia(grupo.asistenciaGrupo.id, viewModel)
     }

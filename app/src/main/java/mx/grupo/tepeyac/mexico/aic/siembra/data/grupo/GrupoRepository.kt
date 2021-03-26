@@ -4,7 +4,6 @@ import android.content.Context
 import android.util.Log
 import androidx.lifecycle.LiveData
 import mx.grupo.tepeyac.mexico.aic.siembra.data.AppDatabase
-import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.AsistenciaGrupoWithAsistencias
 import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.trabajador.Trabajador
 import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.trabajador.TrabajadorDao
 import mx.grupo.tepeyac.mexico.aic.siembra.network.ServiceGenerator
@@ -28,6 +27,9 @@ class GrupoRepository(context: Context) {
     fun getGruposLD(): LiveData<List<GrupoWithTrabajadores>> = grupoDao.getGruposLD()
     fun getGrupoLD(id: Long): LiveData<GrupoWithTrabajadores> = grupoDao.getGrupoLD(id)
     fun getGrupo(id: Long): Grupo = grupoDao.getGrupo(id)
+
+    fun getTrabajadoresLD(idGrupoAsistencia: Long): LiveData<List<Trabajador>> =
+        trabajadorDao.getTrabajadoresLD(idGrupoAsistencia)
 
     fun geGruposDisponibles(start: Date, end: Date) =
         grupoDao.getGruposDisponibles(start, end)

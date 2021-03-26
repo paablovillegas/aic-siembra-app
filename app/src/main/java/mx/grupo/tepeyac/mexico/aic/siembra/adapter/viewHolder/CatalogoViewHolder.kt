@@ -188,4 +188,13 @@ class CatalogoViewHolder(private val binding: ItemListaSimpleBinding) :
             it.findNavController().navigate(R.id.action_lista_grupos_registros_to_listaDescuentos)
         }
     }
+
+    fun bindDescuento(id: Long) {
+        binding.root.setOnClickListener {
+            val bundle = Bundle().apply {
+                this.putLong("id", id)
+            }
+            it.findNavController().navigate(R.id.action_lista_descuentos_to_form_descuento, bundle)
+        }
+    }
 }

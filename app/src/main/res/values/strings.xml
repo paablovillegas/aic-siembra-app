@@ -28,4 +28,6 @@
     <string name="hora_extra">Hora Extra</string>
     <string name="bono">Bono</string>
     <string name="fecha">Fecha</string>
+    <string name="motivo">Motivo</string>
+    <string name="cantidad">Cantidad</string>
 </resources>

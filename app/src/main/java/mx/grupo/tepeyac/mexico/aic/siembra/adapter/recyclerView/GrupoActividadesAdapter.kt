@@ -27,7 +27,7 @@ class GrupoActividadesAdapter(
         val grupo = gruposWithActividades[position]
         holder.bind(
             grupo.grupo.grupo,
-            String.format("%d actividades", grupo.actividades.size)
+            String.format("%d Actividade(s)", grupo.actividades.size)
         )
         holder.bindGrupoActividades(grupo.asistenciaGrupo.id, viewModel)
     }
