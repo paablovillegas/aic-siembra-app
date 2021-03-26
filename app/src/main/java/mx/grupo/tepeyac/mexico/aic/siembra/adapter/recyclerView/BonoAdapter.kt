@@ -26,7 +26,6 @@ class BonoAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
             bono.trabajador.getNombreCompleto(),
             String.format("%d asistencias", bono.bono.fecha.time)
         )
-        holder.bindGrupoBonos(bono.bono.idAsistenciaGrupo)
     }
 
     override fun getItemCount(): Int = bonos.size

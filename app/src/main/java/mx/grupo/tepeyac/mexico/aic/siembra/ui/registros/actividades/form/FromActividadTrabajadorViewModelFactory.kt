@@ -1,16 +1,16 @@
-package mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.asistencias
+package mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.actividades.form
 
 import android.app.Application
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-class ListaAsistenciasViewModelFactory(
+class FromActividadTrabajadorViewModelFactory(
     private val app: Application,
-    private val idAsistenciaGroup: Long,
+    private val id: Long?
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(ListaAsistenciasViewModel::class.java))
-            return ListaAsistenciasViewModel(app, idAsistenciaGroup) as T
+        if (modelClass.isAssignableFrom(FormActividadTrabajadorViewModel::class.java))
+            return FormActividadTrabajadorViewModel(app, id) as T
         throw IllegalArgumentException("Uknown ViewModel class")
     }
 }

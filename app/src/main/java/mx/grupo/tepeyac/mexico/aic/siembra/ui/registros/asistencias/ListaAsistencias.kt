@@ -9,13 +9,21 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import mx.grupo.tepeyac.mexico.aic.siembra.R
-import mx.grupo.tepeyac.mexico.aic.siembra.adapter.recyclerView.AreaAdapter
+import mx.grupo.tepeyac.mexico.aic.siembra.adapter.recyclerView.AsistenciaAdapter
+import mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.RegistrosViewModel
 
 class ListaAsistencias : Fragment() {
     private lateinit var viewModel: ListaAsistenciasViewModel
+    private lateinit var viewModelG: RegistrosViewModel
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ListaAsistenciasViewModel::class.java)
+        viewModelG = ViewModelProvider(requireActivity()).get(RegistrosViewModel::class.java)
+        val factory = ListaAsistenciasViewModelFactory(
+            requireActivity().application,
+            viewModelG.idAsistenciaGrupo
+        )
+        viewModel = ViewModelProvider(this, factory)
+            .get(ListaAsistenciasViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -29,11 +37,12 @@ class ListaAsistencias : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView: RecyclerView = view.findViewById(R.id.lista_general)
-        val adapter = AreaAdapter()
-
+        val adapter = AsistenciaAdapter()
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
-
+        viewModel.asistencias.observe(viewLifecycleOwner) {
+            adapter.combineGrupos(it)
+        }
     }
 }

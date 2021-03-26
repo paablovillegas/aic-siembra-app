@@ -154,53 +154,38 @@ class CatalogoViewHolder(private val binding: ItemListaSimpleBinding) :
         }
     }
 
-    fun bindGrupoAsistencia(id_grupo: Long) {
+    fun bindGrupoAsistencia(idAsistenciaGrupo: Long, vm: RegistrosViewModel) {
         binding.root.setOnClickListener {
-            val bundle = Bundle().apply {
-                this.putLong("id", id_grupo)
-            }
-            it.findNavController()
-                .navigate(R.id.action_lista_grupos_registros_to_lista_asistencias, bundle)
+            vm.idAsistenciaGrupo = idAsistenciaGrupo
+            it.findNavController().navigate(R.id.action_lista_grupos_registros_to_lista_asistencias)
         }
     }
 
-    fun bindGrupoActividades(id_grupo: Long) {
+    fun bindGrupoActividades(idAsistenciaGrupo: Long, vm: RegistrosViewModel) {
         binding.root.setOnClickListener {
-            val bundle = Bundle().apply {
-                this.putLong("id", id_grupo)
-            }
-            it.findNavController()
-                .navigate(R.id.action_lista_grupos_registros_to_listaActividades, bundle)
+            vm.idAsistenciaGrupo = idAsistenciaGrupo
+            it.findNavController().navigate(R.id.action_lista_grupos_registros_to_listaActividades)
         }
     }
 
-    fun bindGrupoExtras(id_grupo: Long) {
+    fun bindGrupoExtras(idAsistenciaGrupo: Long, vm: RegistrosViewModel) {
         binding.root.setOnClickListener {
-            val bundle = Bundle().apply {
-                this.putLong("id", id_grupo)
-            }
-            it.findNavController()
-                .navigate(R.id.action_lista_grupos_registros_to_listaExtras, bundle)
+            vm.idAsistenciaGrupo = idAsistenciaGrupo
+            it.findNavController().navigate(R.id.action_lista_grupos_registros_to_listaExtras)
         }
     }
 
-    fun bindGrupoBonos(id_grupo: Long) {
+    fun bindGrupoBonos(idAsistenciaGrupo: Long, vm: RegistrosViewModel) {
         binding.root.setOnClickListener {
-            val bundle = Bundle().apply {
-                this.putLong("id", id_grupo)
-            }
-            it.findNavController()
-                .navigate(R.id.action_lista_grupos_registros_to_listaBonos, bundle)
+            vm.idAsistenciaGrupo = idAsistenciaGrupo
+            it.findNavController().navigate(R.id.action_lista_grupos_registros_to_listaBonos)
         }
     }
 
-    fun bindGrupoDescuentos(id_grupo: Long) {
+    fun bindGrupoDescuentos(idAsistenciaGrupo: Long, vm: RegistrosViewModel) {
         binding.root.setOnClickListener {
-            val bundle = Bundle().apply {
-                this.putLong("id", id_grupo)
-            }
-            it.findNavController()
-                .navigate(R.id.action_lista_grupos_registros_to_listaDescuentos, bundle)
+            vm.idAsistenciaGrupo = idAsistenciaGrupo
+            it.findNavController().navigate(R.id.action_lista_grupos_registros_to_listaDescuentos)
         }
     }
 }

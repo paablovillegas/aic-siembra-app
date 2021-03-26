@@ -3,7 +3,6 @@ package mx.grupo.tepeyac.mexico.aic.siembra.ui.registros
 import android.app.AlertDialog
 import android.app.DatePickerDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
@@ -57,6 +56,11 @@ class Registros : AppCompatActivity() {
         fab.setOnClickListener {
             when (navController.currentDestination?.id) {
                 R.id.lista_grupos_registros -> insertGrupo()
+                R.id.lista_asistencias -> insertAsistencia(navController)
+                R.id.lista_actividades -> insertActividadTrabajador(navController)
+                R.id.lista_extras -> insertExtra(navController)
+                R.id.lista_bonos -> insertBono(navController)
+                R.id.lista_descuentos -> insertDescuento(navController)
             }
         }
         val swipeActualizar: SwipeRefreshLayout = findViewById(R.id.refresh_registros)
@@ -107,7 +111,6 @@ class Registros : AppCompatActivity() {
 
     private fun insertGrupo() {
         val grupos = viewmodel.getGruposDisponibles()
-
         val builder = AlertDialog.Builder(this)
         builder.setTitle("Nuevo Grupo")
             .setItems(grupos.map { it.grupo }.toTypedArray()) { _, which ->
@@ -116,4 +119,25 @@ class Registros : AppCompatActivity() {
             .create()
             .show()
     }
+
+    private fun insertAsistencia(navController: NavController) {
+        navController.navigate(R.id.action_lista_asistencias_to_form_asistencia)
+    }
+
+    private fun insertActividadTrabajador(navController: NavController) {
+        navController.navigate(R.id.action_lista_actividades_to_form_actividad_trabajador)
+    }
+
+    private fun insertExtra(navController: NavController) {
+        navController.navigate(R.id.action_lista_extras_to_form_extra)
+    }
+
+    private fun insertBono(navController: NavController) {
+        navController.navigate(R.id.action_lista_bonos_to_form_bono)
+    }
+
+    private fun insertDescuento(navController: NavController) {
+        navController.navigate(R.id.action_lista_descuentos_to_form_descuento)
+    }
+
 }

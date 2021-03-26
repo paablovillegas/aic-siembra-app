@@ -7,8 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import mx.grupo.tepeyac.mexico.aic.siembra.adapter.viewHolder.CatalogoViewHolder
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.actividadTrabajador.ActividadWithTrabajador
 import mx.grupo.tepeyac.mexico.aic.siembra.databinding.ItemListaSimpleBinding
+import mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.RegistrosViewModel
 
-class ActividadTrabajadorAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
+class ActividadTrabajadorAdapter(
+    private val viewModel: RegistrosViewModel
+) : RecyclerView.Adapter<CatalogoViewHolder>() {
     private var actividades: List<ActividadWithTrabajador> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatalogoViewHolder =
@@ -26,7 +29,7 @@ class ActividadTrabajadorAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
             actividad.trabajador.getNombreCompleto(),
             String.format("%d actividades", actividad.actividadTrabajador.fecha.time)
         )
-        holder.bindGrupoActividades(actividad.actividadTrabajador.idAsistenciaGrupo)
+        holder.bindGrupoActividades(actividad.actividadTrabajador.idAsistenciaGrupo, viewModel)
     }
 
     override fun getItemCount(): Int = actividades.size

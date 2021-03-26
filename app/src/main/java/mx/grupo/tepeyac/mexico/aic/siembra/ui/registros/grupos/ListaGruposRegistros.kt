@@ -1,7 +1,6 @@
 package mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.grupos
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +15,7 @@ import mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.RegistrosViewModel
 class ListaGruposRegistros : Fragment() {
     private lateinit var viewModelFechas: RegistrosViewModel
     private lateinit var viewModel: ListaGruposRegistrosViewModel
+    private lateinit var recyclerView: RecyclerView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,61 +36,70 @@ class ListaGruposRegistros : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val recyclerView: RecyclerView = view.findViewById(R.id.lista_general)
+        recyclerView = view.findViewById(R.id.lista_general)
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
-
         when (viewModel.type) {
-            0 -> {
-                val adapter = GrupoAsistenciasAdapter()
-                recyclerView.adapter = adapter
-                viewModel.getAsistencias(
-                    viewModelFechas.startDate,
-                    viewModelFechas.endDate,
-                ).observe(viewLifecycleOwner) {
-                    adapter.combineGrupos(it)
-                }
-            }
-            1 -> {
-                val adapter = GrupoActividadesAdapter()
-                recyclerView.adapter = adapter
-                viewModel.getActividades(
-                    viewModelFechas.startDate,
-                    viewModelFechas.endDate,
-                ).observe(viewLifecycleOwner) {
-                    adapter.combineGrupos(it)
-                }
-            }
-            2 -> {
-                val adapter = GrupoExtrasAdapter()
-                recyclerView.adapter = adapter
-                viewModel.getExtras(
-                    viewModelFechas.startDate,
-                    viewModelFechas.endDate,
-                ).observe(viewLifecycleOwner) {
-                    adapter.combineGrupos(it)
-                }
-            }
-            3 -> {
-                val adapter = GrupoBonosAdapter()
-                recyclerView.adapter = adapter
-                viewModel.getBonos(
-                    viewModelFechas.startDate,
-                    viewModelFechas.endDate,
-                ).observe(viewLifecycleOwner) {
-                    adapter.combineGrupos(it)
-                }
-            }
-            4 -> {
-                val adapter = GrupoDescuentosAdapter()
-                recyclerView.adapter = adapter
-                viewModel.getDescuentos(
-                    viewModelFechas.startDate,
-                    viewModelFechas.endDate,
-                ).observe(viewLifecycleOwner) {
-                    adapter.combineGrupos(it)
-                }
-            }
+            0 -> bindAsistencias()
+            1 -> bindActividades()
+            2 -> bindExtras()
+            3 -> bindBonos()
+            4 -> bindDescuentos()
+        }
+    }
+
+    fun bindAsistencias() {
+        val adapter = GrupoAsistenciasAdapter(viewModelFechas)
+        recyclerView.adapter = adapter
+        viewModel.getAsistencias(
+            viewModelFechas.startDate,
+            viewModelFechas.endDate,
+        ).observe(viewLifecycleOwner) {
+            adapter.combineGrupos(it)
+        }
+    }
+
+    fun bindActividades() {
+        val adapter = GrupoActividadesAdapter(viewModelFechas)
+        recyclerView.adapter = adapter
+        viewModel.getActividades(
+            viewModelFechas.startDate,
+            viewModelFechas.endDate,
+        ).observe(viewLifecycleOwner) {
+            adapter.combineGrupos(it)
+        }
+    }
+
+    fun bindExtras() {
+        val adapter = GrupoExtrasAdapter(viewModelFechas)
+        recyclerView.adapter = adapter
+        viewModel.getExtras(
+            viewModelFechas.startDate,
+            viewModelFechas.endDate,
+        ).observe(viewLifecycleOwner) {
+            adapter.combineGrupos(it)
+        }
+    }
+
+    fun bindBonos() {
+        val adapter = GrupoBonosAdapter(viewModelFechas)
+        recyclerView.adapter = adapter
+        viewModel.getBonos(
+            viewModelFechas.startDate,
+            viewModelFechas.endDate,
+        ).observe(viewLifecycleOwner) {
+            adapter.combineGrupos(it)
+        }
+    }
+
+    fun bindDescuentos() {
+        val adapter = GrupoDescuentosAdapter(viewModelFechas)
+        recyclerView.adapter = adapter
+        viewModel.getDescuentos(
+            viewModelFechas.startDate,
+            viewModelFechas.endDate,
+        ).observe(viewLifecycleOwner) {
+            adapter.combineGrupos(it)
         }
     }
 }

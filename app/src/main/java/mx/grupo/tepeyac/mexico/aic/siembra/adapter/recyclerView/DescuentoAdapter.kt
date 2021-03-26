@@ -26,7 +26,6 @@ class DescuentoAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
             descuento.trabajador.getNombreCompleto(),
             String.format("%d asistencias", descuento.descuento.fecha.time)
         )
-        holder.bindGrupoDescuentos(descuento.descuento.idAsistenciaGrupo)
     }
 
     override fun getItemCount(): Int = descuentos.size

@@ -34,6 +34,7 @@ class RegistrosViewModel(app: Application) : AndroidViewModel(app) {
     val startDate: Date = Date()
     val endDate: Date = Date()
     var idRancho: Long = 0L
+    var idAsistenciaGrupo: Long = 0L
 
     init {
         calendar.time = Date()

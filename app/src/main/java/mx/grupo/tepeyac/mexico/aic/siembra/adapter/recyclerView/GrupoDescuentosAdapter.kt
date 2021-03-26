@@ -7,8 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import mx.grupo.tepeyac.mexico.aic.siembra.adapter.viewHolder.CatalogoViewHolder
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.AsistenciaGrupoWithDescuentos
 import mx.grupo.tepeyac.mexico.aic.siembra.databinding.ItemListaSimpleBinding
+import mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.RegistrosViewModel
 
-class GrupoDescuentosAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
+class GrupoDescuentosAdapter(
+    private val viewModel: RegistrosViewModel
+) : RecyclerView.Adapter<CatalogoViewHolder>() {
     private var gruposWithDescuentos: List<AsistenciaGrupoWithDescuentos> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatalogoViewHolder =
@@ -26,6 +29,7 @@ class GrupoDescuentosAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
             grupo.grupo.grupo,
             String.format("%d asistencias", grupo.descuentos.size)
         )
+        holder.bindGrupoDescuentos(grupo.asistenciaGrupo.id, viewModel)
     }
 
     override fun getItemCount(): Int = gruposWithDescuentos.size

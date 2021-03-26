@@ -7,8 +7,11 @@ import androidx.recyclerview.widget.RecyclerView
 import mx.grupo.tepeyac.mexico.aic.siembra.adapter.viewHolder.CatalogoViewHolder
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.AsistenciaGrupoWithActividades
 import mx.grupo.tepeyac.mexico.aic.siembra.databinding.ItemListaSimpleBinding
+import mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.RegistrosViewModel
 
-class GrupoActividadesAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
+class GrupoActividadesAdapter(
+    private val viewModel: RegistrosViewModel
+) : RecyclerView.Adapter<CatalogoViewHolder>() {
     private var gruposWithActividades: List<AsistenciaGrupoWithActividades> = emptyList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatalogoViewHolder =
@@ -26,6 +29,7 @@ class GrupoActividadesAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
             grupo.grupo.grupo,
             String.format("%d actividades", grupo.actividades.size)
         )
+        holder.bindGrupoActividades(grupo.asistenciaGrupo.id, viewModel)
     }
 
     override fun getItemCount(): Int = gruposWithActividades.size

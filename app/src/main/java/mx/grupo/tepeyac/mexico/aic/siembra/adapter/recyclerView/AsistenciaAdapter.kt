@@ -26,7 +26,6 @@ class AsistenciaAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
             asistencia.trabajador.getNombreCompleto(),
             String.format("%d asistencias", asistencia.asistencia.entrada.time)
         )
-        holder.bindGrupoAsistencia(asistencia.asistencia.idAsistenciaGrupo)
     }
 
     override fun getItemCount(): Int = asistencias.size
