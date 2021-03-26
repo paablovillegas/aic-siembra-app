@@ -13,10 +13,10 @@ data class Asistencia(
     val id: Long = 0,
     @ColumnInfo(name = "id_asistencia")
     val idAsistencia: String? = null,
-    val entrada: Date,
-    val salida: Date? = null,
+    var entrada: Date = Date(),
+    var salida: Date? = null,
     @ColumnInfo(name = "id_trabajador")
-    val idTrabajador: Long,
+    var idTrabajador: Long = 0L,
     @ColumnInfo(name = "id_asistencia_grupo")
     val idAsistenciaGrupo: Long,
     val editado: Boolean = false,
@@ -26,9 +26,9 @@ data class Asistencia(
     constructor(
         id: Long = 0,
         idAsistencia: String? = null,
-        entrada: Date,
-        salida: Date?,
-        idTrabajador: Long,
+        entrada: Date = Date(),
+        salida: Date? = null,
+        idTrabajador: Long = 0L,
         idAsistenciaGrupo: Long,
         editado: Boolean = false
     ) : this(
@@ -41,4 +41,7 @@ data class Asistencia(
         editado,
         false
     )
+
+    fun dataCorrect(): Boolean =
+        idTrabajador > 0 && idAsistenciaGrupo > 0
 }

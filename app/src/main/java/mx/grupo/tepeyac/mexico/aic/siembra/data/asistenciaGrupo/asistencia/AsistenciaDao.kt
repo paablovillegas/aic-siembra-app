@@ -28,6 +28,9 @@ interface AsistenciaDao {
     @Delete
     fun delete(asistencia: List<Asistencia>)
 
+    @Query("SELECT * FROM Asistencia WHERE id_interno = :id")
+    fun getAsistencia(id: Long): Asistencia
+
     @Transaction
     @Query("SELECT * FROM Asistencia WHERE id_asistencia_grupo = :id_asistencia_grupo")
     fun getAsistenciasGrupo(id_asistencia_grupo: Long): LiveData<List<AsistenciaWithTrabajador>>

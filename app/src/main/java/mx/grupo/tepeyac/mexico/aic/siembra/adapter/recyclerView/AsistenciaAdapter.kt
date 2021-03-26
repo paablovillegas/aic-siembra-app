@@ -24,8 +24,13 @@ class AsistenciaAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
         val asistencia = asistencias[position]
         holder.bind(
             asistencia.trabajador.getNombreCompleto(),
-            String.format("%d asistencias", asistencia.asistencia.entrada.time)
+            String.format(
+                "%d %d",
+                asistencia.asistencia.entrada.time,
+                asistencia.asistencia.salida?.time ?: kotlin.run { 12300 }
+            )
         )
+        holder.bindAsistencia(asistencia.asistencia.id)
     }
 
     override fun getItemCount(): Int = asistencias.size

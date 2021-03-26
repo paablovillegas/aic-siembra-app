@@ -9,6 +9,10 @@ class AsistenciaRepository(context: Context) {
         AppDatabase.getInstance(context).asistenciaDao
     }
 
+    fun insert(asistencia: Asistencia) = asistenciaDao.insert(asistencia)
+
+    fun getAsistencia(id: Long): Asistencia = asistenciaDao.getAsistencia(id)
+
     fun getAsistencias(idAsistenciaGrupo: Long): LiveData<List<AsistenciaWithTrabajador>> =
         asistenciaDao.getAsistenciasGrupo(idAsistenciaGrupo)
 }

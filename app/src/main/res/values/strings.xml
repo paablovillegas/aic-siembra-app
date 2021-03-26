@@ -30,4 +30,6 @@
     <string name="fecha">Fecha</string>
     <string name="motivo">Motivo</string>
     <string name="cantidad">Cantidad</string>
+    <string name="hora_entrada">Hora Entrada</string>
+    <string name="hora_salida">Hora Salida</string>
 </resources>

@@ -13,17 +13,17 @@ import mx.grupo.tepeyac.mexico.aic.siembra.adapter.recyclerView.DescuentoAdapter
 import mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.RegistrosViewModel
 
 class ListaDescuentos : Fragment() {
-    private lateinit var viewmodel2: RegistrosViewModel
-    private lateinit var viewModel: ListaDescuentosViewModel
+    private lateinit var viewmodel: RegistrosViewModel
+    private lateinit var viewModelDesc: ListaDescuentosViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewmodel2 = ViewModelProvider(requireActivity()).get(RegistrosViewModel::class.java)
+        viewmodel = ViewModelProvider(requireActivity()).get(RegistrosViewModel::class.java)
         val factory = ListaDescuentosViewModelFactory(
             requireActivity().application,
-            viewmodel2.idAsistenciaGrupo
+            viewmodel.idAsistenciaGrupo
         )
-        viewModel = ViewModelProvider(this, factory)
+        viewModelDesc = ViewModelProvider(this, factory)
             .get(ListaDescuentosViewModel::class.java)
     }
 
@@ -41,7 +41,7 @@ class ListaDescuentos : Fragment() {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.setHasFixedSize(true)
         recyclerView.adapter = adapter
-        viewModel.descuentos.observe(viewLifecycleOwner) {
+        viewModelDesc.descuentos.observe(viewLifecycleOwner) {
             adapter.combineGrupos(it)
         }
     }

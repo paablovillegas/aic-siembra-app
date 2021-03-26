@@ -26,6 +26,7 @@ class ExtraAdapter : RecyclerView.Adapter<CatalogoViewHolder>() {
             extra.trabajador.getNombreCompleto(),
             String.format("%d asistencias", extra.extra.fecha.time)
         )
+        holder.bindExtra(extra.extra.id)
     }
 
     override fun getItemCount(): Int = extras.size

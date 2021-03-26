@@ -31,13 +31,17 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="6sp"
-                android:hint="Hora Entrada">
+                android:hint="@string/hora_entrada">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/asistencia_entrada"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
-                    android:maxLines="1" />
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="time"
+                    android:longClickable="false"
+                    android:maxLines="1"/>
 
             </com.google.android.material.textfield.TextInputLayout>
 
@@ -45,12 +49,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="6sp"
-                android:hint="Hora Salida">
+                android:hint="@string/hora_salida">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/asistencia_salida"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:inputType="text"
+                    android:clickable="false"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:inputType="time"
                     android:maxLines="1" />
 
             </com.google.android.material.textfield.TextInputLayout>
