@@ -63,7 +63,7 @@ class ListaActividadesRegistros : Fragment() {
             Log.i("TAG", "onViewCreated: $it")
             tracker.setItemsSelected(it, true)
         }
-        viewModel.getActividades().observe(viewLifecycleOwner) {
+        viewModel.getActividadesLD().observe(viewLifecycleOwner) {
             adapter.combineActividades(it)
         }
     }

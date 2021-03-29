@@ -1,7 +1,6 @@
 package mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.seleccion
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -62,7 +61,7 @@ class ListaTablasRegistros : Fragment() {
         viewModel.liveTablasIds.value?.let {
             tracker.setItemsSelected(it, true)
         }
-        viewModel.getTablas().observe(viewLifecycleOwner) {
+        viewModel.getTablasLD().observe(viewLifecycleOwner) {
             adapter.combineActividades(it)
         }
     }

@@ -34,4 +34,7 @@ interface TablaDao {
 
     @Query(" SELECT * FROM Tabla WHERE id_rancho = :id")
     fun getTablasLD(id: Long): LiveData<List<Tabla>>
+
+    @Query(" SELECT * FROM Tabla WHERE id_rancho = :id")
+    fun getTablas(id: Long): List<Tabla>
 }

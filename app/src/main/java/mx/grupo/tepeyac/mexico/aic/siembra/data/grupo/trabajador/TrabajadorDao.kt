@@ -37,6 +37,15 @@ interface TrabajadorDao {
     )
     fun getTrabajadoresLD(idAsistenciaGrupo: Long): LiveData<List<Trabajador>>
 
+    @Query(
+        """
+        SELECT t.* 
+        FROM Trabajador t
+        INNER JOIN AsistenciaGrupo ag ON ag.id_grupo = t.id_grupo
+        WHERE ag.id_interno = :idAsistenciaGrupo"""
+    )
+    fun getTrabajadores(idAsistenciaGrupo: Long): List<Trabajador>
+
     @Query("SELECT * FROM Trabajador WHERE id_interno = :id")
     fun getTrabajador(id: Long): Trabajador
 

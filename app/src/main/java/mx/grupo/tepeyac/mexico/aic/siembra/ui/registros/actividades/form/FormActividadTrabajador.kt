@@ -8,7 +8,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import com.google.android.material.snackbar.Snackbar
 import mx.grupo.tepeyac.mexico.aic.siembra.R
+import mx.grupo.tepeyac.mexico.aic.siembra.adapter.recyclerView.SelectedActividadAdapter
+import mx.grupo.tepeyac.mexico.aic.siembra.adapter.recyclerView.SelectedTablaAdapter
+import mx.grupo.tepeyac.mexico.aic.siembra.adapter.recyclerView.SelectedTrabajadorAdapter
 import mx.grupo.tepeyac.mexico.aic.siembra.databinding.FormActividadTrabajadorBinding
 import mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.RegistrosViewModel
 
@@ -39,29 +44,46 @@ class FormActividadTrabajador : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-
+        val adapterActividades = SelectedActividadAdapter(viewModel.getActividades())
+        val adapterTablas = SelectedTablaAdapter(viewModel.getTablas())
+        val adapterTrabajadores = SelectedTrabajadorAdapter(viewModel.getTrabajadores())
         viewModel.liveActividadesIds.observe(viewLifecycleOwner) {
-            Log.i("TAG", "A onViewCreated: $it")
+            adapterActividades.setSelection(it)
         }
         viewModel.liveTablasIds.observe(viewLifecycleOwner) {
-            Log.i("TAG", "TA onViewCreated: $it")
+            adapterTablas.setSelection(it)
         }
         viewModel.liveTrabajadoresIds.observe(viewLifecycleOwner) {
-            Log.i("TAG", "TR onViewCreated: $it")
+            adapterTrabajadores.setSelection(it)
         }
-
+        viewModel.errorLD.observe(viewLifecycleOwner) {
+            Snackbar.make(binding.root, it, Snackbar.LENGTH_LONG).show()
+        }
         binding.selectTrabajadores.setOnClickListener {
             findNavController()
                 .navigate(R.id.action_form_actividad_trabajador_to_lista_trabajadores_registros)
         }
+        binding.recyclerActividades.setHasFixedSize(true)
+        binding.recyclerActividades.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerActividades.adapter = adapterActividades
         binding.selectTablas.setOnClickListener {
             findNavController()
                 .navigate(R.id.action_form_actividad_trabajador_to_lista_tablas_registros)
         }
+        binding.recyclerTablas.setHasFixedSize(true)
+        binding.recyclerTablas.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerTablas.adapter = adapterTablas
         binding.selectActividades.setOnClickListener {
             findNavController()
                 .navigate(R.id.action_form_actividad_trabajador_to_lista_actividades_registros)
+        }
+        binding.recyclerTrabajadores.setHasFixedSize(true)
+        binding.recyclerTrabajadores.layoutManager = LinearLayoutManager(requireContext())
+        binding.recyclerTrabajadores.adapter = adapterTrabajadores
+
+        binding.formActividadesRegistrar.setOnClickListener {
+            if (viewModel.registrarActividad())
+                findNavController().popBackStack()
         }
     }
 }

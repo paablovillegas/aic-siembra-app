@@ -8,6 +8,11 @@ import mx.grupo.tepeyac.mexico.aic.siembra.data.area.ActividadWithArea
 import mx.grupo.tepeyac.mexico.aic.siembra.data.area.AreaRepository
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.AsistenciaGrupo
 import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.AsistenciaGrupoRepository
+import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.actividadTrabajador.ActividadTrabajador
+import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.actividadTrabajador.ActividadTrabajadorRepository
+import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.actividadTrabajador.TipoActividadTrabajador
+import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.bono.Bono
+import mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.extra.Extra
 import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.Grupo
 import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.GrupoRepository
 import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.trabajador.Trabajador
@@ -28,6 +33,9 @@ class RegistrosViewModel(app: Application) : AndroidViewModel(app) {
     }
     private val areaRepository: AreaRepository by lazy {
         AreaRepository(app)
+    }
+    private val actividadTrabajadorRepository: ActividadTrabajadorRepository by lazy {
+        ActividadTrabajadorRepository(app)
     }
 
     val registros: List<String> = listOf(
@@ -50,6 +58,8 @@ class RegistrosViewModel(app: Application) : AndroidViewModel(app) {
     val liveTrabajadoresIds: LiveData<List<Long>> = trabajadoresIds
     private val tablasIds = MutableLiveData<List<Long>>()
     val liveTablasIds: LiveData<List<Long>> = tablasIds
+    private val error = MutableLiveData<String>()
+    val errorLD: LiveData<String> = error
 
     init {
         calendar.time = Date()
@@ -105,24 +115,139 @@ class RegistrosViewModel(app: Application) : AndroidViewModel(app) {
         return fecha
     }
 
-    fun getTablas(): LiveData<List<Tabla>> =
+    fun getTablasLD(): LiveData<List<Tabla>> =
         ranchoRepository.getTablasLD(idRancho)
+
+    fun getTablas(): List<Tabla> =
+        ranchoRepository.getTablas(idRancho)
 
     fun setTablas(lista: List<Long>) {
         tablasIds.value = lista
     }
 
-    fun getTrabajadores(): LiveData<List<Trabajador>> =
+    fun getTrabajadoresLD(): LiveData<List<Trabajador>> =
         grupoRepository.getTrabajadoresLD(idAsistenciaGrupo)
+
+    fun getTrabajadores(): List<Trabajador> =
+        grupoRepository.getTrabajadores(idAsistenciaGrupo)
 
     fun setTrabajadores(lista: List<Long>) {
         trabajadoresIds.value = lista
     }
 
-    fun getActividades(): LiveData<List<ActividadWithArea>> =
+    fun getActividadesLD(): LiveData<List<ActividadWithArea>> =
         areaRepository.getActividadesLD()
+
+    fun getActividades(): List<ActividadWithArea> =
+        areaRepository.getActividades()
 
     fun setActividades(lista: List<Long>) {
         actividadesIds.value = lista
+    }
+
+    fun registrarActividad(): Boolean {
+        actividadesIds.value?.let { acts ->
+            tablasIds.value?.let { tablas ->
+                trabajadoresIds.value?.let { trabajadores ->
+                    if (acts.isEmpty() || tablas.isEmpty() || trabajadores.isEmpty()) {
+                        error.value = "Seleccionar al menos 1 elementp de cada tipo"
+                        return false
+                    }
+                    acts.forEach { actividad ->
+                        tablas.forEach { tabla ->
+                            trabajadores.forEach { trabajador ->
+                                val actividadTrabajador = ActividadTrabajador(
+                                    idActividad = actividad,
+                                    idTrabajador = trabajador,
+                                    idTabla = tabla,
+                                    idAsistenciaGrupo = idAsistenciaGrupo,
+                                    fecha = Date(),
+                                    type = TipoActividadTrabajador.REGULAR,
+                                )
+                                actividadTrabajadorRepository.insert(actividadTrabajador)
+                            }
+                        }
+                    }
+                    return true
+                }
+            }
+        }
+        error.value = "Seleccionar al menos 1 elementp de cada tipo"
+        return false
+    }
+
+    fun registrarExtras(horas: Int): Boolean {
+        actividadesIds.value?.let { acts ->
+            tablasIds.value?.let { tablas ->
+                trabajadoresIds.value?.let { trabajadores ->
+                    if (acts.isEmpty() || tablas.isEmpty() || trabajadores.isEmpty()) {
+                        error.value = "Seleccionar al menos 1 elementp de cada tipo"
+                        return false
+                    }
+                    trabajadores.forEach { trabajador ->
+                        val extra = Extra(
+                            horas = horas,
+                            total = 0.0, //TODO: Agregar aqui total
+                            idTrabajador = trabajador,
+                            idAsistenciaGrupo = idAsistenciaGrupo,
+                            fecha = Date(),
+                        )
+                        acts.forEach { actividad ->
+                            tablas.forEach { tabla ->
+                                val actividadTrabajador = ActividadTrabajador(
+                                    idActividad = actividad,
+                                    idTrabajador = trabajador,
+                                    idTabla = tabla,
+                                    idAsistenciaGrupo = idAsistenciaGrupo,
+                                    fecha = Date(),
+                                    type = TipoActividadTrabajador.REGULAR,
+                                )
+                                //actividadTrabajadorRepository.insert(actividadTrabajador)
+                            }
+                        }
+                    }
+                    return true
+                }
+            }
+        }
+        error.value = "Seleccionar al menos 1 elementp de cada tipo"
+        return false
+    }
+
+    fun registrarBonos(): Boolean {
+        actividadesIds.value?.let { acts ->
+            tablasIds.value?.let { tablas ->
+                trabajadoresIds.value?.let { trabajadores ->
+                    if (acts.isEmpty() || tablas.isEmpty() || trabajadores.isEmpty()) {
+                        error.value = "Seleccionar al menos 1 elementp de cada tipo"
+                        return false
+                    }
+                    trabajadores.forEach { trabajador ->
+                        val bono = Bono(
+                            total = 0.0,//TODO: Aqui
+                            idTrabajador = trabajador,
+                            idAsistenciaGrupo = idAsistenciaGrupo,
+                            fecha = Date(),
+                        )
+                        acts.forEach { actividad ->
+                            tablas.forEach { tabla ->
+                                val actividadTrabajador = ActividadTrabajador(
+                                    idActividad = actividad,
+                                    idTrabajador = trabajador,
+                                    idTabla = tabla,
+                                    idAsistenciaGrupo = idAsistenciaGrupo,
+                                    fecha = Date(),
+                                    type = TipoActividadTrabajador.REGULAR,
+                                )
+                                //actividadTrabajadorRepository.insert(actividadTrabajador)
+                            }
+                        }
+                    }
+                    return true
+                }
+            }
+        }
+        error.value = "Seleccionar al menos 1 elementp de cada tipo"
+        return false
     }
 }

@@ -61,7 +61,7 @@ class ListaTrabajadoresRegistros : Fragment() {
         viewModel.liveTrabajadoresIds.value?.let {
             tracker.setItemsSelected(it, true)
         }
-        viewModel.getTrabajadores().observe(viewLifecycleOwner) {
+        viewModel.getTrabajadoresLD().observe(viewLifecycleOwner) {
             adapter.combineActividades(it)
         }
     }

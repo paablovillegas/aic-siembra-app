@@ -43,6 +43,7 @@ class RanchoRepository(context: Context) {
     fun getTablaID(id: Long): String? = tablaDao.getTablaID(id)
     fun getTabla(idTabla: Long): Tabla = tablaDao.getTabla(idTabla)
     fun getTablasLD(idRancho: Long): LiveData<List<Tabla>> = tablaDao.getTablasLD(idRancho)
+    fun getTablas(idRancho: Long): List<Tabla> = tablaDao.getTablas(idRancho)
 
     fun syncRanchos() {
         getRanchosNoSubidos().forEach { insertRancho(it) }

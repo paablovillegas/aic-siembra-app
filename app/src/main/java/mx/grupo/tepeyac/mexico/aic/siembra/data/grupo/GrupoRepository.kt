@@ -31,6 +31,9 @@ class GrupoRepository(context: Context) {
     fun getTrabajadoresLD(idGrupoAsistencia: Long): LiveData<List<Trabajador>> =
         trabajadorDao.getTrabajadoresLD(idGrupoAsistencia)
 
+    fun getTrabajadores(idGrupoAsistencia: Long): List<Trabajador> =
+        trabajadorDao.getTrabajadores(idGrupoAsistencia)
+
     fun geGruposDisponibles(start: Date, end: Date) =
         grupoDao.getGruposDisponibles(start, end)
 
