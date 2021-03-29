@@ -1,6 +1,8 @@
 package mx.grupo.tepeyac.mexico.aic.siembra.data.area.actividad
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
+import mx.grupo.tepeyac.mexico.aic.siembra.data.area.ActividadWithArea
 
 /*
  * @author pablovillegas
@@ -35,4 +37,12 @@ interface ActividadDao {
 
     @Query("SELECT id_interno FROM Actividad WHERE id_actividad = :id")
     fun getActividadID(id: String): Long?
+
+    @Transaction
+    @Query("SELECT * FROM Actividad")
+    fun getActividadesLD(): LiveData<List<ActividadWithArea>>
+
+    @Transaction
+    @Query("SELECT * FROM Actividad")
+    fun getActividades(): List<ActividadWithArea>
 }

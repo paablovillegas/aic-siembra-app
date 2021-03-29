@@ -1,5 +1,6 @@
 package mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.tabla
 
+import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
@@ -30,4 +31,7 @@ interface TablaDao {
 
     @Query(" SELECT * FROM Tabla WHERE id_interno = :id")
     fun getTabla(id: Long): Tabla
+
+    @Query(" SELECT * FROM Tabla WHERE id_rancho = :id")
+    fun getTablasLD(id: Long): LiveData<List<Tabla>>
 }

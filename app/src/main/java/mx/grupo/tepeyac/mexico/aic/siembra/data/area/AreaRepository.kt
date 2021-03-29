@@ -25,6 +25,8 @@ class AreaRepository(context: Context) {
     fun getActividadID(id: Long): String? = actividadDao.getActividadID(id)
     fun getActividad(id: Long): Actividad = actividadDao.getActividad(id)
     fun getAreasLD(): LiveData<List<AreaWithActividades>> = areaDao.getAreasLD()
+    fun getActividadesLD(): LiveData<List<ActividadWithArea>> = actividadDao.getActividadesLD()
+    fun getActividades(): List<ActividadWithArea> = actividadDao.getActividades()
     fun getAreaLD(id: Long): LiveData<AreaWithActividades> = areaDao.getAreaLD(id)
     fun getArea(id: Long): Area = areaDao.getArea(id)
 

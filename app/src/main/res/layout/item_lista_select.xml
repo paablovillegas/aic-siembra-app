@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:clickable="true"
+        android:focusable="true"
+        android:foreground="?attr/selectableItemBackground"
+        android:orientation="vertical"
+        android:padding="8sp">
+
+        <ImageView
+            android:id="@+id/item_image"
+            android:layout_width="55sp"
+            android:layout_height="55sp"
+            android:layout_marginStart="3sp"
+            android:layout_marginEnd="6sp"
+            android:contentDescription="@string/app_name"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/title"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="4sp"
+            android:layout_marginTop="4sp"
+            android:layout_marginEnd="4sp"
+            android:layout_toEndOf="@id/item_image"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:paddingBottom="5sp" />
+
+        <TextView
+            android:id="@+id/subtitle"
+            style="@style/TextAppearance.MaterialComponents.Body2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title"
+            android:layout_alignParentEnd="true"
+            android:layout_marginStart="4sp"
+            android:layout_toEndOf="@id/item_image"
+            android:ellipsize="end"
+            android:maxLines="1" />
+
+        <ImageView
+            android:id="@+id/selection"
+            android:layout_width="25sp"
+            android:layout_height="25sp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:contentDescription="@string/app_name"
+            android:src="@drawable/ic_check" />
+
+    </RelativeLayout>
+</layout>

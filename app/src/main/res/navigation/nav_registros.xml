@@ -48,7 +48,7 @@
         android:id="@+id/lista_bonos"
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.bonos.ListaBonos"
         android:label="ListaBonos"
-        tools:layout="@layout/lista_fragment" >
+        tools:layout="@layout/lista_fragment">
         <action
             android:id="@+id/action_lista_bonos_to_form_bono"
             app:destination="@id/form_bono" />
@@ -57,7 +57,7 @@
         android:id="@+id/lista_actividades"
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.actividades.ListaActividades"
         android:label="ListaActividades"
-        tools:layout="@layout/lista_fragment" >
+        tools:layout="@layout/lista_fragment">
         <action
             android:id="@+id/action_lista_actividades_to_form_actividad_trabajador"
             app:destination="@id/form_actividad_trabajador" />
@@ -66,7 +66,7 @@
         android:id="@+id/lista_extras"
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.extras.ListaExtras"
         android:label="ListaExtras"
-        tools:layout="@layout/lista_fragment" >
+        tools:layout="@layout/lista_fragment">
         <action
             android:id="@+id/action_lista_extras_to_form_extra"
             app:destination="@id/form_extra" />
@@ -75,7 +75,7 @@
         android:id="@+id/lista_descuentos"
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.descuentos.ListaDescuentos"
         android:label="ListaDescuentos"
-        tools:layout="@layout/lista_fragment" >
+        tools:layout="@layout/lista_fragment">
         <action
             android:id="@+id/action_lista_descuentos_to_form_descuento"
             app:destination="@id/form_descuento" />
@@ -98,20 +98,65 @@
         android:id="@+id/form_actividad_trabajador"
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.actividades.form.FormActividadTrabajador"
         android:label="FormActividadTrabajador"
-        tools:layout="@layout/form_actividad_trabajador" />
+        tools:layout="@layout/form_actividad_trabajador" >
+        <action
+            android:id="@+id/action_form_actividad_trabajador_to_lista_actividades_registros"
+            app:destination="@id/lista_actividades_registros" />
+        <action
+            android:id="@+id/action_form_actividad_trabajador_to_lista_tablas_registros"
+            app:destination="@id/lista_tablas_registros" />
+        <action
+            android:id="@+id/action_form_actividad_trabajador_to_lista_trabajadores_registros"
+            app:destination="@id/lista_trabajadores_registros" />
+    </fragment>
     <fragment
         android:id="@+id/form_bono"
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.bonos.form.FormBono"
         android:label="FormBono"
-        tools:layout="@layout/form_bonos" />
+        tools:layout="@layout/form_bonos" >
+        <action
+            android:id="@+id/action_form_bono_to_lista_trabajadores_registros"
+            app:destination="@id/lista_trabajadores_registros" />
+        <action
+            android:id="@+id/action_form_bono_to_lista_actividades_registros"
+            app:destination="@id/lista_actividades_registros" />
+        <action
+            android:id="@+id/action_form_bono_to_lista_tablas_registros"
+            app:destination="@id/lista_tablas_registros" />
+    </fragment>
     <fragment
         android:id="@+id/form_extra"
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.extras.form.FormExtra"
         android:label="FormExtra"
-        tools:layout="@layout/form_extras" />
+        tools:layout="@layout/form_extras" >
+        <action
+            android:id="@+id/action_form_extra_to_lista_actividades_registros"
+            app:destination="@id/lista_actividades_registros" />
+        <action
+            android:id="@+id/action_form_extra_to_lista_tablas_registros"
+            app:destination="@id/lista_tablas_registros" />
+        <action
+            android:id="@+id/action_form_extra_to_lista_trabajadores_registros"
+            app:destination="@id/lista_trabajadores_registros" />
+    </fragment>
     <fragment
         android:id="@+id/form_descuento"
         android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.descuentos.form.FormDescuento"
         android:label="FormDescuento"
         tools:layout="@layout/form_descuento" />
+    <fragment
+        android:id="@+id/lista_tablas_registros"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.seleccion.ListaTablasRegistros"
+        android:label="ListaTablasRegistros"
+        tools:layout="@layout/lista_fragment" />
+    <fragment
+        android:id="@+id/lista_actividades_registros"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.seleccion.ListaActividadesRegistros"
+        android:label="ListaActividadesRegistros"
+        tools:layout="@layout/lista_fragment" />
+    <fragment
+        android:id="@+id/lista_trabajadores_registros"
+        android:name="mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.seleccion.ListaTrabajadoresRegistros"
+        android:label="ListaTrabajadoresRegistros"
+        tools:layout="@layout/lista_fragment" />
 </navigation>

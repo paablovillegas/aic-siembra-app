@@ -6,11 +6,12 @@ import androidx.lifecycle.ViewModelProvider
 
 class FromActividadTrabajadorViewModelFactory(
     private val app: Application,
-    private val id: Long?
+    private val idAsistenciaGrupo: Long,
+    private val idRancho: Long,
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(FormActividadTrabajadorViewModel::class.java))
-            return FormActividadTrabajadorViewModel(app, id) as T
+            return FormActividadTrabajadorViewModel(app, idAsistenciaGrupo, idRancho) as T
         throw IllegalArgumentException("Uknown ViewModel class")
     }
 }

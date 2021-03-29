@@ -32,4 +32,7 @@
     <string name="cantidad">Cantidad</string>
     <string name="hora_entrada">Hora Entrada</string>
     <string name="hora_salida">Hora Salida</string>
+    <string name="trabajadores">Trabajadores</string>
+    <string name="tablas">Tablas</string>
+    <string name="actividades">Actividades</string>
 </resources>
