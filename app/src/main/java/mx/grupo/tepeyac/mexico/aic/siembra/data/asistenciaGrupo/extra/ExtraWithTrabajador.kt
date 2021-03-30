@@ -14,6 +14,7 @@ data class ExtraWithTrabajador(
         entityColumn = "id_interno",
     )
     val trabajador: Trabajador,
+    /*
     @Relation(
         parentColumn = "id_tabla",
         entityColumn = "id_interno",
@@ -24,4 +25,5 @@ data class ExtraWithTrabajador(
         entityColumn = "id_interno",
     )
     val actividad: Actividad,
+    */
 )

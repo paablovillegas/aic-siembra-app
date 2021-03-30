@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <import type="mx.grupo.tepeyac.mexico.aic.siembra.utils.BindingConverter" />
+
+        <variable
+            name="bono"
+            type="mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.bono.BonoWithTrabajador" />
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/trabajador"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="6sp"
+            android:text="@{bono.trabajador.nombreCompleto}" />
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/trabajador"
+            android:hint="@string/bono">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/total_extra"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:inputType="numberDecimal"
+                android:maxLines="1"
+                android:text="@={BindingConverter.doubleToString(bono.bono.total)}" />
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+    </RelativeLayout>
+</layout>

@@ -7,6 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.LinearLayoutManager
+import mx.grupo.tepeyac.mexico.aic.siembra.R
+import mx.grupo.tepeyac.mexico.aic.siembra.adapter.recyclerView.TrabajadorBonoAdapter
 import mx.grupo.tepeyac.mexico.aic.siembra.databinding.ListaSubmitBinding
 import mx.grupo.tepeyac.mexico.aic.siembra.ui.registros.RegistrosViewModel
 
@@ -19,7 +24,7 @@ class FormBono : Fragment() {
         super.onCreate(savedInstanceState)
         viewModel = ViewModelProvider(requireActivity()).get(RegistrosViewModel::class.java)
         val factory = FormBonoViewModelFactory(
-            requireActivity().application,
+            viewModel.getTrabajadores(),
             viewModel.idAsistenciaGrupo,
         )
         viewModelAct = ViewModelProvider(requireActivity(), factory)
@@ -37,8 +42,22 @@ class FormBono : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.liveTrabajadoresIds.observe(viewLifecycleOwner) {
-            Log.i("TAG", "onViewCreated: $it")
+        val adapter = TrabajadorBonoAdapter()
+        adapter.combineListas(viewModelAct.bonos)
+        binding.listaGeneral.setHasFixedSize(true)
+        binding.listaGeneral.layoutManager = LinearLayoutManager(requireContext())
+        binding.listaGeneral.adapter = adapter
+        binding.listaGeneral.addItemDecoration(
+            DividerItemDecoration(
+                requireContext(),
+                LinearLayoutManager.VERTICAL,
+            )
+        )
+
+        binding.listaRegistrar.setOnClickListener {
+            Log.i("TAG", "onViewCreated: ${viewModelAct.bonos}")
+            //TODO: registrar
+            findNavController().popBackStack(R.id.lista_grupos_registros, false)
         }
     }
 

@@ -2,9 +2,7 @@ package mx.grupo.tepeyac.mexico.aic.siembra.data.asistenciaGrupo.bono
 
 import androidx.room.Embedded
 import androidx.room.Relation
-import mx.grupo.tepeyac.mexico.aic.siembra.data.area.actividad.Actividad
 import mx.grupo.tepeyac.mexico.aic.siembra.data.grupo.trabajador.Trabajador
-import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.tabla.Tabla
 
 data class BonoWithTrabajador(
     @Embedded
@@ -14,6 +12,7 @@ data class BonoWithTrabajador(
         entityColumn = "id_interno",
     )
     val trabajador: Trabajador,
+    /*
     @Relation(
         parentColumn = "id_tabla",
         entityColumn = "id_interno",
@@ -24,4 +23,5 @@ data class BonoWithTrabajador(
         entityColumn = "id_interno",
     )
     val actividad: Actividad,
+    */
 )

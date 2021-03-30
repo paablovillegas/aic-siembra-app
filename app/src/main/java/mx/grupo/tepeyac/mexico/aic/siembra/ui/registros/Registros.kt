@@ -42,15 +42,52 @@ class Registros : AppCompatActivity() {
         val navController: NavController = host.navController
         navController.addOnDestinationChangedListener { _, destination, _ ->
             supportActionBar?.setDisplayHomeAsUpEnabled(true)
-            fab.show()
+            fab.hide()
             when (destination.id) {
                 R.id.lista_ranchos_registros -> {
+                    supportActionBar?.title = "Ranchos"
                     supportActionBar?.setDisplayHomeAsUpEnabled(false)
                 }
-                R.id.registros_fragment -> {
+                R.id.registros_fragment ->
                     supportActionBar?.title = "Registros"
-                    fab.hide()
+                R.id.lista_asistencias -> {
+                    supportActionBar?.title = "Asistencias"
+                    fab.show()
                 }
+                R.id.lista_grupos_registros ->
+                    supportActionBar?.title = "Grupos"
+                R.id.lista_bonos -> {
+                    supportActionBar?.title = "Bonos"
+                    fab.show()
+                }
+                R.id.lista_actividades -> {
+                    supportActionBar?.title = "Actividades"
+                    fab.show()
+                }
+                R.id.lista_extras -> {
+                    supportActionBar?.title = "Extras"
+                    fab.show()
+                }
+                R.id.lista_descuentos -> {
+                    supportActionBar?.title = "Descuentos"
+                    fab.show()
+                }
+                R.id.form_asistencia ->
+                    supportActionBar?.title = "Asistencia"
+                R.id.form_actividad_trabajador ->
+                    supportActionBar?.title = "Actividades Trabajador"
+                R.id.form_bono ->
+                    supportActionBar?.title = "Bono"
+                R.id.form_extra ->
+                    supportActionBar?.title = "Extra"
+                R.id.form_descuento ->
+                    supportActionBar?.title = "Descuento"
+                R.id.lista_tablas_registros ->
+                    supportActionBar?.title = "Tablas"
+                R.id.lista_actividades_registros ->
+                    supportActionBar?.title = "Actividades"
+                R.id.lista_trabajadores_registros ->
+                    supportActionBar?.title = "Trabajadores"
             }
         }
         fab.setOnClickListener {
@@ -136,7 +173,6 @@ class Registros : AppCompatActivity() {
             this.putInt("type", 1)
         }
         navController.navigate(R.id.action_lista_extras_to_form_actividad_trabajador, bundle)
-        //navController.navigate(R.id.action_lista_extras_to_form_extra)
     }
 
     private fun insertBono(navController: NavController) {
@@ -144,7 +180,6 @@ class Registros : AppCompatActivity() {
             this.putInt("type", 2)
         }
         navController.navigate(R.id.action_lista_bonos_to_form_actividad_trabajador, bundle)
-        //navController.navigate(R.id.action_lista_bonos_to_form_bono)
     }
 
     private fun insertDescuento(navController: NavController) {
