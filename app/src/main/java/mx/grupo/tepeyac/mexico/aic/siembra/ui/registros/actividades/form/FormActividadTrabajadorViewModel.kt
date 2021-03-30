@@ -13,7 +13,6 @@ import mx.grupo.tepeyac.mexico.aic.siembra.data.rancho.RanchoWithTablas
 class FormActividadTrabajadorViewModel(
     app: Application,
     idAsistenciaGrupo: Long,
-    idRancho: Long,
 ) : AndroidViewModel(app) {
     private val areaRepository: AreaRepository by lazy {
         AreaRepository(app)

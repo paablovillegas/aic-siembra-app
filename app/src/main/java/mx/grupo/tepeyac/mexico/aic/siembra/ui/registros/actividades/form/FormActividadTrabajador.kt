@@ -28,7 +28,6 @@ class FormActividadTrabajador : Fragment() {
         val factory = FromActividadTrabajadorViewModelFactory(
             requireActivity().application,
             viewModel.idAsistenciaGrupo,
-            viewModel.idRancho,
         )
         viewModelAct = ViewModelProvider(requireActivity(), factory)
             .get(FormActividadTrabajadorViewModel::class.java)
@@ -82,8 +81,18 @@ class FormActividadTrabajador : Fragment() {
         binding.recyclerTrabajadores.adapter = adapterTrabajadores
 
         binding.formActividadesRegistrar.setOnClickListener {
-            if (viewModel.registrarActividad())
-                findNavController().popBackStack()
+
+            arguments?.getInt("type", 0)?.let {
+                when (it) {
+                    0 -> if (viewModel.registrarActividad())
+                        findNavController().popBackStack()
+                    1 -> findNavController()
+                        .navigate(R.id.action_form_actividad_trabajador_to_form_extra)
+                    2 -> findNavController()
+                        .navigate(R.id.action_form_actividad_trabajador_to_form_bono)
+                }
+            }
+            Log.i("TAG", "onViewCreated: ${arguments?.getInt("type")}")
         }
     }
 }

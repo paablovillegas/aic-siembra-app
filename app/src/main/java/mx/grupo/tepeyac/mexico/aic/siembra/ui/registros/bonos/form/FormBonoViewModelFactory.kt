@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModelProvider
 
 class FormBonoViewModelFactory(
     private val app: Application,
-    private val id: Long?
+    private val id: Long
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
         if (modelClass.isAssignableFrom(FormBonoViewModel::class.java))

@@ -91,8 +91,8 @@ class Registros : AppCompatActivity() {
 
     private fun downloadData() {
         fragmentContainerView.findNavController().currentDestination?.let {
-            when (it.id) {
-            }
+            //when (it.id) {
+            //}
         }
     }
 
@@ -125,15 +125,26 @@ class Registros : AppCompatActivity() {
     }
 
     private fun insertActividadTrabajador(navController: NavController) {
-        navController.navigate(R.id.action_lista_actividades_to_form_actividad_trabajador)
+        val bundle = Bundle().apply {
+            this.putInt("type", 0)
+        }
+        navController.navigate(R.id.action_lista_actividades_to_form_actividad_trabajador, bundle)
     }
 
     private fun insertExtra(navController: NavController) {
-        navController.navigate(R.id.action_lista_extras_to_form_extra)
+        val bundle = Bundle().apply {
+            this.putInt("type", 1)
+        }
+        navController.navigate(R.id.action_lista_extras_to_form_actividad_trabajador, bundle)
+        //navController.navigate(R.id.action_lista_extras_to_form_extra)
     }
 
     private fun insertBono(navController: NavController) {
-        navController.navigate(R.id.action_lista_bonos_to_form_bono)
+        val bundle = Bundle().apply {
+            this.putInt("type", 2)
+        }
+        navController.navigate(R.id.action_lista_bonos_to_form_actividad_trabajador, bundle)
+        //navController.navigate(R.id.action_lista_bonos_to_form_bono)
     }
 
     private fun insertDescuento(navController: NavController) {

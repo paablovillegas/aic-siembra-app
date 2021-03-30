@@ -200,7 +200,7 @@ class CatalogoViewHolder(private val binding: ItemListaSimpleBinding) :
             val bundle = Bundle().apply {
                 this.putLong("id", id)
             }
-            it.findNavController().navigate(R.id.action_lista_extras_to_form_extra, bundle)
+            //it.findNavController().navigate(R.id.action_lista_extras_to_form_extra, bundle)
         }
     }
 
@@ -216,7 +216,7 @@ class CatalogoViewHolder(private val binding: ItemListaSimpleBinding) :
             val bundle = Bundle().apply {
                 this.putLong("id", id)
             }
-            it.findNavController().navigate(R.id.action_lista_bonos_to_form_bono, bundle)
+            //it.findNavController().navigate(R.id.action_lista_bonos_to_form_bono, bundle)
         }
     }
 
